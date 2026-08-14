@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { Zap, Phone, Mail } from "lucide-react";
+import { useSettings } from "@/context/SettingsContext";
 
 export default function Footer() {
+  const settings = useSettings();
+
   return (
     <footer className="bg-[#051329] text-slate-300 border-t border-slate-800/60 pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
@@ -23,12 +28,19 @@ export default function Footer() {
             <div className="space-y-2 text-xs text-slate-400 pt-2">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <a href="tel:08001234455" className="hover:text-white font-bold text-white">0800 123 4455 (24/7 Hotline)</a>
+                <a href={`tel:${settings.hotline_phone.replace(/\s+/g, '')}`} className="hover:text-white font-bold text-white">
+                  {settings.hotline_phone} (24/7 Hotline)
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <a href="mailto:dispatch@instadrop.co.uk" className="hover:text-white">dispatch@instadrop.co.uk</a>
+                <a href={`mailto:${settings.support_email}`} className="hover:text-white">
+                  {settings.support_email}
+                </a>
               </div>
+              <p className="text-[11px] text-slate-500 pt-1">
+                📍 {settings.office_address}
+              </p>
             </div>
           </div>
 
@@ -80,7 +92,7 @@ export default function Footer() {
 
         {/* Bottom Line */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
-          <p>© {new Date().getFullYear()} InstaDrop Courier Services Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {settings.business_name}. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>

@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Zap, Phone, Mail } from "lucide-react";
 import HeaderMobileMenu from "./HeaderMobileMenu";
 import HeaderServicesDropdown from "./HeaderServicesDropdown";
+import { useSettings } from "@/context/SettingsContext";
 
 export default function Header() {
+  const settings = useSettings();
+
   const topNavLinks = [
     { name: "Home", href: "/" },
     { name: "Get Quote", href: "/instant-quote" },
@@ -34,14 +39,14 @@ export default function Header() {
           </div>
 
           <div className="hidden sm:flex items-center gap-4 text-slate-300 font-semibold">
-            <a href="tel:08001234455" className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <a href={`tel:${settings.hotline_phone.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
-              <span>0800 123 4455</span>
+              <span>{settings.hotline_phone}</span>
             </a>
             <span className="text-slate-600">•</span>
-            <a href="mailto:dispatch@instadrop.co.uk" className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <a href={`mailto:${settings.support_email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail className="w-3.5 h-3.5 text-[#c6ff00]" />
-              <span>dispatch@instadrop.co.uk</span>
+              <span>{settings.support_email}</span>
             </a>
           </div>
         </div>

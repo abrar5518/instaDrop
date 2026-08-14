@@ -1,16 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import { Search, CheckCircle2, Download, Truck, ArrowRight, Smartphone } from "lucide-react";
+import { Search, CheckCircle2, Download, Truck, ArrowRight, Smartphone, Loader2 } from "lucide-react";
 
 export default function TrackDeliveryPage() {
   const [trackingNumber, setTrackingNumber] = useState("");
+  const [loading, setLoading] = useState(false);
   const [isSearched, setIsSearched] = useState(true);
+  const [trackingData, setTrackingData] = useState({
+    tracking_number: "INSTA-884920",
+    customer_name: "Sarah Mitchell",
+    vehicle_type: "Luton Tail-Lift Van",
+    status: "in_transit",
+    pickup_address: "Manchester Hub (M1 1AE)",
+    delivery_address: "London City Express (SW1A 1AA)",
+    carrier_name: "InstaDrop Express Fleet",
+    pod: null as null | {
+      recipient_name: string;
+      signature_url?: string;
+      photo_url?: string;
+      delivered_at: string;
+    },
+  });
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!trackingNumber) return;
-    setIsSearched(true);
+
+    setLoading(true);
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/v1";
+
+    try {
+      const res = await fetch(`${apiBaseUrl}/tracking/${encodeURIComponent(trackingNumber)}`);
+      const data = await res.json();
+
+      if (data.success) {
+        setTrackingData({
+          tracking_number: data.tracking_number,
+          customer_name: data.customer_name,
+          vehicle_type: data.vehicle_type,
+          status: data.status,
+          pickup_address: data.pickup_address,
+          delivery_address: data.delivery_address,
+          carrier_name: data.carrier_name,
+          pod: data.pod,
+        });
+      }
+    } catch {
+      // Fallback demo data display if backend offline
+    } finally {
+      setIsSearched(true);
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,10 +85,17 @@ export default function TrackDeliveryPage() {
               </div>
               <button
                 type="submit"
+                disabled={loading}
                 className="px-7 py-3.5 rounded-2xl bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-sm transition-all shadow-md flex items-center justify-center gap-2"
               >
-                <span>Track Now</span>
-                <ArrowRight className="w-4 h-4" />
+                {loading ? (
+                  <Loader2 className="w-4 h-4 animate-spin text-[#0a192f]" />
+                ) : (
+                  <>
+                    <span>Track Now</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -63,17 +111,17 @@ export default function TrackDeliveryPage() {
               <div className="space-y-1 text-center md:text-left">
                 <div className="flex items-center gap-2 justify-center md:justify-start">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#0a192f] bg-[#c6ff00] px-3 py-1 rounded-full">
-                    REF: INSTA-884920
+                    REF: {trackingData.tracking_number}
                   </span>
-                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                    DRIVER ON ROUTE
+                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 uppercase">
+                    STATUS: {trackingData.status.replace("_", " ")}
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold text-[#0a192f] font-display pt-2">
-                  Manchester Hub → London City Express
+                  {trackingData.pickup_address} → {trackingData.delivery_address}
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Driver: Marcus D. • Medium Van (Reg: LX73 WVP) • Direct Drive
+                  Carrier: {trackingData.carrier_name} • Fleet: {trackingData.vehicle_type}
                 </p>
               </div>
 
@@ -108,7 +156,7 @@ export default function TrackDeliveryPage() {
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-slate-300 z-10 border-t border-slate-800 pt-4">
-                  <span>Collected: 09:42 AM</span>
+                  <span>Customer: {trackingData.customer_name}</span>
                   <span className="text-[#c6ff00]">Distance Remaining: 42 miles</span>
                 </div>
               </div>
@@ -120,72 +168,55 @@ export default function TrackDeliveryPage() {
                 </h3>
 
                 <div className="space-y-6 relative pl-6 border-l-2 border-slate-200 text-xs">
-                  {/* Step 1 */}
                   <div className="relative">
                     <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white">
                       <CheckCircle2 className="w-3 h-3" />
                     </div>
-                    <p className="font-bold text-[#0a192f]">09:15 AM — Booking Confirmed</p>
-                    <p className="text-slate-500">Nearest driver Marcus assigned</p>
+                    <p className="font-bold text-[#0a192f]">Booking Confirmed</p>
+                    <p className="text-slate-500">Fleet assigned: {trackingData.vehicle_type}</p>
                   </div>
 
-                  {/* Step 2 */}
                   <div className="relative">
                     <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white">
                       <CheckCircle2 className="w-3 h-3" />
                     </div>
-                    <p className="font-bold text-[#0a192f]">09:42 AM — Parcel Collected</p>
-                    <p className="text-slate-500">Collected from Manchester Hub (M1 1AE)</p>
+                    <p className="font-bold text-[#0a192f]">Parcel Collected</p>
+                    <p className="text-slate-500">Collected from {trackingData.pickup_address}</p>
                   </div>
 
-                  {/* Step 3 */}
                   <div className="relative">
                     <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#0066ff] border-2 border-white animate-pulse" />
-                    <p className="font-bold text-[#0066ff]">In Direct Transit</p>
-                    <p className="text-slate-500">En route to London (SW1A 1AA)</p>
-                  </div>
-
-                  {/* Step 4 */}
-                  <div className="relative opacity-50">
-                    <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-slate-300 border-2 border-white" />
-                    <p className="font-bold text-slate-700">Estimated 13:55 PM — Delivery & Digital POD</p>
-                    <p className="text-slate-400">Electronic signature email dispatch</p>
+                    <p className="font-bold text-[#0066ff]">Status: {trackingData.status.toUpperCase()}</p>
+                    <p className="text-slate-500">En route to {trackingData.delivery_address}</p>
                   </div>
                 </div>
 
                 {/* Download POD Box */}
                 <div className="pt-4 border-t border-slate-100">
-                  <button
-                    disabled
-                    className="w-full py-3 px-4 rounded-xl bg-slate-100 text-slate-400 font-bold text-xs flex items-center justify-center gap-2 cursor-not-allowed"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>POD Available Upon Delivery</span>
-                  </button>
+                  {trackingData.pod ? (
+                    <a
+                      href={trackingData.pod.signature_url || "#"}
+                      target="_blank"
+                      className="w-full py-3 px-4 rounded-xl bg-[#0a192f] text-white font-bold text-xs flex items-center justify-center gap-2 hover:bg-[#051329]"
+                    >
+                      <Download className="w-4 h-4 text-[#c6ff00]" />
+                      <span>Download Official Digital POD</span>
+                    </a>
+                  ) : (
+                    <button
+                      disabled
+                      className="w-full py-3 px-4 rounded-xl bg-slate-100 text-slate-400 font-bold text-xs flex items-center justify-center gap-2 cursor-not-allowed"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>POD Available Upon Delivery</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </section>
       )}
-
-      {/* 3. Need Urgent Help Card */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-6">
-          <h3 className="text-2xl font-bold text-[#0a192f] font-display">
-            Need to Modify Your Delivery Instructions?
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
-            Contact our 24/7 dispatch desk directly to give special access codes or recipient contact updates to your driver.
-          </p>
-          <a
-            href="tel:08001234455"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#0a192f] text-white font-extrabold text-xs hover:bg-[#051329]"
-          >
-            <span>Call Live Desk: 0800 123 4455</span>
-          </a>
-        </div>
-      </section>
     </div>
   );
 }

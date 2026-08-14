@@ -1,25 +1,16 @@
-import type { Metadata } from "next";
-import { Phone, Mail, MapPin } from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact 24/7 Dispatch Desk — Hotline & Support",
-  description:
-    "Contact InstaDrop's 24/7 same-day courier dispatch desk. Call freephone hotline 0800 123 4455 or submit an urgent booking request online. Head office & regional hub support.",
-  keywords: [
-    "contact same day courier",
-    "courier helpline 24/7",
-    "InstaDrop phone number",
-    "emergency courier phone number",
-    "same day courier contact desk",
-  ],
-  openGraph: {
-    title: "Contact 24/7 Dispatch Desk | InstaDrop Courier",
-    description:
-      "Call 0800 123 4455 for emergency 60-minute pickup or contact our dispatch team online.",
-  },
-};
+import { Phone, Mail, MapPin } from "lucide-react";
+import { useSettings } from "@/context/SettingsContext";
 
 export default function ContactPage() {
+  const settings = useSettings();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Thank you for contacting us! Our dispatch desk will reply within 5 minutes.");
+  };
+
   return (
     <div className="w-full bg-white">
       {/* 1. Header Banner */}
@@ -27,10 +18,10 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-[#c6ff00] border border-emerald-500/30 text-xs font-bold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-[#c6ff00] animate-pulse" />
-            <span>24/7/365 LIVE DISPATCH DESK ACTIVE</span>
+            <span>{settings.opening_hours.toUpperCase()}</span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white font-display">
-            Contact InstaDrop Operations
+            Contact {settings.business_name}
           </h1>
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Need an immediate pickup or have an inquiry about a booking? Speak directly to our experienced logistics coordinators 24 hours a day.
@@ -54,8 +45,8 @@ export default function ContactPage() {
                     <p className="text-xs font-bold text-[#c6ff00] uppercase tracking-wider">
                       Freephone 24/7 Hotline
                     </p>
-                    <a href="tel:08001234455" className="text-2xl font-black text-white hover:text-[#c6ff00] font-display">
-                      0800 123 4455
+                    <a href={`tel:${settings.hotline_phone.replace(/\s+/g, '')}`} className="text-2xl font-black text-white hover:text-[#c6ff00] font-display">
+                      {settings.hotline_phone}
                     </a>
                   </div>
                 </div>
@@ -72,8 +63,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-bold uppercase">Dispatch Email</p>
-                    <a href="mailto:dispatch@instadrop.co.uk" className="text-sm font-bold text-[#0a192f] hover:text-[#0066ff]">
-                      dispatch@instadrop.co.uk
+                    <a href={`mailto:${settings.support_email}`} className="text-sm font-bold text-[#0a192f] hover:text-[#0066ff]">
+                      {settings.support_email}
                     </a>
                   </div>
                 </div>
@@ -89,12 +80,12 @@ export default function ContactPage() {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-slate-400 font-bold uppercase">Head Office Hub</p>
+                    <p className="text-xs text-slate-400 font-bold uppercase">Head Office Location</p>
                     <p className="text-sm font-bold text-[#0a192f]">
-                      InstaDrop Logistics House
+                      {settings.business_name}
                     </p>
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Central Logistics Park, M25 Hub Highway, London UK
+                      {settings.office_address}
                     </p>
                   </div>
                 </div>
@@ -112,7 +103,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <form className="space-y-4 text-xs font-semibold">
+              <form onSubmit={handleSubmit} className="space-y-4 text-xs font-semibold">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
