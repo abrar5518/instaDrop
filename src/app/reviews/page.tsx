@@ -19,7 +19,7 @@ const googleReviews = [
     id: 1,
     name: "Marcus Vance",
     role: "Logistics Manager • Vance Heavy Industries",
-    date: "2 days ago",
+    date: "2026-08-20",
     stars: 5,
     comment:
       "InstaDrop saved our client contract! We needed two Euro pallets moved from Manchester to London within 4 hours. The Luton van arrived in 35 minutes, driver was extremely professional, and POD signature certificate hit my email before 2 PM. Outstanding 5-star service!",
@@ -29,7 +29,7 @@ const googleReviews = [
     id: 2,
     name: "Sarah Jenkins",
     role: "Partner • Jenkins & Co Legal Chambers",
-    date: "1 week ago",
+    date: "2026-08-15",
     stars: 5,
     comment:
       "Extremely reliable for high-priority legal documents and court briefs. Hand-to-hand delivery with real-time GPS tracking. We use InstaDrop exclusively for our urgent same-day courier needs across Bristol and London.",
@@ -39,7 +39,7 @@ const googleReviews = [
     id: 3,
     name: "David H. Miller",
     role: "Site Director • Apex Construction UK",
-    date: "2 weeks ago",
+    date: "2026-08-10",
     stars: 5,
     comment:
       "Simple quote request, instant WhatsApp response with a fair price, and zero hassle. Driver Marcus delivered site equipment direct to Birmingham highway project. Highly recommended same day courier!",
@@ -49,7 +49,7 @@ const googleReviews = [
     id: 4,
     name: "Claire Bennett",
     role: "Operations • BioMed Labs Manchester",
-    date: "3 weeks ago",
+    date: "2026-08-05",
     stars: 5,
     comment:
       "Temperature-sensitive medical samples dispatched GDP compliant. Driver was fully trained, vehicle spotless, and tracking link was updated in real-time. 10/10 service.",
@@ -57,9 +57,54 @@ const googleReviews = [
   },
 ];
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.co.uk";
+
+const reviewsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "InstaDrop Courier Services",
+  "image": `${siteUrl}/logo.png`,
+  "@id": `${siteUrl}/#organization`,
+  "url": siteUrl,
+  "telephone": "0800 123 4455",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "100 Pall Mall, St. James's",
+    "addressLocality": "London",
+    "postalCode": "SW1Y 5NQ",
+    "addressCountry": "GB"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "128",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": googleReviews.map(r => ({
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": r.name
+    },
+    "datePublished": r.date,
+    "reviewBody": r.comment,
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": r.stars,
+      "bestRating": "5"
+    }
+  }))
+};
+
 export default function ReviewsPage() {
   return (
     <div className="w-full bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsJsonLd) }}
+      />
+
       {/* 1. Header Banner */}
       <section className="bg-[#0a192f] text-white py-16 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center space-y-4">

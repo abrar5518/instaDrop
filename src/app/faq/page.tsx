@@ -4,47 +4,65 @@ import { useState } from "react";
 import { HelpCircle, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
+const faqList = [
+  {
+    cat: "pickup",
+    question: "How fast can an InstaDrop courier pick up my parcel?",
+    answer: "We guarantee door-to-door collection within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your booking to the nearest available driver in our network of 120+ logistics hubs.",
+  },
+  {
+    cat: "rates",
+    question: "How are same-day courier prices calculated?",
+    answer: "Our rates are based strictly on journey mileage from pickup postcode to delivery postcode and the chosen vehicle size (Courier Car, Small Van, Medium Van, Large Van, Luton Tail-Lift). We operate on transparent fixed pricing with zero hidden surcharges.",
+  },
+  {
+    cat: "insurance",
+    question: "Are my goods insured during transport?",
+    answer: "Yes! Every booking automatically includes £50,000 Goods-in-Transit insurance completely free of charge. For ultra high-value cargo or tenders, custom coverage up to £250,000 can be arranged upon request.",
+  },
+  {
+    cat: "tracking",
+    question: "How do I track my delivery in real-time?",
+    answer: "As soon as your driver is dispatched, you receive a live GPS tracking link via email or WhatsApp. You can watch your courier’s real-time progress on a map from collection point straight to dropoff.",
+  },
+  {
+    cat: "service",
+    question: "Is my delivery a dedicated direct vehicle?",
+    answer: "100% yes. Once your driver collects your consignment, it goes straight to the dropoff destination with zero co-loading or intermediate hub stops.",
+  },
+  {
+    cat: "business",
+    question: "How do I set up a corporate business credit account?",
+    answer: "You can apply for a business account online in 2 minutes. Account holders receive 30-day net monthly invoice terms, priority dispatch, and tiered volume discounts up to 25%.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqList.map((item) => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+
 export default function FaqPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [activeCategory, setActiveCategory] = useState<string>("all");
-
-  const faqList = [
-    {
-      cat: "pickup",
-      question: "How fast can an InstaDrop courier pick up my parcel?",
-      answer: "We guarantee door-to-door collection within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your booking to the nearest available driver in our network of 120+ logistics hubs.",
-    },
-    {
-      cat: "rates",
-      question: "How are same-day courier prices calculated?",
-      answer: "Our rates are based strictly on journey mileage from pickup postcode to delivery postcode and the chosen vehicle size (Courier Car, Small Van, Medium Van, Large Van, Luton Tail-Lift). We operate on transparent fixed pricing with zero hidden surcharges.",
-    },
-    {
-      cat: "insurance",
-      question: "Are my goods insured during transport?",
-      answer: "Yes! Every booking automatically includes £50,000 Goods-in-Transit insurance completely free of charge. For ultra high-value cargo or tenders, custom coverage up to £250,000 can be arranged upon request.",
-    },
-    {
-      cat: "tracking",
-      question: "How do I track my delivery in real-time?",
-      answer: "As soon as your driver is dispatched, you receive a live GPS tracking link via email or WhatsApp. You can watch your courier’s real-time progress on a map from collection point straight to dropoff.",
-    },
-    {
-      cat: "service",
-      question: "Is my delivery a dedicated direct vehicle?",
-      answer: "100% yes. Once your driver collects your consignment, it goes straight to the dropoff destination with zero co-loading or intermediate hub stops.",
-    },
-    {
-      cat: "business",
-      question: "How do I set up a corporate business credit account?",
-      answer: "You can apply for a business account online in 2 minutes. Account holders receive 30-day net monthly invoice terms, priority dispatch, and tiered volume discounts up to 25%.",
-    },
-  ];
 
   const filteredFaqs = activeCategory === "all" ? faqList : faqList.filter(f => f.cat === activeCategory);
 
   return (
     <div className="w-full bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
       {/* 1. Header Banner */}
       <section className="bg-[#0a192f] text-white py-16 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center space-y-4">
