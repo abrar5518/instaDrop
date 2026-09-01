@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { trackLead } from "@/lib/analytics";
 
 export default function QuoteWidget() {
   const [loading, setLoading] = useState(false);
@@ -77,15 +78,32 @@ export default function QuoteWidget() {
           data.message ||
             "Our dispatch team is calculating your route. We will contact you within 5 minutes."
         );
+
+        // Fire Meta Pixel & GA4 Lead Event
+        trackLead({
+          quote_number: data.quote_number || "Q-88492",
+          vehicle_type: formData.vehicle_type,
+          route: `${formData.collection_postcode} -> ${formData.delivery_postcode}`,
+        });
       } else {
         setSubmitted(true);
         setQuoteNumber("Q-88492");
         setResponseMessage("Quote Request Received! We will contact you shortly.");
+
+        trackLead({
+          quote_number: "Q-88492",
+          vehicle_type: formData.vehicle_type,
+        });
       }
     } catch {
       setSubmitted(true);
       setQuoteNumber("Q-88492");
       setResponseMessage("Quote Request Received! We will contact you shortly.");
+
+      trackLead({
+        quote_number: "Q-88492",
+        vehicle_type: formData.vehicle_type,
+      });
     } finally {
       setLoading(false);
     }
