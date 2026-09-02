@@ -2,15 +2,41 @@
 
 import { useState } from "react";
 import { Search, CheckCircle2, Download, Truck, ArrowRight, Smartphone } from "lucide-react";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
+
+type TrackingResult = {
+  tracking_number: string;
+  customer_name: string;
+  vehicle_type: string;
+  status: string;
+  pickup_address: string;
+  delivery_address: string;
+  carrier_name: string;
+  pod: { recipient_name: string; signature_url: string | null; photo_url: string | null; delivered_at: string } | null;
+};
 
 export default function TrackDeliveryPage() {
   const [trackingNumber, setTrackingNumber] = useState("");
-  const [isSearched, setIsSearched] = useState(true);
+  const [result, setResult] = useState<TrackingResult | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!trackingNumber) return;
-    setIsSearched(true);
+    setLoading(true);
+    setError("");
+    setResult(null);
+    try {
+      const response = await fetch(`/api/tracking/${encodeURIComponent(trackingNumber.trim())}`, { cache: "no-store" });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Tracking reference not found.");
+      setResult(data);
+    } catch (searchError) {
+      setError(searchError instanceof Error ? searchError.message : "Tracking is temporarily unavailable.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,18 +70,20 @@ export default function TrackDeliveryPage() {
               </div>
               <button
                 type="submit"
+                disabled={loading}
                 className="px-7 py-3.5 rounded-2xl bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-sm transition-all shadow-md flex items-center justify-center gap-2"
               >
-                <span>Track Now</span>
+                <span>{loading ? "Searching..." : "Track Now"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
           </div>
+          {error && <p role="alert" className="max-w-xl mx-auto mt-3 text-xs bg-red-50 border border-red-200 text-red-700 rounded-xl p-3">{error}</p>}
         </div>
       </section>
 
       {/* 2. Tracking Details View */}
-      {isSearched && (
+      {result && (
         <section className="py-16 bg-[#f8fafc] border-b border-slate-200">
           <div className="max-w-5xl mx-auto px-4 sm:px-8 space-y-8">
             {/* Tracking Status Card Header */}
@@ -63,24 +91,24 @@ export default function TrackDeliveryPage() {
               <div className="space-y-1 text-center md:text-left">
                 <div className="flex items-center gap-2 justify-center md:justify-start">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#0a192f] bg-[#c6ff00] px-3 py-1 rounded-full">
-                    REF: INSTA-884920
+                    REF: {result.tracking_number}
                   </span>
                   <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                    DRIVER ON ROUTE
+                    {result.status.replaceAll("_", " ").toUpperCase()}
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold text-[#0a192f] font-display pt-2">
-                  Manchester Hub → London City Express
+                  {result.pickup_address} → {result.delivery_address}
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Driver: Marcus D. • Medium Van (Reg: LX73 WVP) • Direct Drive
+                  Carrier: {result.carrier_name} • {result.vehicle_type.replaceAll("_", " ")}
                 </p>
               </div>
 
               <div className="text-center md:text-right shrink-0">
                 <p className="text-xs text-slate-400 font-bold uppercase">Estimated Arrival</p>
-                <p className="text-3xl font-black text-[#0a192f] font-display">13:55 PM</p>
-                <p className="text-xs text-emerald-600 font-semibold">• 45 mins remaining</p>
+                <p className="text-xl font-black text-[#0a192f] font-display">{result.status.replaceAll("_", " ").toUpperCase()}</p>
+                <p className="text-xs text-emerald-600 font-semibold">Live order status</p>
               </div>
             </div>
 
@@ -178,12 +206,7 @@ export default function TrackDeliveryPage() {
           <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
             Contact our 24/7 dispatch desk directly to give special access codes or recipient contact updates to your driver.
           </p>
-          <a
-            href="tel:08001234455"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#0a192f] text-white font-extrabold text-xs hover:bg-[#051329]"
-          >
-            <span>Call Live Desk: 0800 123 4455</span>
-          </a>
+          <ContactPhone prefix="Call Live Desk: " className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#0a192f] text-white font-extrabold text-xs hover:bg-[#051329]" />
         </div>
       </section>
     </div>

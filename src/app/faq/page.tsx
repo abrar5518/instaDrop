@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { HelpCircle, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 
 export default function FaqPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -138,9 +139,7 @@ export default function FaqPage() {
             Our experienced logistics coordinators are live right now to answer any custom transport inquiries.
           </p>
           <div className="pt-2 flex justify-center gap-4">
-            <a href="tel:08001234455" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs">
-              Call 0800 123 4455
-            </a>
+            <ContactPhone prefix="Call " className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs" />
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15">
               Get Instant Quote
             </Link>

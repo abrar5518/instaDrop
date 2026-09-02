@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import QuoteWidget from "@/components/Home/QuoteWidget";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 import { Clock, ShieldCheck, Zap, Phone, CheckCircle2, Calculator, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -64,9 +65,7 @@ export default function InstantQuotePage() {
               </div>
               <div>
                 <p className="text-xs text-slate-400">Prefer to book over the phone?</p>
-                <a href="tel:08001234455" className="text-lg font-black text-[#c6ff00] hover:underline font-display">
-                  0800 123 4455 (24/7 Desk)
-                </a>
+                <ContactPhone suffix=" (24/7 Desk)" className="text-lg font-black text-[#c6ff00] hover:underline font-display" />
               </div>
             </div>
           </div>

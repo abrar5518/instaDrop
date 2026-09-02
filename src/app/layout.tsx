@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import { ContactSettingsProvider } from "@/components/Contact/ContactSettings";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -46,9 +47,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <body className="min-h-screen flex flex-col font-sans bg-white text-slate-900 antialiased selection:bg-[#c6ff00] selection:text-[#0a192f]">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ContactSettingsProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ContactSettingsProvider>
       </body>
     </html>
   );

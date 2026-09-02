@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import QuoteWidget from "@/components/Home/QuoteWidget";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 import { Zap, Clock, ShieldCheck, CheckCircle2, ArrowRight, Truck, Phone, Building2, HelpCircle, XCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -122,13 +123,10 @@ export default function SameDayDeliveryPage() {
                 <span>Get Speedy Quote Now</span>
                 <ArrowRight className="w-4 h-4 text-[#0a192f]" />
               </Link>
-              <a
-                href="tel:08001234455"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15"
-              >
+              <div className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15">
                 <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <span>24/7 Hotline: 0800 123 4455</span>
-              </a>
+                <ContactPhone prefix="24/7 Hotline: " />
+              </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-semibold text-slate-300">
@@ -385,9 +383,7 @@ export default function SameDayDeliveryPage() {
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600]">
               Get Instant Quote
             </Link>
-            <a href="tel:08001234455" className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15">
-              Call 0800 123 4455
-            </a>
+            <ContactPhone prefix="Call " className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15" />
           </div>
         </div>
       </section>

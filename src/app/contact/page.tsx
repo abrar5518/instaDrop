@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Phone, Mail, MapPin } from "lucide-react";
+import ContactForm from "@/components/Forms/ContactForm";
+import { ContactAddress, ContactEmail, ContactPhone } from "@/components/Contact/ContactSettings";
 
 export const metadata: Metadata = {
   title: "Contact 24/7 Dispatch Desk — Hotline & Support",
@@ -54,9 +56,7 @@ export default function ContactPage() {
                     <p className="text-xs font-bold text-[#c6ff00] uppercase tracking-wider">
                       Freephone 24/7 Hotline
                     </p>
-                    <a href="tel:08001234455" className="text-2xl font-black text-white hover:text-[#c6ff00] font-display">
-                      0800 123 4455
-                    </a>
+                    <ContactPhone className="text-2xl font-black text-white hover:text-[#c6ff00] font-display" />
                   </div>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
@@ -72,9 +72,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-bold uppercase">Dispatch Email</p>
-                    <a href="mailto:dispatch@instadrop.co.uk" className="text-sm font-bold text-[#0a192f] hover:text-[#0066ff]">
-                      dispatch@instadrop.co.uk
-                    </a>
+                    <ContactEmail className="text-sm font-bold text-[#0a192f] hover:text-[#0066ff]" />
                   </div>
                 </div>
                 <p className="text-xs text-slate-500">
@@ -93,9 +91,7 @@ export default function ContactPage() {
                     <p className="text-sm font-bold text-[#0a192f]">
                       InstaDrop Logistics House
                     </p>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      Central Logistics Park, M25 Hub Highway, London UK
-                    </p>
+                    <ContactAddress className="text-xs text-slate-500 leading-relaxed" />
                   </div>
                 </div>
               </div>
@@ -112,7 +108,8 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <form className="space-y-4 text-xs font-semibold">
+              <ContactForm />
+              <div className="hidden">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
@@ -181,7 +178,7 @@ export default function ContactPage() {
                 >
                   Send Message to Operations Desk
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

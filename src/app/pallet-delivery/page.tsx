@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import QuoteWidget from "@/components/Home/QuoteWidget";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 import { Package, CheckCircle2, ArrowRight, Layers, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -234,9 +235,7 @@ export default function PalletDeliveryPage() {
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600]">
               Get Pallet Quote
             </Link>
-            <a href="tel:08001234455" className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15">
-              Call 0800 123 4455
-            </a>
+            <ContactPhone prefix="Call " className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15" />
           </div>
         </div>
       </section>

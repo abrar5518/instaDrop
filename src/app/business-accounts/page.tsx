@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Briefcase, CreditCard, Users, ShieldCheck, Zap, ArrowRight, CheckCircle2, FileText, Award } from "lucide-react";
+import BusinessAccountForm from "@/components/Forms/BusinessAccountForm";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 
 export const metadata: Metadata = {
   title: "Corporate & Business Courier Accounts — 30-Day Credit Terms",
@@ -81,12 +83,7 @@ export default function BusinessAccountsPage() {
                 <span>Apply for Account in 2 Mins</span>
                 <ArrowRight className="w-4 h-4 text-[#0a192f]" />
               </a>
-              <a
-                href="tel:08001234455"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15"
-              >
-                <span>Speak to Corporate Desk</span>
-              </a>
+              <ContactPhone prefix="Speak to Corporate Desk: " className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15" />
             </div>
           </div>
 
@@ -157,7 +154,8 @@ export default function BusinessAccountsPage() {
             </p>
           </div>
 
-          <form className="space-y-4 text-xs font-semibold">
+          <BusinessAccountForm />
+          <div className="hidden">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
@@ -211,7 +209,7 @@ export default function BusinessAccountsPage() {
             <button type="submit" className="w-full py-4 px-6 rounded-xl bg-[#0a192f] hover:bg-[#051329] text-white font-bold text-sm shadow-md transition-colors">
               Submit Corporate Account Application
             </button>
-          </form>
+          </div>
         </div>
       </section>
     </div>

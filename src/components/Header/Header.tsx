@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Zap, Phone, Mail } from "lucide-react";
 import HeaderMobileMenu from "./HeaderMobileMenu";
 import HeaderServicesDropdown from "./HeaderServicesDropdown";
+import { ContactEmail, ContactPhone } from "@/components/Contact/ContactSettings";
 
 export default function Header() {
   const topNavLinks = [
@@ -34,15 +35,15 @@ export default function Header() {
           </div>
 
           <div className="hidden sm:flex items-center gap-4 text-slate-300 font-semibold">
-            <a href="tel:08001234455" className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
-              <span>0800 123 4455</span>
-            </a>
+              <ContactPhone />
+            </div>
             <span className="text-slate-600">•</span>
-            <a href="mailto:dispatch@instadrop.co.uk" className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail className="w-3.5 h-3.5 text-[#c6ff00]" />
-              <span>dispatch@instadrop.co.uk</span>
-            </a>
+              <ContactEmail />
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Zap, Phone, Mail } from "lucide-react";
+import { ContactEmail, ContactPhone } from "@/components/Contact/ContactSettings";
 
 export default function Footer() {
   return (
@@ -23,11 +24,11 @@ export default function Footer() {
             <div className="space-y-2 text-xs text-slate-400 pt-2">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <a href="tel:08001234455" className="hover:text-white font-bold text-white">0800 123 4455 (24/7 Hotline)</a>
+                <ContactPhone suffix=" (24/7 Hotline)" className="hover:text-white font-bold text-white" />
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <a href="mailto:dispatch@instadrop.co.uk" className="hover:text-white">dispatch@instadrop.co.uk</a>
+                <ContactEmail className="hover:text-white" />
               </div>
             </div>
           </div>
