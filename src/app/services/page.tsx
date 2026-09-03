@@ -22,6 +22,82 @@ export const metadata: Metadata = {
   },
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.co.uk";
+
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": siteUrl
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": `${siteUrl}/services`
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Same-Day Dedicated Courier Services",
+      "provider": {
+        "@type": "DeliveryService",
+        "name": "InstaDrop Courier Services",
+        "url": siteUrl
+      },
+      "areaServed": "United Kingdom",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Courier Services Directory",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Same-Day Dedicated Express"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Heavy Pallet & Freight Express"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Medical & Bio-Specimen Logistics"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Legal & Confidential Documents"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Wait & Return Courier Service"
+            }
+          }
+        ]
+      }
+    }
+  ]
+};
+
 export default function ServicesPage() {
   const serviceList = [
     {
@@ -139,6 +215,11 @@ export default function ServicesPage() {
 
   return (
     <div className="w-full bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+      />
+
       {/* 1. Hero Banner */}
       <section className="bg-[#0a192f] text-white py-16 lg:py-20 px-4 sm:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

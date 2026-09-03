@@ -22,6 +22,87 @@ export const metadata: Metadata = {
   },
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.co.uk";
+
+const faqs = [
+  {
+    q: "How fast can a courier pick up my parcel?",
+    a: "We guarantee collection within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your job to the nearest available dedicated driver.",
+  },
+  {
+    q: "Is my delivery a dedicated direct vehicle?",
+    a: "Yes! 100% of our same-day deliveries travel in an exclusive dedicated vehicle straight from A to B with zero co-loading or depot stops.",
+  },
+  {
+    q: "Are my goods insured during transport?",
+    a: "Yes, every single shipment includes £50,000 Goods-in-Transit insurance completely free of charge. Additional coverage up to £250,000 can be arranged.",
+  },
+  {
+    q: "How do I receive proof of delivery?",
+    a: "The second your recipient signs for the package on our driver's device, an automated email with signature and timestamped POD is sent to you.",
+  },
+  {
+    q: "What areas in the UK do you cover?",
+    a: "We cover 100% of mainland UK including London, Birmingham, Manchester, Leeds, Glasgow, Bristol, Newcastle, Liverpool, and all regional industrial hubs.",
+  },
+  {
+    q: "Can I book a same-day courier outside normal business hours?",
+    a: "Absolutely. Our dispatch desk and dedicated driver fleet operate 24 hours a day, 7 days a week, 365 days a year including weekends and bank holidays.",
+  },
+];
+
+const pageSchemas = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": siteUrl
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": `${siteUrl}/services`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Same-Day Delivery UK",
+          "item": `${siteUrl}/same-day-delivery`
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Same-Day Dedicated Delivery UK",
+      "serviceType": "Same-Day Courier Express",
+      "provider": {
+        "@type": "DeliveryService",
+        "name": "InstaDrop Courier Services",
+        "url": siteUrl
+      },
+      "areaServed": "United Kingdom",
+      "description": "Guaranteed door-to-door pickup within 60 minutes nationwide. Direct drive parcels, urgent parts & pallets with 24/7 live tracking."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(f => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": f.a
+        }
+      }))
+    }
+  ]
+};
+
 export default function SameDayDeliveryPage() {
   const features = [
     {
@@ -67,35 +148,13 @@ export default function SameDayDeliveryPage() {
     { title: "Corporate Event & Exhibition Displays", desc: "On-time delivery of trade show stands and promotional materials straight to event halls." },
   ];
 
-  const faqs = [
-    {
-      q: "How fast can a courier pick up my parcel?",
-      a: "We guarantee collection within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your job to the nearest available dedicated driver.",
-    },
-    {
-      q: "Is my delivery a dedicated direct vehicle?",
-      a: "Yes! 100% of our same-day deliveries travel in an exclusive dedicated vehicle straight from A to B with zero co-loading or depot stops.",
-    },
-    {
-      q: "Are my goods insured during transport?",
-      a: "Yes, every single shipment includes £50,000 Goods-in-Transit insurance completely free of charge. Additional coverage up to £250,000 can be arranged.",
-    },
-    {
-      q: "How do I receive proof of delivery?",
-      a: "The second your recipient signs for the package on our driver's device, an automated email with signature and timestamped POD is sent to you.",
-    },
-    {
-      q: "What areas in the UK do you cover?",
-      a: "We cover 100% of mainland UK including London, Birmingham, Manchester, Leeds, Glasgow, Bristol, Newcastle, Liverpool, and all regional industrial hubs.",
-    },
-    {
-      q: "Can I book a same-day courier outside normal business hours?",
-      a: "Absolutely. Our dispatch desk and dedicated driver fleet operate 24 hours a day, 7 days a week, 365 days a year including weekends and bank holidays.",
-    },
-  ];
-
   return (
     <div className="w-full bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchemas) }}
+      />
+
       {/* 1. Hero Section */}
       <section className="bg-[#0a192f] text-white py-16 lg:py-20 px-4 sm:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
