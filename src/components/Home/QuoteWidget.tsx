@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { isValidUkPhone, UK_PHONE_MESSAGE, UK_PHONE_PATTERN } from "@/lib/formValidation";
+import VehicleSelect from "@/components/Forms/VehicleSelect";
 
 export default function QuoteWidget() {
   const [submitted, setSubmitted] = useState(false);
@@ -17,6 +18,11 @@ export default function QuoteWidget() {
     setError("");
 
     const formData = new FormData(e.currentTarget);
+    if (!formData.get("vehicle_type")) {
+      setError("Please select a vehicle type.");
+      setSubmitting(false);
+      return;
+    }
     if (!isValidUkPhone(formData.get("phone"))) {
       setError(UK_PHONE_MESSAGE);
       setSubmitting(false);
@@ -177,14 +183,7 @@ export default function QuoteWidget() {
               <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
                 VEHICLE TYPE *
               </label>
-              <select name="vehicle_type" required defaultValue="" className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f] focus:bg-white transition-all text-xs font-medium">
-                <option value="" disabled>Select vehicle</option>
-                <option value="courier_car">Courier Car (Up to 25 kg / Small Parcels / Envelopes)</option>
-                <option value="small_van">Small Van (Up to 450 kg / 1 Standard Pallet — up to 1.1m high)</option>
-                <option value="medium_van">Medium Van (Up to 900 kg / 2 Standard Pallets)</option>
-                <option value="large_van">Large Van (Up to 1,200 kg / 3 Standard Pallets)</option>
-                <option value="luton_tail_lift">Luton Tail-Lift (Up to 1,000 kg / 4–6 Standard Pallets)</option>
-              </select>
+              <VehicleSelect />
             </div>
           </div>
 
