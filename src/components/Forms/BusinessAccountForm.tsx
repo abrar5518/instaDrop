@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { isValidUkPhone, UK_PHONE_MESSAGE, UK_PHONE_PATTERN } from "@/lib/formValidation";
 
 export default function BusinessAccountForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -9,7 +10,12 @@ export default function BusinessAccountForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setState({ pending: true, error: "", success: "" });
-    const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const formData = new FormData(event.currentTarget);
+    if (!isValidUkPhone(formData.get("phone"))) {
+      setState({ pending: false, error: UK_PHONE_MESSAGE, success: "" });
+      return;
+    }
+    const payload = Object.fromEntries(formData.entries());
     try {
       const response = await fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(payload) });
       const data = await response.json();
@@ -33,7 +39,7 @@ export default function BusinessAccountForm() {
         <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">WORK EMAIL *</label><input name="email" type="email" required placeholder="sarah@company.co.uk" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">TELEPHONE NUMBER *</label><input name="phone" type="tel" required placeholder="e.g. 020 1234 5678" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
+        <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">TELEPHONE NUMBER *</label><input name="phone" type="tel" required inputMode="tel" autoComplete="tel" pattern={UK_PHONE_PATTERN} title={UK_PHONE_MESSAGE} maxLength={20} placeholder="e.g. 020 1234 5678 or +44 20 1234 5678" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
         <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">ESTIMATED MONTHLY DELIVERIES</label><select name="monthly_deliveries" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]"><option>1 - 10 deliveries / month</option><option>10 - 50 deliveries / month</option><option>50 - 200 deliveries / month</option><option>200+ deliveries / month</option></select></div>
       </div>
       {state.error && <p role="alert" className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700">{state.error}</p>}

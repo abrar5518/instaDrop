@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { isValidUkPhone, UK_PHONE_MESSAGE, UK_PHONE_PATTERN } from "@/lib/formValidation";
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -9,7 +10,12 @@ export default function ContactForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setState({ pending: true, error: "", success: "" });
-    const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const formData = new FormData(event.currentTarget);
+    if (!isValidUkPhone(formData.get("phone"))) {
+      setState({ pending: false, error: UK_PHONE_MESSAGE, success: "" });
+      return;
+    }
+    const payload = Object.fromEntries(formData.entries());
     try {
       const response = await fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(payload) });
       const data = await response.json();
@@ -26,7 +32,7 @@ export default function ContactForm() {
       <input type="hidden" name="inquiry_type" value="contact" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">FULL NAME *</label><input name="name" type="text" required placeholder="e.g. Alex Johnson" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
-        <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">PHONE NUMBER *</label><input name="phone" type="tel" required placeholder="e.g. 07 1234 56789" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
+        <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">PHONE NUMBER *</label><input name="phone" type="tel" required inputMode="tel" autoComplete="tel" pattern={UK_PHONE_PATTERN} title={UK_PHONE_MESSAGE} maxLength={20} placeholder="e.g. 07123 456789 or +44 7123 456789" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">EMAIL ADDRESS *</label><input name="email" type="email" required placeholder="name@company.co.uk" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
