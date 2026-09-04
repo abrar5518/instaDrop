@@ -14,7 +14,7 @@ const defaults: ContactSettings = {
   business_name: "InstaDrop Courier Services Ltd",
   phone: "0800 123 4455",
   whatsapp: "+448001234455",
-  email: "dispatch@instadrop.co.uk",
+  email: "dispatch@instadrop.uk",
   address: "Central Logistics Park, M25 Hub Highway, London UK",
 };
 
