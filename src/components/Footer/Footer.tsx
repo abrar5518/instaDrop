@@ -1,94 +1,16 @@
 import Link from "next/link";
 import { Zap, Phone, Mail } from "lucide-react";
 import { ContactEmail, ContactPhone } from "@/components/Contact/ContactSettings";
+import { courierServices, industries } from "@/content/siteContent";
 
 export default function Footer() {
-  return (
-    <footer className="bg-[#051329] text-slate-300 border-t border-slate-800/60 pt-16 pb-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
-        {/* Main Columns Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
-          {/* Brand Col (2 cols) */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-[#0a192f] text-[#c6ff00] flex items-center justify-center font-black border border-[#c6ff00]/40">
-                <Zap className="w-6 h-6 text-[#c6ff00] fill-[#c6ff00]" />
-              </div>
-              <span className="font-extrabold text-2xl tracking-tight text-white font-display">
-                Insta<span className="text-[#c6ff00]">Drop</span>
-              </span>
-            </Link>
-            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              UK’s fastest dedicated same-day courier service. Door-to-door pickups within 60 minutes nationwide with real-time satellite GPS tracking and instant digital proof of delivery.
-            </p>
-            <div className="space-y-2 text-xs text-slate-400 pt-2">
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <ContactPhone suffix=" (24/7 Hotline)" className="hover:text-white font-bold text-white" />
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <ContactEmail className="hover:text-white" />
-              </div>
-            </div>
-          </div>
-
-          {/* QUICK LINKS & TOOLS */}
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
-              QUICK LINKS & TOOLS
-            </h4>
-            <ul className="space-y-2.5 text-xs font-semibold text-slate-300">
-              <li><Link href="/" className="hover:text-white transition-colors">Home Page</Link></li>
-              <li><Link href="/instant-quote" className="hover:text-white transition-colors text-[#c6ff00]">Speedy Quote Portal</Link></li>
-              <li><Link href="/track-delivery" className="hover:text-white transition-colors">Track Delivery & POD</Link></li>
-              <li><Link href="/coverage" className="hover:text-white transition-colors">UK Coverage Hubs</Link></li>
-              <li><Link href="/business-accounts" className="hover:text-white transition-colors">Corporate Accounts</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">About InstaDrop</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact 24/7 Desk</Link></li>
-            </ul>
-          </div>
-
-          {/* COURIER SERVICES */}
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
-              COURIER SERVICES
-            </h4>
-            <ul className="space-y-2.5 text-xs font-semibold text-slate-300">
-              <li><Link href="/same-day-delivery" className="hover:text-white transition-colors">Same-Day Express</Link></li>
-              <li><Link href="/pallet-delivery" className="hover:text-white transition-colors">Pallets & Heavy Freight</Link></li>
-              <li><Link href="/medical-courier" className="hover:text-white transition-colors text-emerald-400">Medical GDP Courier</Link></li>
-              <li><Link href="/legal-courier" className="hover:text-white transition-colors">Legal & Court Briefs</Link></li>
-              <li><Link href="/wait-and-return" className="hover:text-white transition-colors">Wait & Return Courier</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">All Services Directory</Link></li>
-            </ul>
-          </div>
-
-          {/* VEHICLES & POLICIES */}
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
-              VEHICLES & POLICIES
-            </h4>
-            <ul className="space-y-2.5 text-xs font-semibold text-slate-300">
-              <li><Link href="/vehicle-fleet" className="hover:text-white transition-colors">Vehicle Fleet Guide</Link></li>
-              <li><Link href="/faq" className="hover:text-white transition-colors">FAQs & Help Centre</Link></li>
-              <li><Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
-              <li><Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms-and-conditions#insurance" className="hover:text-white transition-colors">Goods-in-Transit Policy</Link></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Line */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
-          <p>© {new Date().getFullYear()} InstaDrop Courier Services Ltd. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/faq" className="hover:text-white transition-colors">Help Centre</Link>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer className="border-t border-slate-800/60 bg-[#051329] pb-10 pt-16 text-slate-300"><div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-8">
+    <div className="grid gap-10 border-b border-slate-800/80 pb-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="space-y-4"><Link href="/" className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#c6ff00]/40 bg-[#0a192f]"><Zap className="h-6 w-6 fill-[#c6ff00] text-[#c6ff00]" /></div><span className="font-display text-2xl font-extrabold text-white">Insta<span className="text-[#c6ff00]">Drop</span></span></Link><p className="max-w-sm text-xs leading-relaxed text-slate-400">Professional UK same-day courier and freight services for urgent documents, parcels, equipment, pallets and commercial goods.</p><div className="space-y-2 pt-2 text-xs"><p className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-[#c6ff00]" /><ContactPhone className="font-bold text-white hover:text-[#c6ff00]" /></p><p className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-[#c6ff00]" /><ContactEmail className="hover:text-white" /></p></div></div>
+      <div><h2 className="mb-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Courier services</h2><ul className="space-y-2.5 text-xs font-semibold">{courierServices.map((service) => <li key={service.slug}><Link href={`/${service.slug}`} className="hover:text-white">{service.title}</Link></li>)}<li><Link href="/services" className="font-bold text-[#c6ff00]">All courier services</Link></li></ul></div>
+      <div><h2 className="mb-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Industries</h2><ul className="grid grid-cols-1 gap-2.5 text-xs font-semibold">{industries.map((industry) => <li key={industry.slug}><Link href={`/industries/${industry.slug}`} className="hover:text-white">{industry.title}</Link></li>)}<li><Link href="/industries" className="font-bold text-[#c6ff00]">All industries</Link></li></ul></div>
+      <div><h2 className="mb-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Website</h2><ul className="space-y-2.5 text-xs font-semibold"><li><Link href="/instant-quote" className="text-[#c6ff00]">Get a Quote</Link></li><li><Link href="/vehicle-fleet" className="hover:text-white">Vehicle Fleet</Link></li><li><Link href="/coverage" className="hover:text-white">UK Coverage</Link></li><li><Link href="/track-delivery" className="hover:text-white">Track Delivery / POD</Link></li><li><Link href="/about" className="hover:text-white">About InstaDrop</Link></li><li><Link href="/contact" className="hover:text-white">Contact</Link></li><li><Link href="/terms-and-conditions" className="hover:text-white">Terms & Policies</Link></li><li><Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link></li></ul></div>
+    </div>
+    <div className="flex flex-col items-center justify-between gap-4 text-[11px] text-slate-400 sm:flex-row"><p>© {new Date().getFullYear()} InstaDrop Courier Services Ltd. All rights reserved.</p><div className="flex gap-6"><Link href="/terms-and-conditions" className="hover:text-white">Terms & Conditions</Link><Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link></div></div>
+  </div></footer>;
 }

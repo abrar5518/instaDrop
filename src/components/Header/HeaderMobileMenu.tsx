@@ -3,19 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
+import { courierServices, industries } from "@/content/siteContent";
 
 export default function HeaderMobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesExpanded, setServicesExpanded] = useState(false);
-
-  const services = [
-    { title: "Same-Day Express", href: "/same-day-delivery" },
-    { title: "Pallets & Freight", href: "/pallet-delivery" },
-    { title: "Medical GDP Courier", href: "/medical-courier" },
-    { title: "Legal & Court Briefs", href: "/legal-courier" },
-    { title: "Wait & Return Courier", href: "/wait-and-return" },
-    { title: "All Services Directory", href: "/services" },
-  ];
+  const [industriesExpanded, setIndustriesExpanded] = useState(false);
 
   return (
     <div className="xl:hidden">
@@ -67,18 +60,24 @@ export default function HeaderMobileMenu() {
                 </button>
                 {servicesExpanded && (
                   <div className="pl-4 pt-2 space-y-2 text-xs font-medium text-slate-600">
-                    {services.map((s) => (
+                    {courierServices.map((s) => (
                       <Link
-                        key={s.title}
-                        href={s.href}
+                        key={s.slug}
+                        href={`/${s.slug}`}
                         onClick={() => setIsOpen(false)}
                         className="block py-1.5 hover:text-[#0066ff]"
                       >
                         • {s.title}
                       </Link>
                     ))}
+                    <Link href="/services" onClick={() => setIsOpen(false)} className="block py-1.5 font-bold text-[#0066ff]">All courier services</Link>
                   </div>
                 )}
+              </div>
+
+              <div className="border-b border-slate-100 py-2">
+                <button onClick={() => setIndustriesExpanded(!industriesExpanded)} className="flex w-full items-center justify-between text-sm font-semibold text-slate-800"><span>Industries</span><ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${industriesExpanded ? "rotate-180" : ""}`} /></button>
+                {industriesExpanded && <div className="space-y-2 pl-4 pt-2 text-xs font-medium text-slate-600">{industries.map((industry) => <Link key={industry.slug} href={`/industries/${industry.slug}`} onClick={() => setIsOpen(false)} className="block py-1.5 hover:text-[#0066ff]">• {industry.title}</Link>)}<Link href="/industries" onClick={() => setIsOpen(false)} className="block py-1.5 font-bold text-[#0066ff]">All industries</Link></div>}
               </div>
 
               <Link
@@ -103,14 +102,6 @@ export default function HeaderMobileMenu() {
                 className="text-sm font-semibold text-slate-800 hover:text-blue-600 py-2 border-b border-slate-100"
               >
                 Track POD
-              </Link>
-
-              <Link
-                href="/business-accounts"
-                onClick={() => setIsOpen(false)}
-                className="text-sm font-semibold text-slate-800 hover:text-blue-600 py-2 border-b border-slate-100"
-              >
-                Corporate Accounts
               </Link>
 
               <Link

@@ -2,43 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronDown, Zap, Package, Activity, FileText, Clock, ArrowRight } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import { courierServices } from "@/content/siteContent";
 
 export default function HeaderServicesDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const services = [
-    {
-      title: "Same-Day Express",
-      desc: "60-min pickup direct drive",
-      href: "/same-day-delivery",
-      icon: Zap,
-    },
-    {
-      title: "Pallets & Freight",
-      desc: "500kg Luton tail-lift vans",
-      href: "/pallet-delivery",
-      icon: Package,
-    },
-    {
-      title: "Medical GDP Courier",
-      desc: "Bio-specimens & lab drops",
-      href: "/medical-courier",
-      icon: Activity,
-    },
-    {
-      title: "Legal & Court Briefs",
-      desc: "Hand-to-hand named POD",
-      href: "/legal-courier",
-      icon: FileText,
-    },
-    {
-      title: "Wait & Return Courier",
-      desc: "On-site driver 2-hr waiting",
-      href: "/wait-and-return",
-      icon: Clock,
-    },
-  ];
+  const services = courierServices;
 
   return (
     <div
@@ -62,8 +32,8 @@ export default function HeaderServicesDropdown() {
               const IconComp = s.icon;
               return (
                 <Link
-                  key={s.title}
-                  href={s.href}
+                  key={s.slug}
+                  href={`/${s.slug}`}
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#f8fafc] transition-colors group"
                 >
@@ -75,7 +45,7 @@ export default function HeaderServicesDropdown() {
                       {s.title}
                     </p>
                     <p className="text-[10px] text-slate-400">
-                      {s.desc}
+                      {s.short}
                     </p>
                   </div>
                 </Link>

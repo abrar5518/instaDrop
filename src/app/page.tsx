@@ -7,6 +7,7 @@ import TrackingPodSection from "@/components/Home/TrackingPodSection";
 import FleetSection from "@/components/Home/FleetSection";
 import CtaBanner from "@/components/Home/CtaBanner";
 import TestimonialsSection from "@/components/Home/TestimonialsSection";
+import IndustriesSection from "@/components/Home/IndustriesSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <HeroSection />
       <ClientLogos />
       <ServicesSection />
+      <IndustriesSection />
       <HowItWorksSection />
 
       {/* CENTER OF HOMEPAGE VISUAL ANIMATION */}

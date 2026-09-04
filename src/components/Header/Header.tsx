@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Zap, Phone, Mail } from "lucide-react";
 import HeaderMobileMenu from "./HeaderMobileMenu";
 import HeaderServicesDropdown from "./HeaderServicesDropdown";
+import HeaderIndustriesDropdown from "./HeaderIndustriesDropdown";
 import { ContactEmail, ContactPhone } from "@/components/Contact/ContactSettings";
 
 export default function Header() {
@@ -14,7 +15,6 @@ export default function Header() {
     { name: "Fleet", href: "/vehicle-fleet" },
     { name: "Coverage", href: "/coverage" },
     { name: "Track POD", href: "/track-delivery" },
-    { name: "Business", href: "/business-accounts" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
@@ -79,6 +79,7 @@ export default function Header() {
 
           {/* Interactive Services Dropdown Component */}
           <HeaderServicesDropdown />
+          <HeaderIndustriesDropdown />
 
           {rightNavLinks.map((link) => (
             <Link
