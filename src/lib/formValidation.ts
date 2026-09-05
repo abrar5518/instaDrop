@@ -1,4 +1,4 @@
-export const UK_PHONE_PATTERN = String.raw`(?:\+44[ ()-]*\d(?:[ ()-]*\d){9}|0044[ ()-]*\d(?:[ ()-]*\d){9}|0\d(?:[ ()-]*\d){9})`;
+export const UK_PHONE_PATTERN = String.raw`(?:\+44[ \(\)\-]*\d(?:[ \(\)\-]*\d){9}|0044[ \(\)\-]*\d(?:[ \(\)\-]*\d){9}|0\d(?:[ \(\)\-]*\d){9})`;
 export const UK_PHONE_MESSAGE = "Enter a valid UK phone number, for example 07123 456789 or +44 7123 456789.";
 
 export function isValidUkPhone(value: FormDataEntryValue | null): boolean {
