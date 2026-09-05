@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
           <div className="space-[#0a192f] space-y-3">
             <h2 className="text-lg font-bold text-[#0a192f] font-display">5. Your UK GDPR Rights</h2>
             <p>
-              Under UK GDPR, you have the right to request access to, correction of, or deletion of your personal data held by InstaDrop. For data privacy inquiries, contact our Data Protection Desk at <a href="mailto:privacy@instadrop.co.uk" className="text-[#0066ff] font-bold">privacy@instadrop.co.uk</a>.
+              Under UK GDPR, you have the right to request access to, correction of, or deletion of your personal data held by InstaDrop. For privacy enquiries, use the <a href="/contact#contact-form" className="text-[#0066ff] font-bold">contact form</a> and select the appropriate enquiry type.
             </p>
           </div>
         </div>
