@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { isValidUkPhone, UK_PHONE_MESSAGE, UK_PHONE_PATTERN } from "@/lib/formValidation";
 import VehicleSelect from "@/components/Forms/VehicleSelect";
+import {trackEvent} from "@/lib/tracking";
 
 export default function QuoteWidget() {
   const [submitted, setSubmitted] = useState(false);
@@ -43,6 +44,7 @@ export default function QuoteWidget() {
       }
       setQuoteNumber(data.quote_number);
       setSubmitted(true);
+      trackEvent("quote_submitted", { reference: data.quote_number, vehicle_type: payload.vehicle_type });
       formRef.current?.reset();
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Unable to submit your quote right now.");

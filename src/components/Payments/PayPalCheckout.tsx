@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {trackEvent} from "@/lib/tracking";
 
 type Invoice = {
   invoice_number: string; customer_name: string; pickup_address: string; delivery_address: string;
@@ -32,6 +33,7 @@ export default function PayPalCheckout({ token }: { token: string }) {
       const paypal = (window as PayPalWindow).paypal;
       paypal?.Buttons({
         createOrder: async () => {
+          trackEvent("payment_started", { currency: invoice.currency, value: Number(invoice.total_amount), invoice_number: invoice.invoice_number });
           const response = await fetch("/api/payments/paypal/create", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ payment_token: token }) });
           const data = await response.json();
           if (!response.ok) throw new Error(data.message || "Unable to start PayPal checkout.");
@@ -42,6 +44,7 @@ export default function PayPalCheckout({ token }: { token: string }) {
           const result = await response.json();
           if (!response.ok) throw new Error(result.message || "Unable to confirm payment.");
           setPaid(true);
+          trackEvent("payment_completed", { currency: invoice.currency, value: Number(invoice.total_amount), invoice_number: invoice.invoice_number });
         },
         onError: () => setError("PayPal could not complete the payment. Please try again."),
       }).render("#paypal-buttons");

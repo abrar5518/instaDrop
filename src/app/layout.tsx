@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { ContactSettingsProvider } from "@/components/Contact/ContactSettings";
+import TrackingScripts from "@/components/Analytics/TrackingScripts";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -58,6 +59,7 @@ export default function RootLayout({
           serviceType: ["Same-day courier", "Dedicated vehicle delivery", "Scheduled delivery", "Pallet and freight delivery"],
         }) }} />
         <ContactSettingsProvider>
+          <TrackingScripts />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

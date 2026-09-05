@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { isValidUkPhone, UK_PHONE_MESSAGE, UK_PHONE_PATTERN } from "@/lib/formValidation";
+import {trackEvent} from "@/lib/tracking";
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -22,6 +23,7 @@ export default function ContactForm() {
       if (!response.ok) throw new Error(data.message || "Unable to submit your message.");
       formRef.current?.reset();
       setState({ pending: false, error: "", success: `${data.message} Reference: ${data.reference}` });
+      trackEvent("contact_submitted", { reference: data.reference });
     } catch (error) {
       setState({ pending: false, error: error instanceof Error ? error.message : "Unable to submit your message.", success: "" });
     }

@@ -9,6 +9,7 @@ type ContactSettings = {
   email: string;
   address: string;
   social_links: Record<string, string | null>;
+  tracking: { gtm_id: string | null; ga_id: string | null; meta_pixel_id: string | null };
 };
 
 const defaults: ContactSettings = {
@@ -18,6 +19,7 @@ const defaults: ContactSettings = {
   email: "dispatch@instadrop.uk",
   address: "Central Logistics Park, M25 Hub Highway, London UK",
   social_links: {},
+  tracking: { gtm_id: null, ga_id: null, meta_pixel_id: null },
 };
 
 const ContactContext = createContext(defaults);
@@ -62,5 +64,6 @@ export function SocialLinks({ className = "" }: { className?: string }) {
   const { social_links } = useContactSettings();
   const links = Object.entries(social_links).filter((entry): entry is [string,string] => Boolean(entry[1]));
   if (!links.length) return null;
-  return <div className={className}>{links.map(([name,url]) => <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} className="capitalize hover:text-white">{name}</a>)}</div>;
+  const icons: Record<string, React.ReactNode> = { facebook:<span className="font-black">f</span>, instagram:<span className="text-xs font-black">IG</span>, linkedin:<span className="text-xs font-black">in</span>, youtube:<span className="text-xs font-black">▶</span>, x:<span className="text-sm font-black">X</span>, tiktok:<span className="text-xs font-black">♪</span> };
+  return <div className={className}>{links.map(([name,url]) => <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} title={name} className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 hover:border-[#c6ff00] hover:text-white">{icons[name]}</a>)}</div>;
 }
