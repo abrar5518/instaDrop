@@ -16,7 +16,7 @@ export default function CtaBanner() {
           </div>
 
           <Link
-            href="#quote-form"
+            href="/instant-quote#quote-form"
             className="shrink-0 inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-sm transition-all shadow-md hover:scale-102"
           >
             <span>Get a fast quote</span>

@@ -31,7 +31,7 @@ export default function Header() {
             </span>
             <span className="font-bold text-white">INSTADROP 24/7 DISPATCH</span>
             <span className="hidden md:inline text-slate-600">•</span>
-            <span className="hidden md:inline text-slate-400">60-MIN PICKUP NATIONWIDE</span>
+            <span className="hidden md:inline text-slate-400">UK SAME-DAY COURIER SUPPORT</span>
           </div>
 
           <div className="hidden sm:flex items-center gap-4 text-slate-300 font-semibold">

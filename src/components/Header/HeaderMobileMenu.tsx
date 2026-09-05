@@ -28,7 +28,7 @@ export default function HeaderMobileMenu() {
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
               <span className="text-xs font-bold text-[#0a192f]">
-                InstaDrop 60-Min Live Dispatch
+                InstaDrop UK Dispatch
               </span>
             </div>
 

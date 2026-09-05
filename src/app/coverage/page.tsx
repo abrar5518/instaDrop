@@ -3,9 +3,9 @@ import { MapPin, ArrowRight, Building2 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "UK Coverage & Dispatch Hubs — 60-Minute Pickup Nationwide",
+  title: "UK Courier Coverage",
   description:
-    "InstaDrop operates 120+ logistics dispatch hubs across the UK. Guaranteed 60-minute door-to-door courier collection in London, Birmingham, Manchester, Leeds, Glasgow, Bristol & nationwide.",
+    "Explore InstaDrop courier coverage for same-day, scheduled and dedicated vehicle delivery across the UK.",
   keywords: [
     "UK same day courier coverage",
     "London same day courier",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "UK Coverage & Dispatch Hubs | InstaDrop Same-Day Courier",
     description:
-      "60-minute pickup guarantee across 100% of mainland UK. Over 120 regional logistics hubs.",
+      "Collection availability and timing are confirmed for each postcode and vehicle requirement.",
   },
 };
 
@@ -86,7 +86,7 @@ export default function CoveragePage() {
             UK Nationwide Dispatch Hubs
           </h1>
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            With over 120 regional logistics hubs and dedicated drivers active 24/7, we guarantee door-to-door collection within 60 minutes anywhere in the UK.
+            We arrange courier collections across the UK. Exact availability and collection timing depend on the postcode, vehicle and booking requirements.
           </p>
         </div>
       </section>
@@ -96,7 +96,7 @@ export default function CoveragePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">
-              REGIONAL DISPATCH CENTERS
+              REGIONAL DISPATCH CENTRES
             </p>
             <h2 className="text-3xl font-extrabold text-[#0a192f] font-display">
               Select Your Local Pickup Region

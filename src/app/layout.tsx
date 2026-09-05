@@ -13,27 +13,29 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://swiftly.co.uk"),
+  metadataBase: new URL("https://instadrop.sahoolat.pk"),
   title: {
-    default: "Swiftly — Same-Day Courier UK | Fast, Fully Tracked Parcel Delivery",
-    template: "%s | Swiftly Courier Services",
+    default: "InstaDrop | UK Same-Day Courier & Freight Services",
+    template: "%s | InstaDrop Courier Services",
   },
   description:
-    "Fast, fully tracked parcel delivery with secure online payment and proof of delivery—wherever it needs to go across the UK. Collection from 60 mins.",
+    "Professional UK same-day courier and freight services for urgent parcels, documents, equipment, pallets and scheduled deliveries.",
   keywords: [
-    "Swiftly courier",
+    "InstaDrop courier",
     "same day courier UK",
     "speedy quote courier",
     "dedicated vehicle courier",
     "tracking and POD courier",
   ],
-  authors: [{ name: "Swiftly Courier Services" }],
+  authors: [{ name: "InstaDrop Courier Services" }],
+  alternates: { canonical: "/" },
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
   openGraph: {
-    title: "Swiftly — Same-Day Courier UK",
+    title: "InstaDrop — UK Same-Day Courier & Freight Services",
     description:
-      "From your door to theirs, the same day. Fast, fully tracked parcel delivery across the UK.",
-    url: "https://swiftly.co.uk",
-    siteName: "Swiftly Courier",
+      "Professional same-day, dedicated vehicle, scheduled and freight delivery services across the UK.",
+    url: "https://instadrop.sahoolat.pk",
+    siteName: "InstaDrop Courier Services",
     locale: "en_GB",
     type: "website",
   },
@@ -47,6 +49,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <body className="min-h-screen flex flex-col font-sans bg-white text-slate-900 antialiased selection:bg-[#c6ff00] selection:text-[#0a192f]">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": ["Organization", "LocalBusiness"],
+          name: "InstaDrop Courier Services",
+          url: "https://instadrop.sahoolat.pk",
+          areaServed: { "@type": "Country", name: "United Kingdom" },
+          serviceType: ["Same-day courier", "Dedicated vehicle delivery", "Scheduled delivery", "Pallet and freight delivery"],
+        }) }} />
         <ContactSettingsProvider>
           <Header />
           <main className="flex-1">{children}</main>

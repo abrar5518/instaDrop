@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About InstaDrop — UK's Dedicated Same-Day Courier Network",
   description:
-    "Learn about InstaDrop, the UK's leading dedicated same-day courier service. Over 120 regional logistics hubs, 60-minute door-to-door pickups, fully insured transport, and transparent pricing.",
+    "Learn about InstaDrop's professional UK same-day courier and dedicated vehicle delivery approach.",
   keywords: [
     "about InstaDrop courier",
     "same day courier company UK",
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const stats = [
-    { label: "UK Logistics Hubs", val: "120+" },
-    { label: "Completed Deliveries", val: "150,000+" },
-    { label: "Avg Pickup Guarantee", val: "60 Mins" },
-    { label: "Trustpilot Rating", val: "4.9 / 5.0" },
+    { label: "Service Area", val: "United Kingdom" },
+    { label: "Transport", val: "Dedicated" },
+    { label: "Booking Support", val: "Dispatch Team" },
+    { label: "Delivery Records", val: "POD Available" },
   ];
 
   return (
@@ -77,7 +77,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-bold text-[#0a192f] font-display">Speed & Precision</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                We guarantee collection within 60 minutes nationwide. Every driver goes direct from door to door with zero intermediate hub stops.
+                Collection timing is confirmed for each booking based on location, vehicle availability and the required service. Dedicated vehicles travel directly between the agreed addresses.
               </p>
             </div>
 
@@ -87,7 +87,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-bold text-[#0a192f] font-display">Total Accountability</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Every consignment includes £50,000 Goods-in-Transit insurance, live GPS tracking links, and electronic signature PODs sent immediately upon delivery.
+                Available tracking and proof-of-delivery information is provided according to the confirmed booking and the records captured by dispatch.
               </p>
             </div>
 

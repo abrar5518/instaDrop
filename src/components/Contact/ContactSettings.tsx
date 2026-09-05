@@ -8,6 +8,7 @@ type ContactSettings = {
   whatsapp: string;
   email: string;
   address: string;
+  social_links: Record<string, string | null>;
 };
 
 const defaults: ContactSettings = {
@@ -16,6 +17,7 @@ const defaults: ContactSettings = {
   whatsapp: "+448001234455",
   email: "dispatch@instadrop.uk",
   address: "Central Logistics Park, M25 Hub Highway, London UK",
+  social_links: {},
 };
 
 const ContactContext = createContext(defaults);
@@ -54,4 +56,11 @@ export function ContactEmail({ className = "" }: { className?: string }) {
 export function ContactAddress({ className = "" }: { className?: string }) {
   const { address } = useContactSettings();
   return <span className={className}>{address}</span>;
+}
+
+export function SocialLinks({ className = "" }: { className?: string }) {
+  const { social_links } = useContactSettings();
+  const links = Object.entries(social_links).filter((entry): entry is [string,string] => Boolean(entry[1]));
+  if (!links.length) return null;
+  return <div className={className}>{links.map(([name,url]) => <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} className="capitalize hover:text-white">{name}</a>)}</div>;
 }

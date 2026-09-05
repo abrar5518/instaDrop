@@ -25,6 +25,7 @@ export default function VehicleFleetPage() {
   const fleetData = [
     {
       name: "Courier Car",
+      id: "courier-car",
       icon: Car,
       payload: "Up to 25 kg",
       dimensions: "40cm (L) x 30cm (W) x 20cm (H)",
@@ -35,16 +36,18 @@ export default function VehicleFleetPage() {
     },
     {
       name: "Small Van",
+      id: "small-van",
       icon: Truck,
       payload: "Up to 450 kg",
       dimensions: "1.5m (L) x 1.2m (W) x 1.1m (H)",
       pallets: "1 Standard Pallet (Up to 1.1m high)",
       ideal: "Boxes, IT equipment, small machinery replacement parts",
       badge: "Popular Business",
-      features: ["Fits 1 Euro or UK pallet", "Sliding side door access", "Ideal for daily trade drops", "60-min collection"],
+      features: ["Fits 1 Euro or UK pallet", "Sliding side door access", "Ideal for daily trade drops", "Direct delivery available"],
     },
     {
       name: "Medium Van (SWB)",
+      id: "medium-van",
       icon: Truck,
       payload: "Up to 900 kg",
       dimensions: "2.4m (L) x 1.4m (W) x 1.4m (H)",
@@ -55,16 +58,18 @@ export default function VehicleFleetPage() {
     },
     {
       name: "Large Van (LWB)",
+      id: "large-van",
       icon: Truck,
       payload: "Up to 1,200 kg",
       dimensions: "3.4m (L) x 1.7m (W) x 1.7m (H)",
       pallets: "3 Standard Pallets",
       ideal: "Long timber/pipes, heavy machinery, multi-box office moves",
       badge: "Heavy Freight",
-      features: ["Fits 3 standard pallets", "Long cargo loading length", "High payload clearance", "Goods insured £50k"],
+      features: ["Fits 3 standard pallets", "Long cargo loading length", "High payload clearance", "Dedicated direct transport"],
     },
     {
       name: "Extra Large Luton (Tail Lift)",
+      id: "luton-tail-lift",
       icon: Truck,
       payload: "Up to 1,000 kg",
       dimensions: "4.0m (L) x 2.0m (W) x 2.0m (H)",
@@ -101,6 +106,7 @@ export default function VehicleFleetPage() {
               return (
                 <div
                   key={v.name}
+                  id={v.id}
                   className="bg-[#f8fafc] rounded-3xl p-8 border border-slate-200/90 hover:border-[#0066ff] hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 group"
                 >
                   <div className="space-y-6">

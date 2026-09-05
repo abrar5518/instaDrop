@@ -6,7 +6,7 @@ import { Clock, ShieldCheck, Zap, Phone, CheckCircle2, Calculator, HelpCircle } 
 export const metadata: Metadata = {
   title: "Speedy Quote — Instant Same-Day Courier Price Calculator",
   description:
-    "Get an instant, transparent quote for same-day parcel, pallet, and freight delivery across the UK. 60-minute pickup guarantee. Calculate your price in 30 seconds with InstaDrop.",
+    "Request a tailored quote for same-day parcel, pallet and freight delivery across the UK.",
   keywords: [
     "speedy quote courier",
     "instant same day delivery quote",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Speedy Quote — Instant Same-Day Courier Calculator | InstaDrop",
     description:
-      "Calculate your instant same-day parcel and pallet delivery rate in 30 seconds. Pickups within 60 minutes nationwide.",
+      "Send your collection, delivery and load details to receive a tailored courier quote.",
   },
 };
 
@@ -40,7 +40,7 @@ export default function InstantQuotePage() {
             </h1>
 
             <p className="text-base text-slate-300 leading-relaxed max-w-xl">
-              Fill out your journey details below to receive a guaranteed fixed price. Dedicated driver collection within 60 minutes anywhere in the UK.
+              Fill out your journey and load details so dispatch can prepare a tailored price and collection plan.
             </p>
 
             <div className="space-y-3 pt-2 text-xs font-semibold text-slate-200">
@@ -50,11 +50,11 @@ export default function InstantQuotePage() {
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#c6ff00]" />
-                <span>£50,000 Goods-in-transit insurance included free</span>
+                <span>Consignment requirements reviewed by dispatch</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#c6ff00]" />
-                <span>Live GPS tracking link sent to WhatsApp or email</span>
+                <span>Status and POD available for supported bookings</span>
               </div>
             </div>
 
@@ -82,7 +82,7 @@ export default function InstantQuotePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">
-              TRANSPARENT PRICING GUARANTEE
+              TAILORED COURIER QUOTE
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a192f] font-display">
               Why InstaDrop Quotes Beat Competitors
@@ -97,7 +97,7 @@ export default function InstantQuotePage() {
               <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#0066ff] flex items-center justify-center font-bold">
                 <Zap className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-[#0a192f]">60-Minute Pickup</h3>
+              <h3 className="text-lg font-bold text-[#0a192f]">Collection Planning</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
                 As soon as you approve your quote, our local dispatch engine assigns the nearest dedicated vehicle instantly.
               </p>
@@ -107,9 +107,9 @@ export default function InstantQuotePage() {
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-[#0a192f]">£50,000 Insured Free</h3>
+              <h3 className="text-lg font-bold text-[#0a192f]">Cover Requirements</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Every quote includes £50,000 Goods-in-Transit insurance at zero added cost to protect your cargo.
+                Tell dispatch about the goods and their value so applicable transport and cover terms can be confirmed before booking.
               </p>
             </div>
 
