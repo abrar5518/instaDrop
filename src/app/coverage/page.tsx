@@ -3,6 +3,7 @@ import { MapPin, ArrowRight, Building2 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/coverage" },
   title: "UK Courier Coverage",
   description:
     "Explore InstaDrop courier coverage for same-day, scheduled and dedicated vehicle delivery across the UK.",
@@ -50,13 +51,13 @@ export default function CoveragePage() {
     {
       city: "Glasgow & Central Scotland",
       hubs: "Glasgow City Centre, Paisley, Eurocentral, Edinburgh Hub",
-      time: "Within 60 mins",
+      time: "Subject to availability",
       postcodes: "G, PA, FK, EH, ML",
     },
     {
       city: "Bristol & South West",
       hubs: "Bristol Avonmouth, Bath, Gloucester, Swindon, Exeter",
-      time: "Within 60 mins",
+      time: "Subject to availability",
       postcodes: "BS, BA, EX, TA, GL",
     },
     {
@@ -68,7 +69,7 @@ export default function CoveragePage() {
     {
       city: "Newcastle & North East",
       hubs: "Newcastle Upon Tyne, Sunderland, Durham, Teesside Logistics",
-      time: "Within 60 mins",
+      time: "Subject to availability",
       postcodes: "NE, SR, DH, TS",
     },
   ];

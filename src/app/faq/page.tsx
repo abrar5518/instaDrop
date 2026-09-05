@@ -13,7 +13,7 @@ export default function FaqPage() {
     {
       cat: "pickup",
       question: "How fast can an InstaDrop courier pick up my parcel?",
-      answer: "We guarantee door-to-door collection within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your booking to the nearest available driver in our network of 120+ logistics hubs.",
+      answer: "Collection timing depends on the postcode, required vehicle and current availability. Dispatch confirms the collection window before the booking is finalised.",
     },
     {
       cat: "rates",
@@ -23,12 +23,12 @@ export default function FaqPage() {
     {
       cat: "insurance",
       question: "Are my goods insured during transport?",
-      answer: "Yes! Every booking automatically includes £50,000 Goods-in-Transit insurance completely free of charge. For ultra high-value cargo or tenders, custom coverage up to £250,000 can be arranged upon request.",
+      answer: "Cover and liability terms depend on the goods and confirmed booking. Tell dispatch the contents and value so the applicable terms can be confirmed before transport.",
     },
     {
       cat: "tracking",
       question: "How do I track my delivery in real-time?",
-      answer: "As soon as your driver is dispatched, you receive a live GPS tracking link via email or WhatsApp. You can watch your courier’s real-time progress on a map from collection point straight to dropoff.",
+      answer: "Use the tracking reference supplied with your booking to see the latest status recorded by dispatch and proof of delivery when it is available.",
     },
     {
       cat: "service",
@@ -57,7 +57,7 @@ export default function FaqPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Everything you need to know about InstaDrop same-day pickups, pricing guarantees, insurance policy, and vehicle options.
+            Clear answers about booking, collection timing, tracking, transport terms and vehicle options.
           </p>
         </div>
       </section>

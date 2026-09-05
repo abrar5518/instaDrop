@@ -3,6 +3,7 @@ import { Car, Truck, ArrowRight, CheckCircle2, Zap } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/vehicle-fleet" },
   title: "Vehicle Fleet Guide — Small, Medium, Large & Luton Vans",
   description:
     "View InstaDrop's same-day courier vehicle fleet. Payload capacities from 25kg to 1,200kg, cargo dimensions, pallet limits, and Luton tail-lift specifications across the UK.",
@@ -137,7 +138,7 @@ export default function VehicleFleetPage() {
                         <span className="font-bold text-[#0a192f]">{v.payload}</span>
                       </div>
                       <div className="flex justify-between py-1 border-b border-slate-100">
-                        <span className="text-slate-400">Cargo Length/Height:</span>
+                        <span className="text-slate-400">Cargo Dimensions:</span>
                         <span className="font-semibold text-slate-800">{v.dimensions}</span>
                       </div>
                       <div className="flex justify-between py-1">

@@ -36,6 +36,13 @@ export default function ServicePage({ service }: { service: Service }) {
           </ul>
         </div>
       </section>
+      <section className="bg-slate-50 px-4 py-20 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">Booking process</p><h2 className="mt-3 font-display text-3xl font-extrabold text-[#0a192f]">How {service.title.toLowerCase()} works</h2><p className="mt-4 leading-7 text-slate-600">Provide the collection and delivery postcodes, timing, item count, weight, dimensions and any access or handling notes. Dispatch reviews the request, confirms the suitable vehicle and collection plan, then sends a tailored quotation. After booking, use the supplied reference for available status and proof-of-delivery records.</p></div>
+          <ol className="mt-10 grid gap-5 md:grid-cols-3"><li className="rounded-3xl border border-slate-200 bg-white p-6"><strong className="text-[#0066ff]">01 · Describe the load</strong><p className="mt-2 text-sm leading-6 text-slate-600">Give accurate dimensions, weight, addresses and handling requirements.</p></li><li className="rounded-3xl border border-slate-200 bg-white p-6"><strong className="text-[#0066ff]">02 · Confirm the plan</strong><p className="mt-2 text-sm leading-6 text-slate-600">Dispatch confirms vehicle availability, timing, price and applicable terms.</p></li><li className="rounded-3xl border border-slate-200 bg-white p-6"><strong className="text-[#0066ff]">03 · Delivery record</strong><p className="mt-2 text-sm leading-6 text-slate-600">Track the recorded status and access POD when it has been captured.</p></li></ol>
+        </div>
+      </section>
+      <section className="px-4 py-20 sm:px-8"><div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2"><div><p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">Before requesting a quote</p><h2 className="mt-3 font-display text-3xl font-extrabold text-[#0a192f]">Information dispatch needs</h2></div><ul className="grid gap-3 text-sm text-slate-700 sm:grid-cols-2"><li className="rounded-2xl bg-slate-50 p-4">Full collection and delivery addresses</li><li className="rounded-2xl bg-slate-50 p-4">Required date or time window</li><li className="rounded-2xl bg-slate-50 p-4">Total item count, size and weight</li><li className="rounded-2xl bg-slate-50 p-4">Site access and loading requirements</li><li className="rounded-2xl bg-slate-50 p-4">Contents, value and special handling</li><li className="rounded-2xl bg-slate-50 p-4">Working contact details at both ends</li></ul></div></section>
     </main>
   );
 }

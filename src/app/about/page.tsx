@@ -3,6 +3,7 @@ import { Zap, ShieldCheck, Clock, ArrowRight, Leaf } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About InstaDrop — UK's Dedicated Same-Day Courier Network",
   description:
     "Learn about InstaDrop's professional UK same-day courier and dedicated vehicle delivery approach.",

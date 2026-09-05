@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions — Goods-In-Transit Insurance Policy",
+  alternates: { canonical: "/terms-and-conditions" },
+  title: "Courier Terms & Conditions",
   description:
-    "InstaDrop Same-Day Courier Terms and Conditions. £50,000 Goods-in-Transit insurance policy details, 60-minute pickup SLAs, payment terms, and operational guidelines.",
+    "InstaDrop courier terms covering bookings, collection windows, payment, prohibited goods and delivery records.",
 };
 
 export default function TermsAndConditionsPage() {
@@ -13,7 +14,7 @@ export default function TermsAndConditionsPage() {
         <div className="max-w-4xl mx-auto text-center space-y-4">
           <p className="text-xs font-bold uppercase tracking-widest text-[#c6ff00]">OPERATIONAL TERMS</p>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white font-display">Terms & Conditions</h1>
-          <p className="text-xs text-slate-400">Goods-In-Transit Policy & SLA Terms • InstaDrop Courier Services Ltd</p>
+          <p className="text-xs text-slate-400">Booking, payment and transport terms • InstaDrop Courier Services Ltd</p>
         </div>
       </section>
 
@@ -27,16 +28,16 @@ export default function TermsAndConditionsPage() {
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-lg font-bold text-[#0a192f] font-display">2. 60-Minute Pickup SLA & Guarantees</h2>
+            <h2 className="text-lg font-bold text-[#0a192f] font-display">2. Collection Windows</h2>
             <p>
-              Our 60-minute pickup guarantee applies to mainland UK locations within operating logistics zones. While our average driver collection time is under 45 minutes, severe traffic delays, extreme weather conditions, or incorrect sender address details may occasionally extend pickup windows.
+              Collection windows are estimates until confirmed by dispatch and depend on location, vehicle availability, traffic, weather and accurate sender information.
             </p>
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-lg font-bold text-[#0a192f] font-display">3. £50,000 Goods-in-Transit Insurance</h2>
+            <h2 className="text-lg font-bold text-[#0a192f] font-display">3. Goods-in-Transit Terms</h2>
             <p>
-              Every booking automatically includes up to £50,000 Goods-in-Transit insurance coverage underwritten by leading UK cargo insurers. Coverage covers physical loss or damage during transit caused by traffic collisions or vehicle theft, provided goods were securely packaged by the sender.
+              Applicable cover, exclusions and liability limits are those confirmed for the individual booking. Customers must accurately declare the goods and their value and package them appropriately for transport.
             </p>
           </div>
 

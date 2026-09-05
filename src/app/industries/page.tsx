@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Zap } from "lucide-react";
 import { industries } from "@/content/siteContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/industries" },
   title: "Industries We Serve | InstaDrop",
   description: "Sector-specific same-day courier and freight support for construction, events, legal, engineering, healthcare, print, retail and telecoms.",
 };

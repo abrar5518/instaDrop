@@ -197,7 +197,7 @@ export default function QuoteWidget() {
               </label>
               <select name="timescale" required defaultValue="" className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f] focus:bg-white transition-all text-xs font-medium">
                 <option value="" disabled>Select timescale</option>
-                <option value="asap_60min">ASAP (Within 60 mins)</option>
+                <option value="asap_60min">ASAP collection requested</option>
                 <option value="same_day">Same Day Express</option>
                 <option value="scheduled_date">Scheduled Delivery</option>
               </select>

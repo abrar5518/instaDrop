@@ -4,7 +4,8 @@ import { ContactPhone } from "@/components/Contact/ContactSettings";
 import { Clock, ShieldCheck, Zap, Phone, CheckCircle2, Calculator, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Speedy Quote — Instant Same-Day Courier Price Calculator",
+  title: "Request a Tailored UK Courier Quote",
+  alternates: { canonical: "/instant-quote" },
   description:
     "Request a tailored quote for same-day parcel, pallet and freight delivery across the UK.",
   keywords: [
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     "InstaDrop quote",
   ],
   openGraph: {
-    title: "Speedy Quote — Instant Same-Day Courier Calculator | InstaDrop",
+    title: "Request a Tailored Courier Quote | InstaDrop",
     description:
       "Send your collection, delivery and load details to receive a tailored courier quote.",
   },

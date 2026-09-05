@@ -29,7 +29,6 @@ export const metadata: Metadata = {
     "tracking and POD courier",
   ],
   authors: [{ name: "InstaDrop Courier Services" }],
-  alternates: { canonical: "/" },
   verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
   openGraph: {
     title: "InstaDrop — UK Same-Day Courier & Freight Services",

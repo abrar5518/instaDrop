@@ -37,7 +37,7 @@ export default function BusinessAccountForm() {
         <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">COMPANY REG NUMBER *</label><input name="company_registration" type="text" required placeholder="e.g. 12345678" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">CONTACT NAME *</label><input name="name" type="text" required placeholder="e.g. Sarah Mitchell" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
+        <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">CONTACT NAME *</label><input name="name" type="text" required placeholder="Your full name" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
         <div><label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">WORK EMAIL *</label><input name="email" type="email" required placeholder="sarah@company.co.uk" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" /></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

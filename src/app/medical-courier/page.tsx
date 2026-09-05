@@ -5,6 +5,7 @@ import { Activity, CheckCircle2, ArrowRight, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   title: "Medical Courier UK — GDP Compliant Bio-Specimen & Pharmacy Express",
   description:
     "InstaDrop provides GDP compliant medical courier services across the UK. 60-minute pickup for pharmaceuticals, bloods, laboratory samples, medical devices, and urgent NHS hospital drops.",

@@ -5,6 +5,7 @@ import { FileText, Lock, ArrowRight, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   title: "Legal Document Courier UK — Confidential Court Briefs & Passports",
   description:
     "InstaDrop provides high-security legal courier services across the UK. Confidential court filings, legal tenders, contracts, deeds, and passports delivered hand-to-hand with instant electronic POD.",

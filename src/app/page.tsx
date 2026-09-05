@@ -6,6 +6,9 @@ import TrackingPodSection from "@/components/Home/TrackingPodSection";
 import FleetSection from "@/components/Home/FleetSection";
 import CtaBanner from "@/components/Home/CtaBanner";
 import IndustriesSection from "@/components/Home/IndustriesSection";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (
