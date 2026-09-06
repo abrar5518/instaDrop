@@ -10,6 +10,7 @@ type ContactSettings = {
   address: string;
   social_links: Record<string, string | null>;
   tracking: { gtm_id: string | null; ga_id: string | null; meta_pixel_id: string | null };
+  branding: { header_logo_url: string | null; footer_logo_url: string | null; favicon_url: string | null };
 };
 
 const defaults: ContactSettings = {
@@ -20,6 +21,7 @@ const defaults: ContactSettings = {
   address: "Central Logistics Park, M25 Hub Highway, London UK",
   social_links: {},
   tracking: { gtm_id: null, ga_id: null, meta_pixel_id: null },
+  branding: { header_logo_url: null, footer_logo_url: null, favicon_url: null },
 };
 
 const ContactContext = createContext(defaults);

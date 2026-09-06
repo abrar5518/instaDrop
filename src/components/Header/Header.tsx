@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, Zap, Phone, Mail } from "lucide-react";
+import { ArrowRight, Phone, Mail } from "lucide-react";
 import HeaderMobileMenu from "./HeaderMobileMenu";
 import HeaderServicesDropdown from "./HeaderServicesDropdown";
 import HeaderIndustriesDropdown from "./HeaderIndustriesDropdown";
 import { ContactEmail, ContactPhone } from "@/components/Contact/ContactSettings";
+import BrandLogo from "@/components/Branding/BrandLogo";
 
 export default function Header() {
   const topNavLinks = [
@@ -52,17 +53,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
         {/* Brand Logo: InstaDrop */}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="w-10 h-10 rounded-xl bg-[#0a192f] text-[#c6ff00] flex items-center justify-center font-black group-hover:scale-105 transition-transform shadow-md border border-[#c6ff00]/30">
-            <Zap className="w-6 h-6 text-[#c6ff00] fill-[#c6ff00]" />
-          </div>
-          <div>
-            <span className="font-extrabold text-2xl tracking-tight text-[#0a192f] font-display">
-              Insta<span className="text-[#c6ff00] bg-[#0a192f] px-1.5 py-0.5 rounded-md ml-0.5">Drop</span>
-            </span>
-            <span className="block text-[9px] font-extrabold uppercase tracking-widest text-[#0a192f] mt-0.5">
-              Same-Day Courier
-            </span>
-          </div>
+          <BrandLogo variant="header" />
         </Link>
 
         {/* Streamlined Desktop Navigation Bar */}

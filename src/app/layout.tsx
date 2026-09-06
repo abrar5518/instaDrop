@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "InstaDrop Courier Services" }],
   verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  icons: { icon: "/favicon" },
   openGraph: {
     title: "InstaDrop — UK Same-Day Courier & Freight Services",
     description:
