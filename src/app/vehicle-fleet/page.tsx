@@ -152,11 +152,11 @@ export default function VehicleFleetPage() {
   return (
     <div className="w-full bg-white">
       {/* 1. Header Banner */}
-      <section className="bg-[#0a192f] text-white py-12 lg:py-16 px-4 sm:px-8 relative overflow-hidden">
+      <section className="bg-[#0a192f] text-white py-14 lg:py-18 px-4 sm:px-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#0066ff]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
           <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#c6ff00] text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#c6ff00] text-xs font-bold uppercase tracking-wider">
               <Truck className="w-4 h-4 text-[#c6ff00]" />
               <span>SPEEDY VEHICLE FLEET DIRECTORY</span>
             </div>
@@ -170,16 +170,16 @@ export default function VehicleFleetPage() {
               Complete fleet of dedicated same-day delivery vehicles—from Small Vans (1 Pallet) to 26t HGVs. Direct door-to-door drive with zero co-loading stops.
             </p>
 
-            <div className="flex flex-wrap items-center gap-5 pt-1 text-xs font-semibold text-slate-300">
-              <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-6 pt-2 text-xs sm:text-sm font-semibold text-slate-300">
+              <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-[#c6ff00]" />
                 <span>60-Min SLA</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>£50k Insured Free</span>
+                <span>£50,000 Insured Free</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <Package className="w-4 h-4 text-[#0066ff]" />
                 <span>1 to 26 Pallets</span>
               </div>
@@ -192,90 +192,89 @@ export default function VehicleFleetPage() {
         </div>
       </section>
 
-      {/* 2. Compact Fleet Cards Grid */}
-      <section className="py-12 sm:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
+      {/* 2. Executive Clean Fleet Cards Grid */}
+      <section className="py-16 sm:py-20 bg-slate-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
             <p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">
               EXACT SPECIFICATIONS & PALLET LIMITS
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] font-display">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a192f] font-display">
               Choose the Right Vehicle Size
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
-              Match your parcel weight, dimensions, or pallet count below for immediate 60-minute dispatch.
+            <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+              Match your parcel weight, dimensions, or pallet count below for direct 60-minute express dispatch.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {fleetData.map((v) => (
               <div
                 key={v.name}
                 id={v.slug}
-                className="group bg-[#0a192f] text-white rounded-2xl p-5 border border-white/10 hover:border-[#c6ff00]/60 hover:shadow-[0_15px_35px_rgba(10,25,47,0.25)] transition-all duration-300 flex flex-col justify-between space-y-4 relative overflow-hidden"
+                className="group bg-[#0a192f] text-white rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#c6ff00] hover:shadow-[0_20px_50px_rgba(10,25,47,0.35)] transition-all duration-300 flex flex-col justify-between space-y-6 relative overflow-hidden"
               >
-                {/* Top Accent Line */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#c6ff00] transition-colors duration-300" />
+                {/* Top Gradient Accent Line */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0066ff] via-[#c6ff00] to-[#0066ff] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="space-y-3.5">
-                  {/* Top Badge & Header */}
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <span className="inline-block text-[10px] font-black uppercase tracking-wider text-[#0a192f] bg-[#c6ff00] px-2.5 py-0.5 rounded-full mb-1.5">
+                <div className="space-y-5">
+                  {/* Header: Badge + Truck Icon + Name */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs font-black uppercase tracking-wider text-[#0a192f] bg-[#c6ff00] px-3.5 py-1 rounded-full shadow-xs">
                         {v.badge}
                       </span>
-                      <h3 className="text-base sm:text-lg font-extrabold text-white font-display group-hover:text-[#c6ff00] transition-colors leading-snug">
-                        {v.name}
-                      </h3>
+                      <div className="p-2 rounded-xl bg-white/10 text-[#c6ff00] group-hover:bg-[#c6ff00] group-hover:text-[#0a192f] transition-colors">
+                        <Truck className="w-5 h-5" />
+                      </div>
                     </div>
-                    <div className="p-2 rounded-xl bg-white/5 border border-white/10 shrink-0 group-hover:border-[#c6ff00]/40 transition-colors">
-                      <Truck className="w-5 h-5 text-[#c6ff00]" />
-                    </div>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-white font-display group-hover:text-[#c6ff00] transition-colors">
+                      {v.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                      {v.tagline}
+                    </p>
                   </div>
 
-                  <p className="text-xs text-slate-300 leading-normal">
-                    {v.tagline}
-                  </p>
-
-                  {/* Dimensions & Specs Grid Table - Compact 2 Column */}
-                  <div className="bg-white/5 rounded-xl p-3 border border-white/10 grid grid-cols-2 gap-x-3 gap-y-2 text-[11px]">
-                    <div>
-                      <div className="text-slate-400 text-[10px]">Payload:</div>
-                      <div className="font-extrabold text-[#c6ff00]">{v.payload}</div>
+                  {/* Clean Spec Table Card */}
+                  <div className="bg-white/5 rounded-2xl p-4 border border-white/10 space-y-2.5 text-xs sm:text-sm">
+                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                      <span className="text-slate-400 font-medium">Max Payload Weight:</span>
+                      <span className="font-extrabold text-[#c6ff00] text-sm sm:text-base">{v.payload}</span>
                     </div>
-                    <div>
-                      <div className="text-slate-400 text-[10px]">Pallet Limit:</div>
-                      <div className="font-bold text-white truncate">{v.pallets.split('/')[0]}</div>
+                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                      <span className="text-slate-400 font-medium">Pallet Capacity:</span>
+                      <span className="font-bold text-white">{v.pallets}</span>
                     </div>
-                    <div>
-                      <div className="text-slate-400 text-[10px]">Dimensions (LxW):</div>
-                      <div className="font-medium text-slate-200">{v.length} x {v.width}</div>
+                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                      <span className="text-slate-400 font-medium">Cargo Dimensions:</span>
+                      <span className="font-semibold text-slate-200">{v.length} L × {v.width} W × {v.height} H</span>
                     </div>
-                    <div>
-                      <div className="text-slate-400 text-[10px]">Load Volume:</div>
-                      <div className="font-bold text-[#0066ff]">{v.volume}</div>
+                    <div className="flex items-center justify-between pt-0.5">
+                      <span className="text-slate-400 font-medium">Load Volume:</span>
+                      <span className="font-bold text-[#0066ff] bg-[#0066ff]/20 px-2.5 py-0.5 rounded-md text-xs sm:text-sm">{v.volume}</span>
                     </div>
                   </div>
 
                   {/* Bullet features */}
-                  <ul className="space-y-1.5 text-[11px] text-slate-300 font-medium">
+                  <ul className="space-y-2 text-xs sm:text-sm text-slate-300 font-medium pt-1">
                     {v.features.map((feat) => (
-                      <li key={feat} className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                        <span className="line-clamp-1">{feat}</span>
+                      <li key={feat} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <span className="leading-snug">{feat}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 {/* Instant Quote Button */}
-                <div className="pt-3 border-t border-white/10">
+                <div className="pt-4 border-t border-white/10">
                   <Link
                     href="/instant-quote"
-                    className="w-full py-2.5 px-3 rounded-xl bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
+                    className="w-full py-3.5 px-4 rounded-xl bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md group-hover:shadow-[0_0_20px_rgba(198,255,0,0.3)]"
                   >
-                    <span>Get Quote for {v.name.split(' ')[0]} Van</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#0a192f]" />
+                    <span>Get Instant Quote for {v.name.split(' ')[0]}</span>
+                    <ArrowRight className="w-4 h-4 text-[#0a192f]" />
                   </Link>
                 </div>
               </div>
@@ -285,28 +284,28 @@ export default function VehicleFleetPage() {
       </section>
 
       {/* 3. Hotline Assistance Banner */}
-      <section className="py-12 bg-[#0a192f] text-white border-t border-white/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-4">
-          <Truck className="w-10 h-10 text-[#c6ff00] mx-auto" />
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
+      <section className="py-14 bg-[#0a192f] text-white border-t border-white/10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-5">
+          <Truck className="w-12 h-12 text-[#c6ff00] mx-auto" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display">
             Need Advice on Vehicle Sizing or Heavy Freight?
           </h2>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
             Our experienced logistics coordinators are live 24/7 to analyze your cargo specs and provide the exact vehicle size at the best rate.
           </p>
-          <div className="pt-2 flex flex-wrap justify-center gap-3">
+          <div className="pt-2 flex flex-wrap justify-center gap-4">
             <Link
               href="/instant-quote"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600] transition-all shadow-md"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs sm:text-sm hover:bg-[#b2e600] transition-all shadow-md"
             >
               <span>Get Speedy Quote Online</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#0a192f]" />
+              <ArrowRight className="w-4 h-4 text-[#0a192f]" />
             </Link>
             <a
               href="tel:08001234455"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 text-white font-extrabold text-xs hover:bg-white/20 border border-white/15 transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 text-white font-extrabold text-xs sm:text-sm hover:bg-white/20 border border-white/15 transition-all"
             >
-              <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
+              <Phone className="w-4 h-4 text-[#c6ff00]" />
               <span>Call 0800 123 4455</span>
             </a>
           </div>
