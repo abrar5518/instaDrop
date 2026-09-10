@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Briefcase, CreditCard, Users, ShieldCheck, Zap, ArrowRight, CheckCircle2, FileText, Award } from "lucide-react";
+import BusinessAccountForm from "@/components/Forms/BusinessAccountForm";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/business-accounts" },
   title: "Corporate & Business Courier Accounts — 30-Day Credit Terms",
   description:
     "Open a business courier account with InstaDrop. Benefit from 30-day monthly invoice terms, tiered volume discounts, priority driver dispatch, multi-user portal access, and dedicated account management across the UK.",
@@ -81,12 +84,7 @@ export default function BusinessAccountsPage() {
                 <span>Apply for Account in 2 Mins</span>
                 <ArrowRight className="w-4 h-4 text-[#0a192f]" />
               </a>
-              <a
-                href="tel:08001234455"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15"
-              >
-                <span>Speak to Corporate Desk</span>
-              </a>
+              <ContactPhone prefix="Speak to Corporate Desk: " className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15" />
             </div>
           </div>
 
@@ -157,61 +155,7 @@ export default function BusinessAccountsPage() {
             </p>
           </div>
 
-          <form className="space-y-4 text-xs font-semibold">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                  COMPANY NAME *
-                </label>
-                <input type="text" required placeholder="e.g. Apex Legal Ltd" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" />
-              </div>
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                  COMPANY REG NUMBER *
-                </label>
-                <input type="text" required placeholder="e.g. 12345678" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                  CONTACT NAME *
-                </label>
-                <input type="text" required placeholder="e.g. Sarah Mitchell" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" />
-              </div>
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                  WORK EMAIL *
-                </label>
-                <input type="email" required placeholder="sarah@company.co.uk" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                  TELEPHONE NUMBER *
-                </label>
-                <input type="tel" required placeholder="e.g. 020 1234 5678" className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" />
-              </div>
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                  ESTIMATED MONTHLY DELIVERIES
-                </label>
-                <select className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]">
-                  <option>1 - 10 deliveries / month</option>
-                  <option>10 - 50 deliveries / month</option>
-                  <option>50 - 200 deliveries / month</option>
-                  <option>200+ deliveries / month</option>
-                </select>
-              </div>
-            </div>
-
-            <button type="submit" className="w-full py-4 px-6 rounded-xl bg-[#0a192f] hover:bg-[#051329] text-white font-bold text-sm shadow-md transition-colors">
-              Submit Corporate Account Application
-            </button>
-          </form>
+          <BusinessAccountForm />
         </div>
       </section>
     </div>

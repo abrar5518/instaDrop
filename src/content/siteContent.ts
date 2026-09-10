@@ -1,0 +1,118 @@
+import {
+  CalendarClock,
+  FileText,
+  Factory,
+  HardHat,
+  HeartPulse,
+  Package,
+  Printer,
+  RefreshCw,
+  Router,
+  ShoppingBag,
+  Store,
+  Truck,
+  Zap,
+} from "lucide-react";
+
+export const courierServices = [
+  {
+    slug: "same-day-delivery",
+    title: "Same-Day & Urgent Courier",
+    short: "Fast collection and direct same-day delivery for urgent consignments.",
+    description: "Fast collection and direct delivery on the same day for urgent documents, parcels, equipment and replacement parts.",
+    icon: Zap,
+    examples: ["Urgent documents", "Parcels", "Equipment", "Replacement parts"],
+  },
+  {
+    slug: "dedicated-vehicle-delivery",
+    title: "Dedicated Vehicle Delivery",
+    short: "One vehicle reserved exclusively for your consignment.",
+    description: "A vehicle is reserved exclusively for one customer's consignment and travels directly from collection to destination without depot handling or shared loads.",
+    icon: Truck,
+    examples: ["Exclusive-use vehicle", "Direct point-to-point travel", "No depot handling", "No shared loads"],
+  },
+  {
+    slug: "scheduled-delivery",
+    title: "Scheduled Delivery",
+    short: "Book collection and delivery in advance for an agreed date or time window.",
+    description: "A courier is booked in advance for collection and delivery on an agreed date or within an agreed time window.",
+    icon: CalendarClock,
+    examples: ["Advance bookings", "Timed collections", "Agreed delivery dates", "Planned business movements"],
+  },
+  {
+    slug: "pallet-delivery",
+    title: "Pallet & Heavy Freight Delivery",
+    short: "Matched vehicles for pallets, machinery and heavy commercial goods.",
+    description: "Transport for pallets, machinery and large or heavy commercial goods using a vehicle matched to the load.",
+    icon: Package,
+    examples: ["Palletised goods", "Machinery", "Large equipment", "Heavy commercial loads"],
+  },
+  {
+    slug: "wait-and-return",
+    title: "Wait & Return Courier",
+    short: "Delivery, on-site waiting and return to the original location.",
+    description: "The driver delivers the item, waits while documents are signed, equipment is tested or parts are exchanged, and then returns to the original location.",
+    icon: RefreshCw,
+    examples: ["Signed documents", "Tested equipment", "Part exchanges", "Return journeys"],
+  },
+] as const;
+
+export const industries = [
+  {
+    slug: "construction-site-delivery",
+    title: "Construction & Site Delivery",
+    description: "Time-sensitive delivery support for active construction sites, contractors and facilities teams.",
+    consignments: "Tools, site equipment, cables, fixings, technical drawings and urgent replacement parts.",
+    icon: HardHat,
+  },
+  {
+    slug: "events-exhibitions",
+    title: "Events & Exhibitions",
+    description: "Reliable timed transport for venues, organisers, exhibitors and production teams.",
+    consignments: "Exhibition stands, banners, displays, lighting, audio equipment and event materials.",
+    icon: Store,
+  },
+  {
+    slug: "legal-document-delivery",
+    title: "Legal & Document Delivery",
+    description: "Direct, professional movement of confidential and deadline-sensitive documents.",
+    consignments: "Court papers, contracts, deeds, tenders, passports and confidential documents.",
+    icon: FileText,
+  },
+  {
+    slug: "engineering-manufacturing",
+    title: "Engineering & Manufacturing",
+    description: "Urgent parts and production support that helps reduce operational downtime.",
+    consignments: "Machine parts, motors, pumps, valves, components, prototypes and palletised goods.",
+    icon: Factory,
+  },
+  {
+    slug: "medical-healthcare",
+    title: "Medical & Healthcare",
+    description: "Careful site-to-site delivery for healthcare providers and medical suppliers.",
+    consignments: "Medical supplies, specialist equipment, secure materials and emergency site-to-site transfers.",
+    icon: HeartPulse,
+  },
+  {
+    slug: "printing-marketing",
+    title: "Printing & Marketing",
+    description: "Deadline-focused delivery for printers, agencies, production houses and campaign teams.",
+    consignments: "Leaflets, brochures, banners, signage, samples and promotional materials.",
+    icon: Printer,
+  },
+  {
+    slug: "retail-ecommerce",
+    title: "Retail & eCommerce",
+    description: "Flexible courier support for shops, warehouses and online retail operations.",
+    consignments: "Retail stock, packaged orders, returns, packaging materials and store transfers.",
+    icon: ShoppingBag,
+  },
+  {
+    slug: "telecoms-infrastructure",
+    title: "Telecoms & Infrastructure",
+    description: "Rapid transport of critical hardware for field engineers and infrastructure teams.",
+    consignments: "Routers, switches, cables, antennas, testing devices and emergency network parts.",
+    icon: Router,
+  },
+] as const;
+

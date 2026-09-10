@@ -8,24 +8,28 @@ export default function FleetSection() {
       icon: Car,
       desc: "Documents, keys and small urgent parcels.",
       capacity: "Up to 25 kg",
+      href: "/vehicle-fleet#courier-car",
     },
     {
       name: "Small van",
       icon: Truck,
       desc: "Boxes, equipment and everyday business delivery.",
       capacity: "Up to 450 kg",
+      href: "/vehicle-fleet#small-van",
     },
     {
       name: "Medium van",
       icon: Truck,
       desc: "Bulkier items, stock and multiple parcels.",
       capacity: "Up to 900 kg",
+      href: "/vehicle-fleet#medium-van",
     },
     {
       name: "Large van",
       icon: Truck,
       desc: "Pallets, freight and commercial consignments.",
       capacity: "Up to 1,200 kg",
+      href: "/vehicle-fleet#large-van",
     },
   ];
 
@@ -50,8 +54,9 @@ export default function FleetSection() {
           {vehicles.map((v) => {
             const IconComp = v.icon;
             return (
-              <div
+              <Link
                 key={v.name}
+                href={v.href}
                 className="bg-white/5 rounded-3xl p-7 border border-white/10 hover:border-[#c6ff00]/50 transition-all flex flex-col justify-between space-y-6 group"
               >
                 <div className="space-y-4">
@@ -68,14 +73,11 @@ export default function FleetSection() {
                   </div>
                 </div>
 
-                <Link
-                  href="#quote-form"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c6ff00] hover:text-white transition-colors pt-2"
-                >
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c6ff00] group-hover:text-white transition-colors pt-2">
                   <span>{v.capacity}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
+                </span>
+              </Link>
             );
           })}
         </div>

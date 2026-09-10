@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import QuoteWidget from "@/components/Home/QuoteWidget";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 import { Activity, CheckCircle2, ArrowRight, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+  alternates: { canonical: "/industries/medical-healthcare" },
   title: "Medical Courier UK — GDP Compliant Bio-Specimen & Pharmacy Express",
   description:
     "InstaDrop provides GDP compliant medical courier services across the UK. 60-minute pickup for pharmaceuticals, bloods, laboratory samples, medical devices, and urgent NHS hospital drops.",
@@ -84,12 +87,7 @@ export default function MedicalCourierPage() {
                 <span>Book Medical Courier</span>
                 <ArrowRight className="w-4 h-4 text-[#0a192f]" />
               </Link>
-              <a
-                href="tel:08001234455"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15"
-              >
-                <span>Emergency Medical Desk: 0800 123 4455</span>
-              </a>
+              <ContactPhone prefix="Emergency Medical Desk: " className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15" />
             </div>
           </div>
 
@@ -207,15 +205,13 @@ export default function MedicalCourierPage() {
             Need Emergency Medical Transport Right Now?
           </h2>
           <p className="text-sm text-slate-300 max-w-xl mx-auto">
-            Our 24/7 medical dispatch desk is live. Call freephone 0800 123 4455 or book online.
+            Our 24/7 medical dispatch desk is live. Call freephone <ContactPhone className="font-bold" /> or book online.
           </p>
           <div className="pt-2 flex justify-center gap-4">
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600]">
               Get Medical Quote
             </Link>
-            <a href="tel:08001234455" className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15">
-              Call 0800 123 4455
-            </a>
+            <ContactPhone prefix="Call " className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15" />
           </div>
         </div>
       </section>

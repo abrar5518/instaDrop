@@ -38,7 +38,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-semibold text-slate-300">
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-[#c6ff00]" />
-              <span>Collection from 60 min</span>
+              <span>Collection time confirmed by dispatch</span>
             </div>
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-[#c6ff00]" />

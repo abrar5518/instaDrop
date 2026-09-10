@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy-policy" },
   title: "Privacy Policy & Data Protection Terms",
   description:
-    "InstaDrop Privacy Policy and UK GDPR data protection guidelines. Learn how we handle customer booking information, live GPS data, and payment security.",
+    "InstaDrop privacy information explaining how booking, contact, payment and delivery-status data is handled.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -29,12 +30,12 @@ export default function PrivacyPolicyPage() {
           <div className="space-y-3">
             <h2 className="text-lg font-bold text-[#0a192f] font-display">2. How We Use Your Data</h2>
             <p>
-              We process your personal information to fulfill courier transport services, calculate journey mileage, dispatch dedicated drivers, provide live GPS tracking links, send electronic proof of delivery (POD) notifications, and issue invoices.
+              We process personal information to fulfil courier services, calculate journeys, coordinate dispatch, provide available delivery-status and proof-of-delivery records, and issue invoices.
             </p>
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-lg font-bold text-[#0a192f] font-display">3. Live GPS & Location Data</h2>
+            <h2 className="text-lg font-bold text-[#0a192f] font-display">3. Delivery Status Data</h2>
             <p>
               Driver GPS tracking data is generated during active delivery assignments to inform senders and recipients of exact vehicle location and estimated arrival times (ETA). Location data is retained strictly for transit verification and POD logs.
             </p>
@@ -50,7 +51,7 @@ export default function PrivacyPolicyPage() {
           <div className="space-[#0a192f] space-y-3">
             <h2 className="text-lg font-bold text-[#0a192f] font-display">5. Your UK GDPR Rights</h2>
             <p>
-              Under UK GDPR, you have the right to request access to, correction of, or deletion of your personal data held by InstaDrop. For data privacy inquiries, contact our Data Protection Desk at <a href="mailto:privacy@instadrop.co.uk" className="text-[#0066ff] font-bold">privacy@instadrop.co.uk</a>.
+              Under UK GDPR, you have the right to request access to, correction of, or deletion of your personal data held by InstaDrop. For privacy enquiries, use the <a href="/contact#contact-form" className="text-[#0066ff] font-bold">contact form</a> and select the appropriate enquiry type.
             </p>
           </div>
         </div>
