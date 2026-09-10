@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
 import { trackLead } from "@/lib/analytics";
 
 export default function QuoteWidget() {
@@ -111,17 +111,17 @@ export default function QuoteWidget() {
 
   return (
     <div id="quote-form" className="w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-900 border border-slate-100">
-      {/* Form Header */}
-      <div className="flex items-center justify-between gap-2 mb-2">
-        <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] font-display">
+      {/* Form Header — Fits cleanly on ONE single line */}
+      <div className="flex items-center justify-between gap-2 mb-1">
+        <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] font-display whitespace-nowrap">
           Get your speedy quote
         </h3>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          AUTO DISTANCE ENGINE
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#0066ff] border border-blue-200 text-[10px] font-extrabold uppercase tracking-wider shrink-0">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#0066ff]" />
+          SECURE DISPATCH
         </span>
       </div>
-      <p className="text-xs sm:text-sm text-slate-500 mb-6">
+      <p className="text-xs text-slate-500 mb-5">
         Tell us about your delivery. We&apos;ll confirm the tailored price.
       </p>
 
