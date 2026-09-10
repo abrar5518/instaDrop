@@ -18,7 +18,7 @@ export default function QuoteWidget() {
     contact_preference: "email",
     collection_postcode: "",
     delivery_postcode: "",
-    vehicle_type: "medium_van",
+    vehicle_type: "Small Van / 1 Pallet / 400kg Max",
     timescale: "asap_60min",
     enquiry_type: "business",
     additional_info: "",
@@ -267,11 +267,12 @@ export default function QuoteWidget() {
                 onChange={handleChange}
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f] focus:bg-white transition-all text-xs font-medium"
               >
-                <option value="courier_car">Courier Car (Up to 25kg)</option>
-                <option value="small_van">Small Van (Up to 450kg)</option>
-                <option value="medium_van">Medium Van (Up to 900kg)</option>
-                <option value="large_van">Large Van (Up to 1,200kg)</option>
-                <option value="luton_tail_lift">Luton Tail-Lift (Up to 1,300kg)</option>
+                <option value="Small Van / 1 Pallet / 400kg Max">Small Van / 1 Pallet / 400kg Max</option>
+                <option value="SWB Van / 2 Pallets / 900kg Max">SWB Van / 2 Pallets / 900kg Max</option>
+                <option value="LWB Van / 3 Pallets / 1100kg Max">LWB Van / 3 Pallets / 1100kg Max</option>
+                <option value="XLWB Van / 4 Pallets / 1100kg Max">XLWB Van / 4 Pallets / 1100kg Max</option>
+                <option value="Luton Van / 6 Pallets / 1000kg Max">Luton Van / 6 Pallets / 1000kg Max</option>
+                <option value="Something Bigger">Something Bigger</option>
               </select>
             </div>
           </div>
