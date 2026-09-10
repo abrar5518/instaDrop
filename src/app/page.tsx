@@ -1,5 +1,11 @@
 import HeroSection from "@/components/Home/HeroSection";
-import HomeExperience from "@/components/Home/HomeExperience";
+import ServicesSection from "@/components/Home/ServicesSection";
+import HowItWorksSection from "@/components/Home/HowItWorksSection";
+import LiveDeliveryAnimation from "@/components/Home/LiveDeliveryAnimation";
+import TrackingPodSection from "@/components/Home/TrackingPodSection";
+import FleetSection from "@/components/Home/FleetSection";
+import CtaBanner from "@/components/Home/CtaBanner";
+import IndustriesSection from "@/components/Home/IndustriesSection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -8,7 +14,16 @@ export default function Home() {
   return (
     <div className="w-full bg-white">
       <HeroSection />
-      <HomeExperience />
+      <ServicesSection />
+      <IndustriesSection />
+      <HowItWorksSection />
+
+      {/* CENTER OF HOMEPAGE VISUAL ANIMATION */}
+      <LiveDeliveryAnimation />
+
+      <TrackingPodSection />
+      <FleetSection />
+      <CtaBanner />
     </div>
   );
 }
