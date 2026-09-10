@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { isValidUkPhone, UK_PHONE_MESSAGE, UK_PHONE_PATTERN } from "@/lib/formValidation";
 import VehicleSelect from "@/components/Forms/VehicleSelect";
@@ -11,6 +11,10 @@ export default function QuoteWidget() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [quoteNumber, setQuoteNumber] = useState("");
+  const collectionDateRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (collectionDateRef.current) collectionDateRef.current.min = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+  }, [submitted]);
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -189,8 +193,8 @@ export default function QuoteWidget() {
             </div>
           </div>
 
-          {/* Row 5 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Collection preference */}
+          <div>
             <div>
               <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
                 TIMESCALES *
@@ -202,14 +206,16 @@ export default function QuoteWidget() {
                 <option value="scheduled_date">Scheduled Delivery</option>
               </select>
             </div>
-            <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                TYPE OF ENQUIRY *
-              </label>
-              <select name="enquiry_type" required defaultValue="business" className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f] focus:bg-white transition-all text-xs font-medium">
-                <option value="business">Business</option>
-                <option value="personal">Personal / One-off</option>
-              </select>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="min-w-0">
+              <label htmlFor="collection-date" className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-slate-600">Collection date *</label>
+              <input id="collection-date" ref={collectionDateRef} type="date" name="collection_date" required className="min-h-10 w-full min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" />
+            </div>
+            <div className="min-w-0">
+              <label htmlFor="collection-time" className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-slate-600">Collection time (UK) *</label>
+              <input id="collection-time" type="time" name="collection_time" required className="min-h-10 w-full min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]" />
             </div>
           </div>
 

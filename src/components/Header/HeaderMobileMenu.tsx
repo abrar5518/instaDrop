@@ -112,6 +112,8 @@ export default function HeaderMobileMenu() {
                 About Us
               </Link>
 
+              <Link href="/blog" onClick={() => setIsOpen(false)} className="text-sm font-semibold text-slate-800 hover:text-blue-600 py-2 border-b border-slate-100">Blog</Link>
+
               <Link
                 href="/contact"
                 onClick={() => setIsOpen(false)}

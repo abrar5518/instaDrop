@@ -17,6 +17,7 @@ export default function Header() {
     { name: "Coverage", href: "/coverage" },
     { name: "Track POD", href: "/track-delivery" },
     { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
 

@@ -52,8 +52,9 @@ export function ContactPhone({ className = "", prefix = "", suffix = "" }: { cla
   return <a href={phoneHref(phone)} className={className}>{prefix}{phone}{suffix}</a>;
 }
 
-export function ContactEmail({ className = "", label = "Email dispatch" }: { className?: string; label?: string }) {
-  return <a href="/contact#contact-form" className={className}>{label}</a>;
+export function ContactEmail({ className = "" }: { className?: string }) {
+  const { email } = useContactSettings();
+  return <a href={`mailto:${email}`} className={className}>{email}</a>;
 }
 
 export function ContactAddress({ className = "" }: { className?: string }) {

@@ -1,4 +1,14 @@
-import type {Metadata} from "next"; import Link from "next/link"; import {ArrowRight} from "lucide-react";
-export const metadata:Metadata={title:"Courier Guides & Delivery Advice",description:"Practical guidance on selecting courier services, vehicles and preparing consignments for UK delivery.",alternates:{canonical:"/blog"}};
-const posts=[{slug:"choose-the-right-courier-vehicle",title:"How to choose the right courier vehicle",text:"Match parcel weight, dimensions and pallet count to a courier car, van or tail-lift vehicle."},{slug:"prepare-urgent-consignment",title:"How to prepare an urgent consignment",text:"A straightforward checklist for packaging, collection access and recipient details."},{slug:"proof-of-delivery-explained",title:"Proof of delivery explained",text:"What POD records, when it becomes available and how to retrieve it."}];
-export default function Blog(){return <div><section className="bg-[#0a192f] px-4 py-16 text-center text-white"><p className="text-xs font-bold uppercase tracking-widest text-[#c6ff00]">Resources</p><h1 className="mt-3 text-4xl font-extrabold sm:text-6xl">Courier guides</h1><p className="mx-auto mt-4 max-w-2xl text-slate-300">Clear, practical information for planning a UK courier booking.</p></section><section className="mx-auto grid max-w-7xl gap-6 px-4 py-20 md:grid-cols-3">{posts.map(p=><article key={p.slug} className="rounded-3xl border border-slate-200 bg-slate-50 p-7"><h2 className="text-xl font-extrabold text-[#0a192f]">{p.title}</h2><p className="mt-3 text-sm leading-6 text-slate-600">{p.text}</p><Link href={`/blog/${p.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#0066ff]">Read guide <ArrowRight className="h-4 w-4"/></Link></article>)}</section></div>}
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { getBlogs } from "@/lib/blogs";
+import BlogExplorer from "@/components/Blog/BlogExplorer";
+import BlogCta from "@/components/Blog/BlogCta";
+import "./journal.css";
+export const metadata: Metadata = { title: "The InstaDrop Journal", description: "Stories, practical tips and fresh perspectives from the world of delivery.", robots: { index: true, follow: true } };
+export default async function BlogPage() {
+ const blogPosts = await getBlogs();
+ const post = blogPosts.find(item => item.featured) ?? blogPosts[0];
+ return <div className="journal"><section className="journal-featured-section"><div className="journal-container"><h1 className="sr-only">InstaDrop Blog</h1>{post && <Link href={`/blog/${post.slug}`} className="journal-featured"><div className="journal-featured-image"><Image src={post.image} alt={post.alt} fill priority sizes="(max-width: 767px) 100vw, 60vw" /><span className="journal-featured-label">EDITOR’S PICK</span></div><div className="journal-featured-content"><span className="journal-category">{post.category}</span><h2>{post.title}</h2><p>{post.description}</p><div className="journal-meta"><span>{post.date}</span><span>{post.readTime}</span></div><span className="journal-featured-action">Read the story <span><ArrowUpRight size={23} /></span></span></div></Link>}</div></section><BlogExplorer blogPosts={blogPosts} /><BlogCta /></div>;
+}
