@@ -152,36 +152,36 @@ export default function VehicleFleetPage() {
   return (
     <div className="w-full bg-white">
       {/* 1. Header Banner */}
-      <section className="bg-[#0a192f] text-white py-16 lg:py-20 px-4 sm:px-8 relative overflow-hidden">
+      <section className="bg-[#0a192f] text-white py-12 lg:py-16 px-4 sm:px-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#0066ff]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#c6ff00] text-xs font-bold uppercase tracking-wider">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+          <div className="lg:col-span-7 space-y-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#c6ff00] text-xs font-bold uppercase tracking-wider">
               <Truck className="w-4 h-4 text-[#c6ff00]" />
-              <span>OFFICIAL SPEEDY VEHICLE FLEET DIRECTORY</span>
+              <span>SPEEDY VEHICLE FLEET DIRECTORY</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white font-display leading-[1.1]">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white font-display leading-tight">
               Speedy Vehicles. <br />
               <span className="text-[#c6ff00]">Dedicated Nationwide Fleet.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 max-w-xl font-normal leading-relaxed">
-              We operate a complete fleet of dedicated same-day delivery vehicles—from Small Vans (1 Pallet) to 26t HGVs. Direct door-to-door drive with zero co-loading stops.
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl font-normal leading-relaxed">
+              Complete fleet of dedicated same-day delivery vehicles—from Small Vans (1 Pallet) to 26t HGVs. Direct door-to-door drive with zero co-loading stops.
             </p>
 
-            <div className="flex flex-wrap items-center gap-6 pt-2 text-xs font-semibold text-slate-300">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-5 pt-1 text-xs font-semibold text-slate-300">
+              <div className="flex items-center gap-1.5">
                 <Zap className="w-4 h-4 text-[#c6ff00]" />
-                <span>60-Min Pickup SLA</span>
+                <span>60-Min SLA</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>£50,000 Insured Free</span>
+                <span>£50k Insured Free</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <Package className="w-4 h-4 text-[#0066ff]" />
-                <span>1 to 26 Pallets Capacity</span>
+                <span>1 to 26 Pallets</span>
               </div>
             </div>
           </div>
@@ -192,102 +192,90 @@ export default function VehicleFleetPage() {
         </div>
       </section>
 
-      {/* 2. Detailed Fleet Cards Grid */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
+      {/* 2. Compact Fleet Cards Grid */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
             <p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">
               EXACT SPECIFICATIONS & PALLET LIMITS
             </p>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0a192f] font-display">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] font-display">
               Choose the Right Vehicle Size
             </h2>
-            <p className="text-base text-slate-500 max-w-2xl mx-auto">
-              Match your parcel weight, dimensions, or pallet count below to get a direct dedicated driver dispatched in 60 minutes.
+            <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+              Match your parcel weight, dimensions, or pallet count below for immediate 60-minute dispatch.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {fleetData.map((v) => (
               <div
                 key={v.name}
                 id={v.slug}
-                className="group bg-[#0a192f] text-white rounded-3xl p-8 border border-white/10 hover:border-[#c6ff00]/50 hover:shadow-[0_20px_50px_rgba(10,25,47,0.3)] transition-all duration-300 flex flex-col justify-between space-y-6 relative overflow-hidden"
+                className="group bg-[#0a192f] text-white rounded-2xl p-5 border border-white/10 hover:border-[#c6ff00]/60 hover:shadow-[0_15px_35px_rgba(10,25,47,0.25)] transition-all duration-300 flex flex-col justify-between space-y-4 relative overflow-hidden"
               >
                 {/* Top Accent Line */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#c6ff00] transition-colors duration-300" />
 
-                <div className="space-y-6">
-                  {/* Badge & Name */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-black uppercase tracking-wider text-[#0a192f] bg-[#c6ff00] px-3.5 py-1 rounded-full shadow-xs">
+                <div className="space-y-3.5">
+                  {/* Top Badge & Header */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <span className="inline-block text-[10px] font-black uppercase tracking-wider text-[#0a192f] bg-[#c6ff00] px-2.5 py-0.5 rounded-full mb-1.5">
                         {v.badge}
                       </span>
+                      <h3 className="text-base sm:text-lg font-extrabold text-white font-display group-hover:text-[#c6ff00] transition-colors leading-snug">
+                        {v.name}
+                      </h3>
                     </div>
-                    <h2 className="text-2xl font-extrabold text-white font-display group-hover:text-[#c6ff00] transition-colors">
-                      {v.name}
-                    </h2>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      {v.tagline}
-                    </p>
+                    <div className="p-2 rounded-xl bg-white/5 border border-white/10 shrink-0 group-hover:border-[#c6ff00]/40 transition-colors">
+                      <Truck className="w-5 h-5 text-[#c6ff00]" />
+                    </div>
                   </div>
 
-                  {/* Real Vehicle Photograph Frame */}
-                  <div className="relative w-full h-48 rounded-2xl overflow-hidden border border-white/15 bg-slate-900 group-hover:border-[#c6ff00]/40 transition-colors">
-                    <Image
-                      src={v.image}
-                      alt={v.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] via-transparent to-transparent opacity-60" />
-                  </div>
+                  <p className="text-xs text-slate-300 leading-normal">
+                    {v.tagline}
+                  </p>
 
-                  {/* Dimensions & Specs Grid Table */}
-                  <div className="bg-white/5 rounded-2xl p-4 border border-white/10 space-y-2.5 text-xs">
-                    <div className="flex justify-between py-1 border-b border-white/10">
-                      <span className="text-slate-400">Max Payload Weight:</span>
-                      <span className="font-extrabold text-[#c6ff00]">{v.payload}</span>
+                  {/* Dimensions & Specs Grid Table - Compact 2 Column */}
+                  <div className="bg-white/5 rounded-xl p-3 border border-white/10 grid grid-cols-2 gap-x-3 gap-y-2 text-[11px]">
+                    <div>
+                      <div className="text-slate-400 text-[10px]">Payload:</div>
+                      <div className="font-extrabold text-[#c6ff00]">{v.payload}</div>
                     </div>
-                    <div className="flex justify-between py-1 border-b border-white/10">
-                      <span className="text-slate-400">Pallet Capacity:</span>
-                      <span className="font-bold text-white">{v.pallets}</span>
+                    <div>
+                      <div className="text-slate-400 text-[10px]">Pallet Limit:</div>
+                      <div className="font-bold text-white truncate">{v.pallets.split('/')[0]}</div>
                     </div>
-                    <div className="flex justify-between py-1 border-b border-white/10">
-                      <span className="text-slate-400">Cargo Length x Width:</span>
-                      <span className="font-semibold text-slate-200">{v.length} x {v.width}</span>
+                    <div>
+                      <div className="text-slate-400 text-[10px]">Dimensions (LxW):</div>
+                      <div className="font-medium text-slate-200">{v.length} x {v.width}</div>
                     </div>
-                    <div className="flex justify-between py-1 border-b border-white/10">
-                      <span className="text-slate-400">Cargo Height:</span>
-                      <span className="font-semibold text-slate-200">{v.height}</span>
-                    </div>
-                    <div className="flex justify-between py-1">
-                      <span className="text-slate-400">Load Volume:</span>
-                      <span className="font-bold text-[#0066ff]">{v.volume}</span>
+                    <div>
+                      <div className="text-slate-400 text-[10px]">Load Volume:</div>
+                      <div className="font-bold text-[#0066ff]">{v.volume}</div>
                     </div>
                   </div>
 
                   {/* Bullet features */}
-                  <ul className="space-y-2 text-xs font-semibold text-slate-300">
+                  <ul className="space-y-1.5 text-[11px] text-slate-300 font-medium">
                     {v.features.map((feat) => (
                       <li key={feat} className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                        <span>{feat}</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span className="line-clamp-1">{feat}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 {/* Instant Quote Button */}
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-3 border-t border-white/10">
                   <Link
                     href="/instant-quote"
-                    className="w-full py-3.5 px-4 rounded-xl bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-xs flex items-center justify-center gap-2 transition-colors shadow-md"
+                    className="w-full py-2.5 px-3 rounded-xl bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
                   >
-                    <span>Get Quote for {v.name}</span>
-                    <ArrowRight className="w-4 h-4 text-[#0a192f]" />
+                    <span>Get Quote for {v.name.split(' ')[0]} Van</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#0a192f]" />
                   </Link>
                 </div>
               </div>
@@ -297,28 +285,28 @@ export default function VehicleFleetPage() {
       </section>
 
       {/* 3. Hotline Assistance Banner */}
-      <section className="py-16 bg-[#0a192f] text-white border-t border-white/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-6">
-          <Truck className="w-12 h-12 text-[#c6ff00] mx-auto" />
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display">
+      <section className="py-12 bg-[#0a192f] text-white border-t border-white/10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-4">
+          <Truck className="w-10 h-10 text-[#c6ff00] mx-auto" />
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
             Need Advice on Vehicle Sizing or Heavy Freight?
           </h2>
-          <p className="text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto leading-relaxed">
             Our experienced logistics coordinators are live 24/7 to analyze your cargo specs and provide the exact vehicle size at the best rate.
           </p>
-          <div className="pt-2 flex flex-wrap justify-center gap-4">
+          <div className="pt-2 flex flex-wrap justify-center gap-3">
             <Link
               href="/instant-quote"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-sm hover:bg-[#b2e600] transition-all shadow-md"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600] transition-all shadow-md"
             >
               <span>Get Speedy Quote Online</span>
-              <ArrowRight className="w-4 h-4 text-[#0a192f]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#0a192f]" />
             </Link>
             <a
               href="tel:08001234455"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 text-white font-extrabold text-sm hover:bg-white/20 border border-white/15 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 text-white font-extrabold text-xs hover:bg-white/20 border border-white/15 transition-all"
             >
-              <Phone className="w-4 h-4 text-[#c6ff00]" />
+              <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
               <span>Call 0800 123 4455</span>
             </a>
           </div>
