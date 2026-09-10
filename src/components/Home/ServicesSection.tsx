@@ -19,7 +19,45 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">{courierServices.map((service) => { const Icon = service.icon; return <div key={service.slug} className="flex flex-col rounded-3xl border border-slate-200/90 bg-white p-6 hover:shadow-lg"><div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-[#0066ff]"><Icon className="h-5 w-5" /></div><h3 className="font-display text-lg font-bold text-[#0a192f]">{service.title}</h3><p className="mt-3 flex-1 text-sm leading-relaxed text-slate-500">{service.short}</p><Link href={`/${service.slug}`} className="mt-5 inline-flex items-center gap-2 text-xs font-bold text-[#0066ff]">Explore service <ArrowRight className="h-3.5 w-3.5" /></Link></div>; })}</div>
+        {/* Enhanced Interactive Cards Grid */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
+          {courierServices.map((service) => {
+            const Icon = service.icon;
+            return (
+              <Link
+                key={service.slug}
+                href={`/${service.slug}`}
+                className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:bg-[#0a192f] hover:border-[#c6ff00]/40 hover:shadow-[0_20px_40px_rgba(10,25,47,0.25)] cursor-pointer overflow-hidden"
+              >
+                {/* Subtle Background Glow Line on Hover */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#c6ff00] transition-colors duration-300" />
+
+                <div>
+                  {/* Icon Container */}
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-[#0066ff] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#c6ff00] group-hover:text-[#0a192f] group-hover:shadow-md">
+                    <Icon className="h-6 w-6" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-display text-lg font-extrabold text-[#0a192f] transition-colors duration-300 group-hover:text-white">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-500 transition-colors duration-300 group-hover:text-slate-300">
+                    {service.short}
+                  </p>
+                </div>
+
+                {/* Explore Link */}
+                <div className="mt-6 flex items-center gap-2 text-xs font-extrabold text-[#0066ff] transition-colors duration-300 group-hover:text-[#c6ff00]">
+                  <span>Explore service</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

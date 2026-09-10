@@ -3,22 +3,22 @@ export default function HowItWorksSection() {
     {
       num: "01",
       title: "Tell us the journey",
-      desc: "Enter postcodes, parcel details, vehicle and timing.",
+      desc: "Enter postcodes, parcel details, vehicle and timing in our 30-sec quote tool.",
     },
     {
       num: "02",
       title: "Approve your quote",
-      desc: "Review your final tailored price by WhatsApp or email.",
+      desc: "Review your final tailored price guarantee via instant WhatsApp or email.",
     },
     {
       num: "03",
       title: "Pay securely online",
-      desc: "Use your encrypted payment link and receive an invoice.",
+      desc: "Use your encrypted payment link and receive instant tax PDF invoice.",
     },
     {
       num: "04",
       title: "Follow every mile",
-      desc: "Get status updates and proof of delivery automatically.",
+      desc: "Get real-time satellite GPS tracking updates and digital POD proof automatically.",
     },
   ];
 
@@ -38,21 +38,25 @@ export default function HowItWorksSection() {
           </p>
         </div>
 
-        {/* 4 Cards Grid */}
+        {/* 4 Interactive Process Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step) => (
             <div
               key={step.num}
-              className="bg-white rounded-3xl p-7 border border-slate-200/80 shadow-xs space-y-4 flex flex-col justify-between"
+              className="group relative bg-white rounded-3xl p-8 border border-slate-200/90 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:bg-[#0a192f] hover:border-[#c6ff00]/40 hover:shadow-[0_20px_40px_rgba(10,25,47,0.25)] flex flex-col justify-between space-y-6 overflow-hidden"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#0a192f] text-white flex items-center justify-center text-xs font-extrabold">
+              {/* Top Accent Line */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#c6ff00] transition-colors duration-300" />
+
+              <div className="w-12 h-12 rounded-2xl bg-[#0a192f] text-white flex items-center justify-center text-sm font-black transition-all duration-300 group-hover:bg-[#c6ff00] group-hover:text-[#0a192f] group-hover:scale-110 group-hover:shadow-md">
                 {step.num}
               </div>
+
               <div>
-                <h3 className="text-lg font-bold text-[#0a192f] font-display">
+                <h3 className="text-xl font-extrabold text-[#0a192f] font-display transition-colors duration-300 group-hover:text-white">
                   {step.title}
                 </h3>
-                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed transition-colors duration-300 group-hover:text-slate-300">
                   {step.desc}
                 </p>
               </div>
