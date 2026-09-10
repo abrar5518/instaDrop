@@ -1,5 +1,6 @@
-import { Truck, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function FleetSection() {
   const vehicles = [
@@ -9,6 +10,7 @@ export default function FleetSection() {
       capacity: "Up to 400 kg",
       href: "/vehicle-fleet#small-van",
       badge: "1 Pallet",
+      image: "/images/fleet/small-van.jpg",
     },
     {
       name: "SWB Van (Short Wheelbase)",
@@ -16,6 +18,7 @@ export default function FleetSection() {
       capacity: "Up to 900 kg",
       href: "/vehicle-fleet#swb-van",
       badge: "2 Pallets",
+      image: "/images/fleet/swb-van.jpg",
     },
     {
       name: "LWB Van (Long Wheelbase)",
@@ -23,6 +26,7 @@ export default function FleetSection() {
       capacity: "Up to 1,100 kg",
       href: "/vehicle-fleet#lwb-van",
       badge: "3 Pallets",
+      image: "/images/fleet/lwb-van.jpg",
     },
     {
       name: "XLWB Van (Extra Long)",
@@ -30,6 +34,7 @@ export default function FleetSection() {
       capacity: "Up to 1,100 kg",
       href: "/vehicle-fleet#xlwb-van",
       badge: "4 Pallets",
+      image: "/images/fleet/xlwb-van.jpg",
     },
     {
       name: "Luton Van (Tail Lift)",
@@ -37,6 +42,7 @@ export default function FleetSection() {
       capacity: "Up to 1,000 kg",
       href: "/vehicle-fleet#luton-van",
       badge: "6 Pallets",
+      image: "/images/fleet/luton-van.jpg",
     },
     {
       name: "Something Bigger",
@@ -44,6 +50,7 @@ export default function FleetSection() {
       capacity: "1.5t to 26t",
       href: "/vehicle-fleet#something-bigger",
       badge: "Heavy Freight",
+      image: "/images/fleet/hgv-truck.jpg",
     },
   ];
 
@@ -67,34 +74,43 @@ export default function FleetSection() {
           </p>
         </div>
 
-        {/* 6 Vehicle Cards Grid */}
+        {/* 6 Vehicle Cards Grid with Real Photos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {vehicles.map((v) => (
             <Link
               key={v.name}
               href={v.href}
-              className="group relative bg-white/5 backdrop-blur-md rounded-3xl p-7 border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-b hover:from-[#112444] hover:to-[#0a192f] hover:border-[#c6ff00] hover:shadow-[0_20px_50px_rgba(198,255,0,0.12)] flex flex-col justify-between space-y-6"
+              className="group relative bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-b hover:from-[#112444] hover:to-[#0a192f] hover:border-[#c6ff00] hover:shadow-[0_20px_50px_rgba(198,255,0,0.12)] flex flex-col justify-between space-y-5 overflow-hidden"
             >
               {/* Top Badge Tag */}
               <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 text-[#c6ff00] flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-[#c6ff00] group-hover:text-[#0a192f] group-hover:shadow-lg">
-                  <Truck className="w-6 h-6" />
-                </div>
+                <h3 className="text-lg font-extrabold text-white font-display transition-colors duration-300 group-hover:text-[#c6ff00]">
+                  {v.name}
+                </h3>
                 <span className="text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-[#c6ff00]/20 text-[#c6ff00] border border-[#c6ff00]/30 transition-all">
                   {v.badge}
                 </span>
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-xl font-extrabold text-white font-display transition-colors duration-300 group-hover:text-[#c6ff00]">
-                  {v.name}
-                </h3>
-                <p className="text-xs text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-200">
+              {/* Real Vehicle Image Frame */}
+              <div className="relative w-full h-40 rounded-2xl overflow-hidden border border-white/15 bg-slate-900 group-hover:border-[#c6ff00]/40 transition-colors">
+                <Image
+                  src={v.image}
+                  alt={v.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] via-transparent to-transparent opacity-50" />
+              </div>
+
+              <div className="space-y-1">
+                <p className="text-xs text-slate-300 leading-relaxed transition-colors duration-300 group-hover:text-slate-200">
                   {v.desc}
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#c6ff00] transition-colors duration-300">
+              <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#c6ff00] transition-colors duration-300">
                 <span className="text-slate-300 group-hover:text-white transition-colors">{v.capacity}</span>
                 <div className="flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-300">
                   <span>View Specs</span>

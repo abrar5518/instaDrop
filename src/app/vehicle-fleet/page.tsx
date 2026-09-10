@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Truck, ArrowRight, CheckCircle2, Zap, Package, ShieldCheck, Phone } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import QuoteWidget from "@/components/Home/QuoteWidget";
 
 export const metadata: Metadata = {
@@ -44,16 +45,7 @@ export default function VehicleFleetPage() {
         "Sliding side loading door + rear doors",
         "£50,000 Goods-in-Transit insurance included free",
       ],
-      svgGraphic: (
-        <svg className="w-full h-32 text-[#c6ff00]" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 70 L20 40 L50 30 L140 30 L160 45 L180 45 L180 70 Z" fill="#0f2444" stroke="#c6ff00" strokeWidth="2.5" />
-          <circle cx="50" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <circle cx="150" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <path d="M55 35 L80 35 L80 50 L55 50 Z" fill="#0066ff" opacity="0.4" />
-          <rect x="90" y="42" width="22" height="20" rx="3" fill="#c6ff00" opacity="0.8" />
-          <text x="96" y="56" fontSize="10" fontWeight="bold" fill="#0a192f">1P</text>
-        </svg>
-      )
+      image: "/images/fleet/small-van.jpg"
     },
     {
       name: "Short Wheelbase Van (SWB)",
@@ -73,17 +65,7 @@ export default function VehicleFleetPage() {
         "Heavy-duty internal lashing points & straps",
         "Real-time satellite GPS tracking link",
       ],
-      svgGraphic: (
-        <svg className="w-full h-32 text-[#c6ff00]" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 70 L15 35 L45 25 L150 25 L170 42 L185 42 L185 70 Z" fill="#0f2444" stroke="#0066ff" strokeWidth="2.5" />
-          <circle cx="45" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <circle cx="155" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <rect x="65" y="38" width="22" height="22" rx="3" fill="#c6ff00" />
-          <rect x="95" y="38" width="22" height="22" rx="3" fill="#c6ff00" opacity="0.8" />
-          <text x="71" y="53" fontSize="10" fontWeight="bold" fill="#0a192f">1P</text>
-          <text x="101" y="53" fontSize="10" fontWeight="bold" fill="#0a192f">2P</text>
-        </svg>
-      )
+      image: "/images/fleet/swb-van.jpg"
     },
     {
       name: "Long Wheelbase Van (LWB)",
@@ -103,19 +85,7 @@ export default function VehicleFleetPage() {
         "Side sliding door for forklift loading",
         "Instant electronic proof of delivery (POD)",
       ],
-      svgGraphic: (
-        <svg className="w-full h-32 text-[#c6ff00]" viewBox="0 0 220 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 70 L10 30 L40 20 L170 20 L190 40 L205 40 L205 70 Z" fill="#0f2444" stroke="#c6ff00" strokeWidth="2.5" />
-          <circle cx="45" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <circle cx="175" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <rect x="60" y="34" width="22" height="24" rx="3" fill="#c6ff00" />
-          <rect x="90" y="34" width="22" height="24" rx="3" fill="#c6ff00" opacity="0.9" />
-          <rect x="120" y="34" width="22" height="24" rx="3" fill="#c6ff00" opacity="0.75" />
-          <text x="66" y="50" fontSize="10" fontWeight="bold" fill="#0a192f">1P</text>
-          <text x="96" y="50" fontSize="10" fontWeight="bold" fill="#0a192f">2P</text>
-          <text x="126" y="50" fontSize="10" fontWeight="bold" fill="#0a192f">3P</text>
-        </svg>
-      )
+      image: "/images/fleet/lwb-van.jpg"
     },
     {
       name: "Extra Long Wheelbase Van (XLWB)",
@@ -135,21 +105,7 @@ export default function VehicleFleetPage() {
         "High roof standing clearance",
         "Direct A to B express drive nationwide",
       ],
-      svgGraphic: (
-        <svg className="w-full h-32 text-[#c6ff00]" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 70 L10 25 L40 18 L190 18 L210 38 L225 38 L225 70 Z" fill="#0f2444" stroke="#0066ff" strokeWidth="2.5" />
-          <circle cx="45" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <circle cx="195" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <rect x="55" y="30" width="22" height="26" rx="3" fill="#c6ff00" />
-          <rect x="85" y="30" width="22" height="26" rx="3" fill="#c6ff00" opacity="0.9" />
-          <rect x="115" y="30" width="22" height="26" rx="3" fill="#c6ff00" opacity="0.8" />
-          <rect x="145" y="30" width="22" height="26" rx="3" fill="#c6ff00" opacity="0.65" />
-          <text x="61" y="47" fontSize="10" fontWeight="bold" fill="#0a192f">1P</text>
-          <text x="91" y="47" fontSize="10" fontWeight="bold" fill="#0a192f">2P</text>
-          <text x="121" y="47" fontSize="10" fontWeight="bold" fill="#0a192f">3P</text>
-          <text x="151" y="47" fontSize="10" fontWeight="bold" fill="#0a192f">4P</text>
-        </svg>
-      )
+      image: "/images/fleet/xlwb-van.jpg"
     },
     {
       name: "Luton Box Van with Hydraulic Tail Lift",
@@ -169,28 +125,7 @@ export default function VehicleFleetPage() {
         "Fits 6 standard Euro pallets",
         "Box body maximum width & square loading volume",
       ],
-      svgGraphic: (
-        <svg className="w-full h-32 text-[#c6ff00]" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="15" y="15" width="165" height="55" fill="#0f2444" stroke="#c6ff00" strokeWidth="2.5" rx="4" />
-          <path d="M180 35 L205 35 L220 50 L220 70 L180 70 Z" fill="#0a192f" stroke="#c6ff00" strokeWidth="2.5" />
-          <circle cx="55" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <circle cx="195" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          {/* Tail lift plate */}
-          <rect x="2" y="65" width="10" height="15" fill="#c6ff00" />
-          <rect x="25" y="24" width="20" height="28" rx="3" fill="#c6ff00" />
-          <rect x="50" y="24" width="20" height="28" rx="3" fill="#c6ff00" opacity="0.9" />
-          <rect x="75" y="24" width="20" height="28" rx="3" fill="#c6ff00" opacity="0.8" />
-          <rect x="100" y="24" width="20" height="28" rx="3" fill="#c6ff00" opacity="0.7" />
-          <rect x="125" y="24" width="20" height="28" rx="3" fill="#c6ff00" opacity="0.6" />
-          <rect x="150" y="24" width="20" height="28" rx="3" fill="#c6ff00" opacity="0.5" />
-          <text x="30" y="42" fontSize="9" fontWeight="bold" fill="#0a192f">1P</text>
-          <text x="55" y="42" fontSize="9" fontWeight="bold" fill="#0a192f">2P</text>
-          <text x="80" y="42" fontSize="9" fontWeight="bold" fill="#0a192f">3P</text>
-          <text x="105" y="42" fontSize="9" fontWeight="bold" fill="#0a192f">4P</text>
-          <text x="130" y="42" fontSize="9" fontWeight="bold" fill="#0a192f">5P</text>
-          <text x="155" y="42" fontSize="9" fontWeight="bold" fill="#0a192f">6P</text>
-        </svg>
-      )
+      image: "/images/fleet/luton-van.jpg"
     },
     {
       name: "Something Bigger (Heavy Freight & HGVs)",
@@ -210,17 +145,7 @@ export default function VehicleFleetPage() {
         "Dedicated transport manager assignment",
         "Custom UK & European transit insurance up to £250,000",
       ],
-      svgGraphic: (
-        <svg className="w-full h-32 text-[#c6ff00]" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="15" width="180" height="55" fill="#0f2444" stroke="#0066ff" strokeWidth="2.5" rx="4" />
-          <path d="M195 30 L225 30 L245 45 L245 70 L195 70 Z" fill="#0a192f" stroke="#c6ff00" strokeWidth="2.5" />
-          <circle cx="45" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <circle cx="75" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <circle cx="215" cy="70" r="12" fill="#0a192f" stroke="#c6ff00" strokeWidth="3" />
-          <rect x="25" y="25" width="150" height="35" fill="#0066ff" opacity="0.3" rx="2" />
-          <text x="45" y="46" fontSize="13" fontWeight="bold" fill="#c6ff00">HGV HEAVY FREIGHT</text>
-        </svg>
-      )
+      image: "/images/fleet/hgv-truck.jpg"
     },
   ];
 
@@ -308,9 +233,16 @@ export default function VehicleFleetPage() {
                     </p>
                   </div>
 
-                  {/* SVG Blueprint Illustration */}
-                  <div className="bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                    {v.svgGraphic}
+                  {/* Real Vehicle Photograph Frame */}
+                  <div className="relative w-full h-48 rounded-2xl overflow-hidden border border-white/15 bg-slate-900 group-hover:border-[#c6ff00]/40 transition-colors">
+                    <Image
+                      src={v.image}
+                      alt={v.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] via-transparent to-transparent opacity-60" />
                   </div>
 
                   {/* Dimensions & Specs Grid Table */}

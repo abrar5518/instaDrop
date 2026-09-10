@@ -116,9 +116,9 @@ export default function QuoteWidget() {
         <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] font-display whitespace-nowrap">
           Get your speedy quote
         </h3>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#0066ff] border border-blue-200 text-[10px] font-extrabold uppercase tracking-wider shrink-0">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#0066ff]" />
-          SECURE DISPATCH
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold uppercase tracking-wider shrink-0">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+          SECURE
         </span>
       </div>
       <p className="text-xs text-slate-500 mb-5">
