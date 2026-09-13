@@ -1,313 +1,300 @@
 import type { Metadata } from "next";
-import { Truck, ArrowRight, CheckCircle2, Zap, Package, ShieldCheck, Phone } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
-import QuoteWidget from "@/components/Home/QuoteWidget";
+import Link from "next/link";
+import { fleetVehicles as fleet } from "@/content/fleet";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
+import {
+  ArrowRight,
+  Box,
+  Check,
+  Clock3,
+  Headphones,
+  Layers3,
+  MapPin,
+  Move3d,
+  Phone,
+  Ruler,
+  ShieldCheck,
+  Truck,
+  Weight,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/vehicle-fleet" },
-  title: "Speedy Vehicle Fleet — Small, SWB, LWB, XLWB & Luton Box Vans",
+  title: "Courier Vehicle Fleet | Van Capacity Guide",
   description:
-    "Explore InstaDrop's dedicated courier vehicle fleet: Small Vans (1 Pallet), SWB Vans (2 Pallets), LWB Vans (3 Pallets), XLWB Vans (4 Pallets), Luton Box Vans with Tail Lift (6 Pallets), and HGVs across the UK.",
+    "Choose the right dedicated courier vehicle for your delivery. Compare Small Van, Transit, LWB, XLWB and tail-lift Luton capacities.",
   keywords: [
     "courier vehicle fleet UK",
-    "small van courier 400kg",
-    "SWB van 2 pallets",
-    "LWB van 3 pallets",
-    "XLWB van 4 pallets",
-    "Luton tail lift van 6 pallets",
-    "heavy freight HGVs UK",
+    "small van courier",
+    "transit van courier",
+    "LWB van courier",
+    "XLWB van courier",
+    "Luton van courier",
+    "tail lift van courier",
   ],
   openGraph: {
-    title: "Speedy Vehicle Fleet — Dedicated Couriers Nationwide | InstaDrop",
+    title: "Courier Vehicle Fleet & Capacity Guide | InstaDrop",
     description:
-      "Find the exact vehicle size for your parcel, pallet, or heavy freight delivery.",
+      "From a single pallet to specialist heavy freight, find the right dedicated vehicle for your UK delivery.",
   },
 };
 
-export default function VehicleFleetPage() {
-  const fleetData = [
-    {
-      name: "Small Van",
-      slug: "small-van",
-      badge: "1 Pallet / 400kg Max",
-      tagline: "Ideal for urgent parcels, small boxes, and single Euro pallets.",
-      payload: "400 kg",
-      pallets: "1 Standard / Euro Pallet",
-      length: "1.2 m",
-      width: "1.2 m",
-      height: "1.1 m",
-      volume: "2.0 m³",
-      ideal: "Small machinery replacement parts, urgent trade tools, IT hardware, single pallet, legal briefs.",
-      features: [
-        "Nationwide pickup within 60 minutes",
-        "Direct door-to-door transit — zero co-loading",
-        "Sliding side loading door + rear doors",
-        "£50,000 Goods-in-Transit insurance included free",
-      ],
-      image: "/images/fleet/small-van.jpg"
-    },
-    {
-      name: "Short Wheelbase Van (SWB)",
-      slug: "swb-van",
-      badge: "2 Pallets / 900kg Max",
-      tagline: "Perfect for multiple boxes, medium trade cargo, and 2 standard pallets.",
-      payload: "900 kg",
-      pallets: "2 Standard / Euro Pallets",
-      length: "2.4 m",
-      width: "1.4 m",
-      height: "1.4 m",
-      volume: "6.0 m³",
-      ideal: "Trade crates, 2 standard pallets, exhibition displays, commercial stock drops.",
-      features: [
-        "Fits 2 standard UK or Euro pallets",
-        "Full standing cargo loading clearance",
-        "Heavy-duty internal lashing points & straps",
-        "Real-time satellite GPS tracking link",
-      ],
-      image: "/images/fleet/swb-van.jpg"
-    },
-    {
-      name: "Long Wheelbase Van (LWB)",
-      slug: "lwb-van",
-      badge: "3 Pallets / 1100kg Max",
-      tagline: "Designed for 3 standard pallets, long piping, and heavy commercial freight.",
-      payload: "1,100 kg",
-      pallets: "3 Standard / Euro Pallets",
-      length: "3.4 m",
-      width: "1.4 m",
-      height: "1.7 m",
-      volume: "10.5 m³",
-      ideal: "Long timber & metal piping up to 3.4m, 3 pallets, heavy industrial parts.",
-      features: [
-        "Fits 3 standard pallets with ease",
-        "High payload loading capacity up to 1.1 tonnes",
-        "Side sliding door for forklift loading",
-        "Instant electronic proof of delivery (POD)",
-      ],
-      image: "/images/fleet/lwb-van.jpg"
-    },
-    {
-      name: "Extra Long Wheelbase Van (XLWB)",
-      slug: "xlwb-van",
-      badge: "4 Pallets / 1100kg Max",
-      tagline: "Maximum cargo length up to 4.2m for 4 standard pallets and oversized freight.",
-      payload: "1,100 kg",
-      pallets: "4 Standard / Euro Pallets",
-      length: "4.2 m",
-      width: "1.4 m",
-      height: "1.7 m",
-      volume: "14.0 m³",
-      ideal: "4 standard pallets, extra long materials, trade show stands, large factory moves.",
-      features: [
-        "Fits 4 standard pallets in line",
-        "4.2m internal cargo bed length",
-        "High roof standing clearance",
-        "Direct A to B express drive nationwide",
-      ],
-      image: "/images/fleet/xlwb-van.jpg"
-    },
-    {
-      name: "Luton Box Van with Hydraulic Tail Lift",
-      slug: "luton-van",
-      badge: "6 Pallets / 1000kg Max",
-      tagline: "Box body with 500kg hydraulic tail-lift & pallet truck for 6 pallets.",
-      payload: "1,000 kg",
-      pallets: "6 Standard / Euro Pallets",
-      length: "4.2 m",
-      width: "2.0 m",
-      height: "2.0 m",
-      volume: "18.0 m³",
-      ideal: "6 Euro pallets, heavy warehouse machinery, bulky furniture, construction drops.",
-      features: [
-        "500kg hydraulic tail-lift for ground loading",
-        "Pallet truck & cargo lashing straps provided",
-        "Fits 6 standard Euro pallets",
-        "Box body maximum width & square loading volume",
-      ],
-      image: "/images/fleet/luton-van.jpg"
-    },
-    {
-      name: "Something Bigger (Heavy Freight & HGVs)",
-      slug: "something-bigger",
-      badge: "8-26 Pallets / 1.5t to 26t",
-      tagline: "7.5t, 18t & 26t curtainside HGVs for full truckloads (FTL) and heavy machinery.",
-      payload: "1,500 kg to 26,000 kg",
-      pallets: "8 to 26 Standard Pallets",
-      length: "6.0m to 13.6m",
-      width: "2.4 m",
-      height: "2.4 m",
-      volume: "35m³ to 90m³",
-      ideal: "Factory relocations, full truckload freight (FTL), heavy steel/construction loads.",
-      features: [
-        "7.5t Box/Curtainside, 18t Rigid, 26t Articulated Trucks",
-        "Moffett lorry-mounted forklift options available",
-        "Dedicated transport manager assignment",
-        "Custom UK & European transit insurance up to £250,000",
-      ],
-      image: "/images/fleet/hgv-truck.jpg"
-    },
-  ];
+const servicePoints = [
+  { icon: Clock3, value: "60 min", label: "Target collection" },
+  { icon: MapPin, value: "UK-wide", label: "Nationwide coverage" },
+  { icon: ShieldCheck, value: "Dedicated", label: "No co-loading" },
+  { icon: Headphones, value: "24/7", label: "Dispatch support" },
+];
 
+function Spec({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof Ruler;
+  label: string;
+  value: string;
+}) {
   return (
-    <div className="w-full bg-white">
-      {/* 1. Header Banner */}
-      <section className="bg-[#0a192f] text-white py-14 lg:py-18 px-4 sm:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#0066ff]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-          <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#c6ff00] text-xs font-bold uppercase tracking-wider">
-              <Truck className="w-4 h-4 text-[#c6ff00]" />
-              <span>SPEEDY VEHICLE FLEET DIRECTORY</span>
+    <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
+      <div className="mb-2 flex items-center gap-2 text-slate-400">
+        <Icon className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.14em]">{label}</span>
+      </div>
+      <p className="text-sm font-extrabold text-[#0a192f]">{value}</p>
+    </div>
+  );
+}
+
+export default function VehicleFleetPage() {
+  return (
+    <div className="overflow-hidden bg-[#f7f8f4] text-[#0a192f]">
+      <section className="relative isolate bg-[#07182d] text-white">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-70"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(circle at 84% 35%, rgba(198,255,0,.16), transparent 27%), radial-gradient(circle at 5% 100%, rgba(0,102,255,.16), transparent 32%)",
+          }}
+        />
+        <div className="relative mx-auto grid min-h-[610px] max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+          <div className="relative z-10 max-w-2xl">
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#c6ff00]">
+              <Truck className="h-4 w-4" aria-hidden="true" />
+              Vehicle capacity guide
             </div>
-
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white font-display leading-tight">
-              Speedy Vehicles. <br />
-              <span className="text-[#c6ff00]">Dedicated Nationwide Fleet.</span>
+            <h1 className="max-w-2xl text-4xl font-extrabold leading-[1.04] tracking-[-0.045em] text-white sm:text-6xl lg:text-[64px]">
+              The right vehicle.
+              <span className="block text-[#c6ff00]">Ready when you are.</span>
             </h1>
-
-            <p className="text-sm sm:text-base text-slate-300 max-w-xl font-normal leading-relaxed">
-              Complete fleet of dedicated same-day delivery vehicles—from Small Vans (1 Pallet) to 26t HGVs. Direct door-to-door drive with zero co-loading stops.
+            <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
+              From one urgent box to six-pallet Luton loads, our nationwide fleet gives every consignment the space, care and direct route it needs.
             </p>
-
-            <div className="flex flex-wrap items-center gap-6 pt-2 text-xs sm:text-sm font-semibold text-slate-300">
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-[#c6ff00]" />
-                <span>60-Min SLA</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>£50,000 Insured Free</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Package className="w-4 h-4 text-[#0066ff]" />
-                <span>1 to 26 Pallets</span>
-              </div>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/instant-quote"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#c6ff00] px-6 py-3.5 text-sm font-extrabold text-[#07182d] transition hover:bg-[#b8ed00]"
+              >
+                Get an instant quote
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <a
+                href="#fleet-guide"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-white/10"
+              >
+                Explore the fleet
+              </a>
             </div>
           </div>
 
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <QuoteWidget />
+          <div className="relative flex min-h-[300px] items-center justify-center lg:min-h-[430px]">
+            <div className="absolute inset-x-[8%] bottom-[10%] h-20 rounded-[100%] bg-black/35 blur-2xl" aria-hidden="true" />
+            <div className="absolute right-0 top-2 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 backdrop-blur-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">Fleet access</p>
+              <p className="mt-1 text-sm font-extrabold text-white">Small vans to 6-pallet Lutons</p>
+            </div>
+            <Image
+              src="/fleet/van one (2).jpeg"
+              alt="InstaDrop curtain-side Luton van with tail lift"
+              width={1536}
+              height={1024}
+              priority
+              sizes="(max-width: 1024px) 92vw, 58vw"
+              className="relative z-10 h-auto w-full max-w-[720px] object-contain drop-shadow-[0_24px_30px_rgba(0,0,0,.34)]"
+            />
           </div>
         </div>
       </section>
 
-      {/* 2. Executive Clean Fleet Cards Grid */}
-      <section className="py-16 sm:py-20 bg-slate-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">
-              EXACT SPECIFICATIONS & PALLET LIMITS
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a192f] font-display">
-              Choose the Right Vehicle Size
-            </h2>
-            <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-              Match your parcel weight, dimensions, or pallet count below for direct 60-minute express dispatch.
-            </p>
+      <section className="relative z-20 mx-auto -mt-1 max-w-7xl px-5 sm:px-8 lg:-mt-10">
+        <div className="grid grid-cols-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_18px_60px_rgba(7,24,45,.10)] lg:grid-cols-4">
+          {servicePoints.map(({ icon: Icon, value, label }, index) => (
+            <div
+              key={label}
+              className={`flex items-center gap-3 px-4 py-5 sm:px-6 ${
+                index % 2 !== 0 ? "border-l border-slate-200" : ""
+              } ${index > 1 ? "border-t border-slate-200 lg:border-t-0" : ""} ${
+                index === 2 ? "lg:border-l" : ""
+              }`}
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#eef6d3] text-[#365314]">
+                <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
+              </span>
+              <span>
+                <strong className="block text-sm font-extrabold text-[#0a192f] sm:text-base">{value}</strong>
+                <span className="text-[11px] font-medium text-slate-500 sm:text-xs">{label}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="fleet-guide" className="scroll-mt-28 px-5 pb-20 pt-20 sm:px-8 lg:pb-28 lg:pt-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#547000]">Our vehicle range</p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0a192f] sm:text-5xl">
+                Find your best fit.
+              </h2>
+            </div>
+            <div>
+              <p className="max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+                Use this guide to match your load to the most commonly used vehicles in our fleet. Vehicle sizes can vary slightly by model, so share exact dimensions when booking.
+              </p>
+              <nav aria-label="Fleet sections" className="mt-5 flex flex-wrap gap-2">
+                {fleet.map((vehicle) => (
+                  <a
+                    key={vehicle.shortName}
+                    href={`#${vehicle.value.replaceAll("_", "-")}`}
+                    className="rounded-full border border-slate-300 bg-white px-3.5 py-2 text-[11px] font-bold text-slate-600 transition hover:border-[#0a192f] hover:text-[#0a192f]"
+                  >
+                    {vehicle.shortName}
+                  </a>
+                ))}
+              </nav>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {fleetData.map((v) => (
-              <div
-                key={v.name}
-                id={v.slug}
-                className="group bg-[#0a192f] text-white rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#c6ff00] hover:shadow-[0_20px_50px_rgba(10,25,47,0.35)] transition-all duration-300 flex flex-col justify-between space-y-6 relative overflow-hidden"
+          <div className="mt-12 space-y-6">
+            {fleet.map((vehicle, index) => (
+              <article
+                key={vehicle.name}
+                id={vehicle.value.replaceAll("_", "-")}
+                className="scroll-mt-32 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_12px_40px_rgba(15,23,42,.055)]"
               >
-                {/* Top Gradient Accent Line */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0066ff] via-[#c6ff00] to-[#0066ff] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="space-y-5">
-                  {/* Header: Badge + Truck Icon + Name */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="text-xs font-black uppercase tracking-wider text-[#0a192f] bg-[#c6ff00] px-3.5 py-1 rounded-full shadow-xs">
-                        {v.badge}
-                      </span>
-                      <div className="p-2 rounded-xl bg-white/10 text-[#c6ff00] group-hover:bg-[#c6ff00] group-hover:text-[#0a192f] transition-colors">
-                        <Truck className="w-5 h-5" />
-                      </div>
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-white font-display group-hover:text-[#c6ff00] transition-colors">
-                      {v.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-                      {v.tagline}
-                    </p>
-                  </div>
-
-                  {/* Clean Spec Table Card */}
-                  <div className="bg-white/5 rounded-2xl p-4 border border-white/10 space-y-2.5 text-xs sm:text-sm">
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                      <span className="text-slate-400 font-medium">Max Payload Weight:</span>
-                      <span className="font-extrabold text-[#c6ff00] text-sm sm:text-base">{v.payload}</span>
-                    </div>
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                      <span className="text-slate-400 font-medium">Pallet Capacity:</span>
-                      <span className="font-bold text-white">{v.pallets}</span>
-                    </div>
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                      <span className="text-slate-400 font-medium">Cargo Dimensions:</span>
-                      <span className="font-semibold text-slate-200">{v.length} L × {v.width} W × {v.height} H</span>
-                    </div>
-                    <div className="flex items-center justify-between pt-0.5">
-                      <span className="text-slate-400 font-medium">Load Volume:</span>
-                      <span className="font-bold text-[#0066ff] bg-[#0066ff]/20 px-2.5 py-0.5 rounded-md text-xs sm:text-sm">{v.volume}</span>
-                    </div>
-                  </div>
-
-                  {/* Bullet features */}
-                  <ul className="space-y-2 text-xs sm:text-sm text-slate-300 font-medium pt-1">
-                    {v.features.map((feat) => (
-                      <li key={feat} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span className="leading-snug">{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Instant Quote Button */}
-                <div className="pt-4 border-t border-white/10">
-                  <Link
-                    href="/instant-quote"
-                    className="w-full py-3.5 px-4 rounded-xl bg-[#c6ff00] hover:bg-[#b2e600] text-[#0a192f] font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md group-hover:shadow-[0_0_20px_rgba(198,255,0,0.3)]"
+                <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+                  <div
+                    className={`relative flex min-h-[270px] items-center justify-center overflow-hidden p-8 sm:min-h-[340px] sm:p-12 ${
+                      vehicle.dark ? "bg-[#07182d]" : "bg-[#eef6d3]"
+                    } ${index % 2 === 1 ? "lg:order-2" : ""}`}
                   >
-                    <span>Get Instant Quote for {v.name.split(' ')[0]}</span>
-                    <ArrowRight className="w-4 h-4 text-[#0a192f]" />
-                  </Link>
+                    <div
+                      className={`absolute inset-0 ${vehicle.dark ? "opacity-20" : "opacity-45"}`}
+                      aria-hidden="true"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(rgba(100,116,139,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(100,116,139,.18) 1px, transparent 1px)",
+                        backgroundSize: "28px 28px",
+                        maskImage: "linear-gradient(to bottom, black, transparent 88%)",
+                      }}
+                    />
+                    <span
+                      className={`absolute left-6 top-6 rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] sm:left-8 sm:top-8 ${
+                        vehicle.dark ? "bg-[#c6ff00] text-[#07182d]" : "bg-[#07182d] text-white"
+                      }`}
+                    >
+                      {String(index + 1).padStart(2, "0")} / {String(fleet.length).padStart(2, "0")}
+                    </span>
+                    <div className="absolute inset-x-[18%] bottom-[17%] h-10 rounded-[100%] bg-black/20 blur-xl" aria-hidden="true" />
+                    <Image
+                      src={vehicle.image}
+                      alt={vehicle.name}
+                      width={vehicle.imageWidth}
+                      height={vehicle.imageHeight}
+                      sizes="(max-width: 1024px) 80vw, 42vw"
+                      className={`relative z-10 h-auto object-contain drop-shadow-[0_20px_18px_rgba(0,0,0,.22)] ${
+                        vehicle.shortName === "Specialist" ? "w-full max-w-[520px]" : "w-[88%] max-w-[520px]"
+                      }`}
+                    />
+                  </div>
+
+                  <div className={`p-6 sm:p-9 lg:p-11 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                    <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#648000]">
+                      {vehicle.shortName} courier
+                    </p>
+                    <h3 className="mt-2 text-2xl font-extrabold tracking-[-0.025em] text-[#0a192f] sm:text-3xl">
+                      {vehicle.name}
+                    </h3>
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">{vehicle.description}</p>
+
+                    <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                      <Spec icon={Layers3} label="Pallets" value={vehicle.pallets} />
+                      <Spec icon={Weight} label="Payload" value={vehicle.payload} />
+                      <Spec icon={Ruler} label="Max length" value={vehicle.length} />
+                      <Spec icon={Move3d} label="Max height" value={vehicle.height} />
+                      <Spec icon={Box} label="Max width" value={vehicle.width} />
+                      {vehicle.tailLiftCapacity ? (
+                        <>
+                          <Spec icon={Truck} label="Tail lift capacity" value={vehicle.tailLiftCapacity} />
+                          <Spec icon={Move3d} label="Side loading" value={vehicle.sideLoading ?? "No"} />
+                          <Spec icon={ShieldCheck} label="Weather protection" value={vehicle.weatherProtection ?? "Load specific"} />
+                        </>
+                      ) : (
+                        <Spec icon={Truck} label="Between arches" value={vehicle.archWidth ?? "Load specific"} />
+                      )}
+                    </div>
+
+                    <div className="mt-7 border-t border-slate-200 pt-6">
+                      <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-slate-400">A smart choice for</p>
+                      <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                        {vehicle.bestFor.map((item) => (
+                          <li key={item} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#c6ff00] text-[#07182d]">
+                              <Check className="h-2.5 w-2.5" strokeWidth={3} aria-hidden="true" />
+                            </span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
+
+          <p className="mt-5 text-center text-[11px] leading-5 text-slate-500">
+            Dimensions and capacities are a practical guide only. Exact limits may vary by vehicle model and load distribution.
+          </p>
         </div>
       </section>
 
-      {/* 3. Hotline Assistance Banner */}
-      <section className="py-14 bg-[#0a192f] text-white border-t border-white/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-5">
-          <Truck className="w-12 h-12 text-[#c6ff00] mx-auto" />
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display">
-            Need Advice on Vehicle Sizing or Heavy Freight?
-          </h2>
-          <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Our experienced logistics coordinators are live 24/7 to analyze your cargo specs and provide the exact vehicle size at the best rate.
-          </p>
-          <div className="pt-2 flex flex-wrap justify-center gap-4">
+      <section className="bg-[#c6ff00] px-5 py-16 sm:px-8 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1fr_auto]">
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#405400]">Not sure which one?</p>
+            <h2 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-[-0.035em] text-[#07182d] sm:text-5xl">
+              Tell us what you&apos;re moving. We&apos;ll match the vehicle.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-[#31420a] sm:text-base">
+              Share your item dimensions, total weight and collection postcode. Our dispatch team will take care of the rest.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <Link
               href="/instant-quote"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs sm:text-sm hover:bg-[#b2e600] transition-all shadow-md"
+              className="inline-flex min-w-52 items-center justify-center gap-2 rounded-full bg-[#07182d] px-6 py-3.5 text-sm font-extrabold text-white transition hover:bg-[#102a49]"
             >
-              <span>Get Speedy Quote Online</span>
-              <ArrowRight className="w-4 h-4 text-[#0a192f]" />
+              Get my quote
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <a
-              href="tel:08001234455"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 text-white font-extrabold text-xs sm:text-sm hover:bg-white/20 border border-white/15 transition-all"
-            >
-              <Phone className="w-4 h-4 text-[#c6ff00]" />
-              <span>Call 0800 123 4455</span>
-            </a>
+            <div className="inline-flex min-w-52 items-center justify-center gap-2 rounded-full border border-[#07182d]/20 bg-white/55 px-6 py-3.5 text-sm font-extrabold text-[#07182d] transition hover:bg-white">
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              <ContactPhone prefix="Call " className="hover:underline" />
+            </div>
           </div>
         </div>
       </section>

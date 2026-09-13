@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import QuoteWidget from "@/components/Home/QuoteWidget";
 import { Zap, Briefcase, Package, Activity, FileText, Clock, ArrowRight, CheckCircle2, XCircle, HelpCircle } from "lucide-react";
 import Link from "next/link";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 
 export const metadata: Metadata = {
   title: "Same-Day Courier Services — Dedicated Van, Pallet & Urgent Logistics",
@@ -18,11 +19,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Same-Day Courier Services — Dedicated Van & Freight | InstaDrop",
     description:
-      "Direct door-to-door same-day courier services across the UK. 60-minute pickup guarantee, £50k insurance included.",
+      "Direct door-to-door same-day courier services across the UK, with collection timing and cover confirmed for each booking.",
   },
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.co.uk";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.uk";
 
 const servicesSchema = {
   "@context": "https://schema.org",
@@ -103,18 +104,18 @@ export default function ServicesPage() {
     {
       id: "sameday",
       title: "Same-Day Dedicated Express",
-      badge: "60-Min Pickup SLA",
+      badge: "Urgent Dispatch",
       icon: Zap,
       href: "/same-day-delivery",
       subtitle: "Direct door-to-door transport with zero co-loading or intermediate hub stops.",
       description:
-        "When an urgent parcel or part must arrive today without exception, our Same-Day Dedicated Express is the fastest solution. Your consignment travels in an exclusive vehicle straight from pickup to delivery.",
+        "When an urgent parcel or part needs to arrive today, Same-Day Dedicated Express provides an exclusive vehicle travelling from collection to delivery as agreed.",
       specs: [
-        "Nationwide pickup within 60 minutes guaranteed",
+        "Expected collection window confirmed by dispatch",
         "Exclusive dedicated driver — zero co-loading",
-        "Real-time satellite GPS tracking link sent to phone/email",
-        "£50,000 Goods-in-transit insurance policy included free",
-        "Instant electronic signature proof of delivery (POD)",
+        "Delivery-status updates where supported",
+        "Applicable Goods-in-Transit cover confirmed before booking",
+        "Electronic proof of delivery where supported",
       ],
     },
     {
@@ -128,10 +129,10 @@ export default function ServicesPage() {
         "Streamline your corporate supply chain with dedicated courier accounts. Get preferential volume rates, monthly consolidated invoicing, priority driver dispatch, and a dedicated account manager.",
       specs: [
         "Monthly invoice & flexible 30-day net credit terms",
-        "Dedicated corporate account coordinator & SLA guarantees",
+        "Dedicated corporate account coordinator and agreed service levels",
         "Multi-user employee booking portal & CSV bulk import",
-        "Tiered volume discounts saving up to 25% on mileage",
-        "Enhanced transit insurance options up to £250,000",
+        "Volume pricing subject to the account agreement",
+        "Enhanced cover options reviewed for declared high-value goods",
       ],
     },
     {
@@ -180,7 +181,7 @@ export default function ServicesPage() {
       specs: [
         "Sealed serialized tamper-evident security pouches",
         "Hand-to-hand named recipient signature requirement",
-        "Court submission deadline delivery SLA guarantee",
+        "Deadline requirements recorded and confirmed before booking",
         "Immediate timestamped PDF POD notification emailed",
         "Discreet direct vehicle courier — zero multi-drop delays",
       ],
@@ -199,18 +200,18 @@ export default function ServicesPage() {
         "Heavily discounted return leg fare saving up to 50%",
         "Ideal for signed contracts, tenders & warranty part swaps",
         "Same dedicated driver and vehicle throughout whole journey",
-        "Continuous live satellite GPS tracking both ways",
+        "Journey-status updates where supported",
       ],
     },
   ];
 
   const faqs = [
     { q: "What courier services does InstaDrop provide?", a: "We provide dedicated same-day parcel delivery, heavy pallet freight, GDP medical specimen transport, confidential legal document delivery, wait & return courier service, and corporate business accounts." },
-    { q: "How fast is collection across the UK?", a: "We guarantee collection within 60 minutes nationwide from the moment your booking is confirmed." },
-    { q: "Are all services delivered using dedicated vehicles?", a: "Yes! 100% of our services operate on exclusive dedicated direct vehicles with zero co-loading or sorting depot stops." },
-    { q: "What is the insurance coverage per delivery?", a: "Every booking automatically includes £50,000 Goods-in-Transit insurance completely free of charge." },
+    { q: "How fast is collection across the UK?", a: "Dispatch confirms the expected collection window after checking location, route requirements and vehicle availability." },
+    { q: "Are all services delivered using dedicated vehicles?", a: "A dedicated direct vehicle is used where that service is selected and confirmed in the quote." },
+    { q: "What is the insurance coverage per delivery?", a: "Cover depends on the declared contents, value and booking terms. Ask dispatch to confirm the applicable limit." },
     { q: "How do I calculate a price for my courier service?", a: "You can enter your pickup and dropoff postcodes in our speedy quote engine to calculate instant upfront rates in 30 seconds." },
-    { q: "Can I open a corporate credit account for my company?", a: "Yes, business credit account applications take 2 minutes online and offer 30-day invoice terms and volume discounts up to 25%." },
+    { q: "Can I open a corporate credit account for my company?", a: "Yes. Credit terms and volume pricing are subject to application review and the signed account agreement." },
   ];
 
   return (
@@ -235,7 +236,7 @@ export default function ServicesPage() {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 max-w-xl font-normal leading-relaxed">
-              From urgent legal briefs to heavy 6-pallet freight and GDP medical samples, InstaDrop delivers door-to-door across mainland UK with 60-minute pickup SLAs.
+              From urgent legal briefs to pallet freight and specialist consignments, InstaDrop arranges door-to-door services across mainland UK, subject to booking requirements and availability.
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -328,7 +329,7 @@ export default function ServicesPage() {
                   <div className="lg:col-span-5 bg-[#0a192f] text-white rounded-2xl p-8 space-y-6 border border-[#0a192f]">
                     <div className="space-y-2">
                       <p className="text-xs font-bold text-[#c6ff00] uppercase tracking-wider">
-                        Operational Guarantee
+                        Booking Details
                       </p>
                       <h4 className="text-xl font-bold text-white font-display">
                         Direct Vehicle Dispatch
@@ -337,8 +338,8 @@ export default function ServicesPage() {
 
                     <div className="space-y-3 text-xs text-slate-300">
                       <div className="flex justify-between py-2 border-b border-slate-800">
-                        <span>Pickup SLA:</span>
-                        <span className="font-bold text-[#c6ff00]">Within 60 Mins</span>
+                        <span>Collection:</span>
+                        <span className="font-bold text-[#c6ff00]">Confirmed by dispatch</span>
                       </div>
                       <div className="flex justify-between py-2 border-b border-slate-800">
                         <span>Depot Sorting Stops:</span>
@@ -346,11 +347,11 @@ export default function ServicesPage() {
                       </div>
                       <div className="flex justify-between py-2 border-b border-slate-800">
                         <span>Goods Insurance:</span>
-                        <span className="font-bold text-emerald-400">Up to £50,000 Free</span>
+                        <span className="font-bold text-emerald-400">Confirmed for declared goods</span>
                       </div>
                       <div className="flex justify-between py-2">
                         <span>Live Tracking:</span>
-                        <span className="font-bold text-[#0066ff]">Satellite GPS Link</span>
+                        <span className="font-bold text-[#0066ff]">Where supported</span>
                       </div>
                     </div>
                   </div>
@@ -383,7 +384,7 @@ export default function ServicesPage() {
             <div className="divide-y divide-slate-100 font-semibold text-slate-700">
               <div className="grid grid-cols-3 p-4 items-center">
                 <span>Pickup SLA</span>
-                <span className="text-emerald-700 font-bold flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Collection in 60 minutes</span>
+                <span className="text-emerald-700 font-bold flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Confirmed collection window</span>
                 <span className="text-slate-400 flex items-center gap-1.5"><XCircle className="w-4 h-4 text-red-400" /> All-day window (9am-6pm)</span>
               </div>
               <div className="grid grid-cols-3 p-4 items-center">
@@ -398,7 +399,7 @@ export default function ServicesPage() {
               </div>
               <div className="grid grid-cols-3 p-4 items-center">
                 <span>Tracking</span>
-                <span className="text-emerald-700 font-bold flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Live GPS update every second</span>
+                <span className="text-emerald-700 font-bold flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Status updates where supported</span>
                 <span className="text-slate-400 flex items-center gap-1.5"><XCircle className="w-4 h-4 text-red-400" /> Delayed barcode scan updates</span>
               </div>
             </div>
@@ -440,9 +441,7 @@ export default function ServicesPage() {
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600]">
               Get Instant Quote
             </Link>
-            <a href="tel:08001234455" className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15">
-              Call 0800 123 4455
-            </a>
+            <ContactPhone prefix="Call " className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15" />
           </div>
         </div>
       </section>

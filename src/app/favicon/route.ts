@@ -1,3 +1,3 @@
-const backend=process.env.BACKEND_API_URL??"https://admin-instadrop.sahoolat.pk/api/v1";
+const backend=process.env.BACKEND_API_URL??"https://admin.instadrop.uk/api/v1";
 export const dynamic="force-dynamic";
 export async function GET(){try{const settings=await fetch(`${backend}/settings/public`,{cache:"no-store"}).then(r=>r.json());const url=settings?.branding?.favicon_url;if(url){const image=await fetch(url,{cache:"no-store"});if(image.ok)return new Response(image.body,{headers:{"Content-Type":image.headers.get("content-type")||"image/png","Cache-Control":"public, max-age=300"}})}}catch{}const fallback='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0a192f"/><path d="M37 6 13 36h17l-3 22 24-32H34z" fill="#c6ff00"/></svg>';return new Response(fallback,{headers:{"Content-Type":"image/svg+xml","Cache-Control":"public, max-age=300"}})}

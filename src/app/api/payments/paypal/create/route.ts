@@ -1,11 +1,18 @@
-const backendUrl = process.env.BACKEND_API_URL ?? "https://admin-instadrop.sahoolat.pk/api/v1";
+import { enforceRateLimit, proxyError, proxyJson, readJsonBody } from "@/lib/api-proxy";
+
+const backendUrl = (process.env.BACKEND_API_URL ?? "https://admin.instadrop.uk/api/v1").replace(/\/$/, "");
 
 export async function POST(request: Request) {
+  const limited = enforceRateLimit(request, "paypal-create", 15, 5 * 60_000);
+  if (limited) return limited;
   try {
-    const payload = await request.json();
-    const response = await fetch(`${backendUrl}/payments/paypal/create`, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ payment_token: payload.payment_token }), cache: "no-store" });
-    return Response.json(await response.json(), { status: response.status });
-  } catch {
-    return Response.json({ message: "PayPal is temporarily unavailable." }, { status: 502 });
+    const payload = await readJsonBody(request, 8 * 1024);
+    return await proxyJson(`${backendUrl}/payments/paypal/create`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ payment_token: payload.payment_token }),
+    });
+  } catch (error) {
+    return proxyError(error, "PayPal is temporarily unavailable.");
   }
 }

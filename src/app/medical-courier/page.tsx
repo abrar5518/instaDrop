@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/industries/medical-healthcare" },
   title: "Medical Courier UK — GDP Compliant Bio-Specimen & Pharmacy Express",
   description:
-    "InstaDrop provides GDP compliant medical courier services across the UK. 60-minute pickup for pharmaceuticals, bloods, laboratory samples, medical devices, and urgent NHS hospital drops.",
+    "InstaDrop arranges specialist medical courier services across the UK for pharmaceuticals, bloods, laboratory samples, medical devices and urgent hospital deliveries, subject to booking requirements.",
   keywords: [
     "medical courier UK",
     "GDP compliant courier",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Medical Courier UK | GDP Compliant Specimen Transport | InstaDrop",
     description:
-      "Time-critical medical transport with GDP trained drivers, tamper-evident handling, and 60-minute pickup.",
+      "Time-critical medical transport with handling requirements and collection timing confirmed for each booking.",
   },
 };
 
@@ -30,16 +30,16 @@ export default function MedicalCourierPage() {
     { title: "GDP Trained Drivers", desc: "Drivers trained under Good Distribution Practice (GDP) protocols for biological samples, pharmaceuticals, and vaccines." },
     { title: "Tamper-Evident Security Seals", desc: "Every specimen pouch features serialized tamper-evident security locks to protect sample integrity." },
     { title: "Point-to-Point Direct Drive", desc: "Zero intermediate depot stops. Samples go straight from clinic or pharmacy to pathology labs or hospital wards." },
-    { title: "Emergency 60-Min Pickup SLA", desc: "Available 24/7/365 for urgent bloods, organs, tissues, or critical ICU pharmaceutical dispatches." },
+    { title: "Urgent Dispatch Assessment", desc: "Contact dispatch for availability and suitability for urgent bloods, tissues or pharmaceutical consignments." },
     { title: "Chain-of-Custody Documentation", desc: "Complete timestamped hand-to-hand signature trail from collecting doctor to lab technician." },
-    { title: "£50,000 Goods Insurance Included", desc: "Full Goods-in-Transit protection included for high-value medical diagnostic equipment and trial drugs." },
+    { title: "Cover Confirmed Before Booking", desc: "Applicable Goods-in-Transit cover depends on the declared contents, value and agreed terms." },
   ];
 
   const workflow = [
     { step: "01", title: "Urgent Medical Request", desc: "Enter pickup hospital & lab postcodes in our speedy quote engine or call our 24/7 desk." },
     { step: "02", title: "GDP Driver Assigned", desc: "Nearest certified medical courier driver is dispatched immediately to your clinic." },
     { step: "03", title: "Tamper Bag Sealing", desc: "Samples loaded into serialized tamper-proof thermal bags with chain-of-custody log." },
-    { step: "04", title: "Direct Point-to-Point Transit", desc: "Driver travels directly to lab with live satellite GPS tracking updates." },
+    { step: "04", title: "Direct Point-to-Point Transit", desc: "Where a dedicated service is booked, the driver travels directly to the agreed handover point with status updates where supported." },
     { step: "05", title: "Lab Handover & POD", desc: "Handed to named laboratory technician with electronic POD signature sent instantly." },
   ];
 
@@ -52,10 +52,10 @@ export default function MedicalCourierPage() {
 
   const faqs = [
     { q: "Are your medical couriers GDP compliant?", a: "Yes! Our drivers undergo rigorous Good Distribution Practice (GDP) training regarding temperature monitoring, bio-hazard safety, and chain-of-custody protocols." },
-    { q: "How fast can a medical sample be collected?", a: "We guarantee collection within 60 minutes anywhere across mainland UK, 24 hours a day." },
+    { q: "How fast can a medical sample be collected?", a: "Timing depends on the collection location, vehicle availability and handling requirements. Dispatch confirms the expected window before booking." },
     { q: "Are samples kept temperature-stable during transit?", a: "Yes, we utilize certified thermal transport bags and temperature-monitored vehicles to maintain sample viability." },
     { q: "Do you deliver directly to NHS pathology laboratories?", a: "Yes, our couriers deliver directly to named lab technicians, pathology receiving desks, and hospital wards." },
-    { q: "Can I track the courier's location during transport?", a: "Yes, you receive a real-time satellite GPS tracking link to monitor the driver from hospital pickup to lab handover." },
+    { q: "Can I track the courier during transport?", a: "Supported bookings include delivery-status updates. The level of tracking detail depends on the assigned courier and service." },
     { q: "Is chain-of-custody documentation provided?", a: "A complete electronic signature trail with timestamps and recipient names is emailed to your desk the second handover is complete." },
   ];
 

@@ -1,11 +1,13 @@
-const backendUrl = process.env.BACKEND_API_URL ?? "https://admin-instadrop.sahoolat.pk/api/v1";
+import { enforceRateLimit, proxyError, proxyJson } from "@/lib/api-proxy";
 
-export async function GET() {
+const backendUrl = (process.env.BACKEND_API_URL ?? "https://admin.instadrop.uk/api/v1").replace(/\/$/, "");
+
+export async function GET(request: Request) {
+  const limited = enforceRateLimit(request, "contact-settings", 60);
+  if (limited) return limited;
   try {
-    const response = await fetch(`${backendUrl}/settings/public`, { cache: "no-store" });
-    const data = await response.json();
-    return Response.json(data, { status: response.status });
-  } catch {
-    return Response.json({ message: "Contact settings are temporarily unavailable." }, { status: 502 });
+    return await proxyJson(`${backendUrl}/settings/public`);
+  } catch (error) {
+    return proxyError(error, "Contact settings are temporarily unavailable.");
   }
 }

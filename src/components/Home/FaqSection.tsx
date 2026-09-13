@@ -9,27 +9,27 @@ export default function FaqSection() {
   const faqs = [
     {
       question: "How fast can a courier pick up my parcel?",
-      answer: "We guarantee door-to-door pickup within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your job to the nearest dedicated driver in our network of over 120 UK logistics hubs.",
+      answer: "Collection timing depends on vehicle availability, location and traffic. Dispatch confirms the expected collection window for each booking.",
     },
     {
       question: "Are my goods insured during transport?",
-      answer: "Yes! Every single shipment automatically includes £50,000 Goods-in-Transit insurance completely free of charge. For ultra high-value cargo (e.g. art, luxury goods, expensive electronics), higher coverage can be arranged upon request.",
+      answer: "Cover and limits depend on the goods and booking terms. Declare the contents and value so the applicable Goods-in-Transit cover can be confirmed before collection.",
     },
     {
       question: "Is my delivery a dedicated direct vehicle?",
-      answer: "Absolutely. We specialize in dedicated direct drive transport. Once your driver collects your consignment, it goes straight to the dropoff destination with zero co-loading or intermediate hub stops.",
+      answer: "A dedicated direct vehicle is available when selected and confirmed in your quote. Other service types may use different routing arrangements.",
     },
     {
       question: "How do I track my delivery in real-time?",
-      answer: "As soon as your driver is dispatched, you will receive an SMS and email with a live GPS tracking link. You can view the driver's exact location on a map from collection point straight to delivery.",
+      answer: "Supported bookings receive status updates and a tracking reference. The tracking detail available can vary by assigned courier.",
     },
     {
       question: "What UK areas do you cover?",
-      answer: "We cover 100% of mainland UK including Greater London, Birmingham, Manchester, Leeds, Glasgow, Edinburgh, Bristol, Newcastle, Liverpool, Cardiff, and all rural industrial parks.",
+      answer: "We arrange collections across mainland UK, subject to vehicle availability and route requirements. Dispatch confirms coverage for your postcodes.",
     },
     {
       question: "How do I get proof of delivery (POD)?",
-      answer: "Upon delivery, the recipient signs electronically on the courier's device. An automated email with timestamped signature, recipient name, and photo POD is immediately sent to you.",
+      answer: "Where POD is supported, delivery details such as the recipient name, timestamp, signature or photograph are made available after completion.",
     },
   ];
 
@@ -45,7 +45,7 @@ export default function FaqSection() {
             Got Questions? We Have Answers.
           </h2>
           <p className="text-base sm:text-lg text-slate-600">
-            Everything you need to know about our same-day courier pickup, rates, and guarantees.
+            Everything you need to know about same-day collections, quotes and service options.
           </p>
         </div>
 
@@ -62,6 +62,7 @@ export default function FaqSection() {
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="w-full p-6 text-left font-bold text-base sm:text-lg text-slate-900 flex items-center justify-between gap-4 focus:outline-none hover:text-blue-600 transition-colors"
                   aria-expanded={isOpen}
+                  aria-controls={`home-faq-panel-${index}`}
                 >
                   <span className="flex items-center gap-3">
                     <HelpCircle className="w-5 h-5 text-blue-600 shrink-0" />
@@ -75,7 +76,7 @@ export default function FaqSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 animate-in fade-in duration-150">
+                  <div id={`home-faq-panel-${index}`} role="region" className="px-6 pb-6 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 animate-in fade-in duration-150">
                     {faq.answer}
                   </div>
                 )}

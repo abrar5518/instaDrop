@@ -8,7 +8,7 @@ export default function HowItWorksSection() {
     {
       num: "02",
       title: "Approve your quote",
-      desc: "Review your final tailored price guarantee via instant WhatsApp or email.",
+      desc: "Review your tailored quote and applicable booking terms via WhatsApp or email.",
     },
     {
       num: "03",
@@ -18,7 +18,7 @@ export default function HowItWorksSection() {
     {
       num: "04",
       title: "Follow every mile",
-      desc: "Get real-time satellite GPS tracking updates and digital POD proof automatically.",
+      desc: "Receive delivery-status updates and digital POD where supported for your booking.",
     },
   ];
 

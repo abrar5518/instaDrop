@@ -1,17 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { courierServices } from "@/content/siteContent";
 
 export default function HeaderServicesDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function close(event: KeyboardEvent | MouseEvent) {
+      if (event instanceof KeyboardEvent && event.key === "Escape") setIsOpen(false);
+      if (event instanceof MouseEvent && !containerRef.current?.contains(event.target as Node)) setIsOpen(false);
+    }
+    document.addEventListener("keydown", close);
+    document.addEventListener("mousedown", close);
+    return () => {
+      document.removeEventListener("keydown", close);
+      document.removeEventListener("mousedown", close);
+    };
+  }, []);
 
   const services = courierServices;
 
   return (
-    <div
+    <div ref={containerRef}
       className="relative"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
@@ -20,13 +34,15 @@ export default function HeaderServicesDropdown() {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-[#0a192f] transition-colors py-2 focus:outline-none"
         aria-expanded={isOpen}
+        aria-controls="desktop-services-menu"
+        aria-haspopup="menu"
       >
         <span>Services</span>
         <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#0a192f]" : ""}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute top-full -left-4 z-50 w-72 pt-2 animate-in fade-in zoom-in-95 duration-150">
+        <div id="desktop-services-menu" className="absolute top-full -left-4 z-50 w-72 pt-2 animate-in fade-in zoom-in-95 duration-150">
           <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-3 space-y-1">
             {services.map((s) => {
               const IconComp = s.icon;

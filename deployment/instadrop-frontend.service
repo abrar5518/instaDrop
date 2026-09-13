@@ -1,0 +1,24 @@
+[Unit]
+Description=InstaDrop Next.js frontend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/instadrop-app/current
+Environment=NODE_ENV=production
+Environment=NEXT_TELEMETRY_DISABLED=1
+EnvironmentFile=-/etc/instadrop/frontend.env
+ExecStart=/opt/instadrop-node-v22.23.2/bin/node /var/www/instadrop-app/current/node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3000
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGINT
+SuccessExitStatus=0 130
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

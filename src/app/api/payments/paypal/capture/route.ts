@@ -1,11 +1,18 @@
-const backendUrl = process.env.BACKEND_API_URL ?? "https://admin-instadrop.sahoolat.pk/api/v1";
+import { enforceRateLimit, proxyError, proxyJson, readJsonBody } from "@/lib/api-proxy";
+
+const backendUrl = (process.env.BACKEND_API_URL ?? "https://admin.instadrop.uk/api/v1").replace(/\/$/, "");
 
 export async function POST(request: Request) {
+  const limited = enforceRateLimit(request, "paypal-capture", 20, 5 * 60_000);
+  if (limited) return limited;
   try {
-    const payload = await request.json();
-    const response = await fetch(`${backendUrl}/payments/paypal/capture`, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ payment_token: payload.payment_token, paypal_order_id: payload.paypal_order_id }), cache: "no-store" });
-    return Response.json(await response.json(), { status: response.status });
-  } catch {
-    return Response.json({ message: "PayPal payment confirmation is temporarily unavailable." }, { status: 502 });
+    const payload = await readJsonBody(request, 8 * 1024);
+    return await proxyJson(`${backendUrl}/payments/paypal/capture`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ payment_token: payload.payment_token, paypal_order_id: payload.paypal_order_id }),
+    });
+  } catch (error) {
+    return proxyError(error, "PayPal payment confirmation is temporarily unavailable.");
   }
 }

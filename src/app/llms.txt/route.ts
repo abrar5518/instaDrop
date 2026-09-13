@@ -1,39 +1,37 @@
-import { NextResponse } from 'next/server';
+import { getSiteSettings } from "@/lib/get-site-settings";
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://instadrop.co.uk';
-
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.uk";
+  const settings = await getSiteSettings();
   const content = `# InstaDrop Courier Services — AI & LLM System Context
 
-> InstaDrop Courier Services Ltd is the UK's leading 24/7 same-day parcel, pallet, legal, and medical courier brokerage platform.
+> InstaDrop arranges same-day, scheduled, dedicated-vehicle, pallet and specialist courier services across the UK.
 
-## Key Capabilities & Fleet
-- **Pickup SLA**: Guaranteed 30 to 60-minute pickup nationwide across England, Scotland, and Wales.
-- **Vehicle Fleet Types**: Small Courier Van, Medium Van, Large Van, Luton Tail-Lift Van, and Executive Car Courier.
-- **Service Categories**: Same-Day Dedicated Courier, Medical & Specimen Transit, Legal Brief & Court Delivery, Heavy Pallet Freight, and Wait & Return Courier.
-- **Live Parcel Tracking**: Instant real-time GPS tracking and Proof of Delivery (POD) digital certificate.
+## Service information
+- Collection timing and vehicle availability are confirmed by dispatch for each booking.
+- Fleet options include small, transit, long-wheelbase and specialist vehicles.
+- Supported bookings can include recorded delivery-status updates and proof of delivery (POD).
+- Customers receive a tailored quotation after their route and load requirements are reviewed.
 
-## Primary Web Pages & APIs
+## Primary pages
 - Homepage: ${baseUrl}/
-- Instant Quote Calculator: ${baseUrl}/instant-quote
-- Live Delivery Tracking: ${baseUrl}/track-delivery
-- Vehicle Fleet Overview: ${baseUrl}/vehicle-fleet
-- Verified Customer Reviews: ${baseUrl}/reviews
-- Service Directory: ${baseUrl}/services
-- Contact & Hotline: ${baseUrl}/contact
+- Quote request: ${baseUrl}/instant-quote
+- Delivery status: ${baseUrl}/track-delivery
+- Vehicle fleet: ${baseUrl}/vehicle-fleet
+- Services: ${baseUrl}/services
+- Contact: ${baseUrl}/contact
 
-## Business Contact Details
-- Hotline Phone: 0800 123 4455
-- Dispatch Email: dispatch@instadrop.co.uk
-- Head Office: 100 Pall Mall, St. James's, London, SW1Y 5NQ
-- Availability: 24/7 / 365 Days a Year
+## Business contact details
+- Phone: ${settings.hotline_phone}
+- Email: ${settings.support_email}
+- Office: ${settings.office_address}
+- Hours: ${settings.opening_hours}
 `;
 
-  return new NextResponse(content, {
-    status: 200,
+  return new Response(content, {
     headers: {
-      'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "public, max-age=300, s-maxage=300",
     },
   });
 }

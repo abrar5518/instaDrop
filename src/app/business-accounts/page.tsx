@@ -52,7 +52,7 @@ export default function BusinessAccountsPage() {
     {
       icon: ShieldCheck,
       title: "Enhanced Insurance Cover",
-      desc: "Customized Goods-in-Transit insurance options up to £250,000 for high-value corporate shipments, prototypes, and tenders.",
+      desc: "Goods-in-Transit cover options can be reviewed for high-value corporate shipments, prototypes and tenders, subject to declared value and agreed terms.",
     },
   ];
 

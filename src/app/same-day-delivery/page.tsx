@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import QuoteWidget from "@/components/Home/QuoteWidget";
-import { Zap, Clock, ShieldCheck, CheckCircle2, ArrowRight, Truck, Phone, Building2, HelpCircle, XCircle } from "lucide-react";
+import { Zap, Clock, ShieldCheck, CheckCircle2, ArrowRight, Truck, Building2, HelpCircle, XCircle } from "lucide-react";
 import Link from "next/link";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 
 export const metadata: Metadata = {
-  title: "Same-Day Delivery UK — Guaranteed 60-Minute Direct Pickup",
+  title: "Same-Day Delivery UK — Dedicated Direct Courier",
   description:
-    "UK's leading dedicated same-day delivery service. Guaranteed door-to-door pickup within 60 minutes nationwide. Direct drive parcels, urgent parts & pallets with 24/7 live tracking and £50,000 free insurance.",
+    "Dedicated same-day delivery for urgent parcels, parts and pallets across the UK, with collection timing, tracking options and cover confirmed for each booking.",
   keywords: [
     "same day delivery UK",
     "60 minute parcel pickup",
@@ -16,34 +17,34 @@ export const metadata: Metadata = {
     "InstaDrop same day delivery",
   ],
   openGraph: {
-    title: "Same-Day Delivery UK | 60-Minute Direct Pickup | InstaDrop",
+    title: "Same-Day Delivery UK | Dedicated Direct Courier | InstaDrop",
     description:
-      "Direct door-to-door same-day parcel delivery across mainland UK. 60-minute pickup guarantee, £50k insurance included.",
+      "Direct door-to-door same-day parcel delivery across mainland UK, subject to vehicle availability and confirmed booking terms.",
   },
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.co.uk";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.uk";
 
 const faqs = [
   {
     q: "How fast can a courier pick up my parcel?",
-    a: "We guarantee collection within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your job to the nearest available dedicated driver.",
+    a: "Dispatch confirms an expected collection window after checking the route, traffic and suitable vehicle availability.",
   },
   {
     q: "Is my delivery a dedicated direct vehicle?",
-    a: "Yes! 100% of our same-day deliveries travel in an exclusive dedicated vehicle straight from A to B with zero co-loading or depot stops.",
+    a: "A dedicated direct vehicle is used when that service is selected and confirmed in your quote.",
   },
   {
     q: "Are my goods insured during transport?",
-    a: "Yes, every single shipment includes £50,000 Goods-in-Transit insurance completely free of charge. Additional coverage up to £250,000 can be arranged.",
+    a: "Goods-in-Transit cover and limits depend on the declared contents, value and agreed booking terms. Dispatch confirms the applicable cover before collection.",
   },
   {
     q: "How do I receive proof of delivery?",
-    a: "The second your recipient signs for the package on our driver's device, an automated email with signature and timestamped POD is sent to you.",
+    a: "Where POD is supported, recipient and timestamp details are made available after the delivery is completed.",
   },
   {
     q: "What areas in the UK do you cover?",
-    a: "We cover 100% of mainland UK including London, Birmingham, Manchester, Leeds, Glasgow, Bristol, Newcastle, Liverpool, and all regional industrial hubs.",
+    a: "We arrange collections across mainland UK, subject to postcode, route and vehicle availability. Dispatch confirms coverage before booking.",
   },
   {
     q: "Can I book a same-day courier outside normal business hours?",
@@ -87,7 +88,7 @@ const pageSchemas = {
         "url": siteUrl
       },
       "areaServed": "United Kingdom",
-      "description": "Guaranteed door-to-door pickup within 60 minutes nationwide. Direct drive parcels, urgent parts & pallets with 24/7 live tracking."
+      "description": "Dedicated door-to-door same-day transport for urgent parcels, parts and pallets, subject to vehicle availability and agreed booking terms."
     },
     {
       "@type": "FAQPage",
@@ -106,20 +107,20 @@ const pageSchemas = {
 export default function SameDayDeliveryPage() {
   const features = [
     {
-      title: "60-Minute Pickup Guarantee",
-      desc: "Our automated dispatch algorithm locates the closest active driver in our network of over 120 UK logistics hubs, ensuring collection within 60 minutes.",
+      title: "Responsive Dispatch",
+      desc: "Dispatch checks suitable vehicle availability and confirms an expected collection window for your route.",
     },
     {
       title: "100% Dedicated Direct Drive",
       desc: "Your consignment is loaded into an exclusive vehicle traveling directly from pickup to delivery. Zero co-loading, zero sorting depots, zero detours.",
     },
     {
-      title: "£50,000 Goods-in-Transit Insurance",
-      desc: "Every single booking automatically includes £50,000 Goods-in-Transit insurance completely free of charge for full financial peace of mind.",
+      title: "Goods-in-Transit Cover",
+      desc: "Applicable cover and limits are confirmed for the declared goods and agreed booking terms.",
     },
     {
-      title: "Real-Time Satellite GPS Tracking",
-      desc: "Receive a live tracking link to monitor your driver's exact location on an interactive map from the instant of collection to final dropoff.",
+      title: "Delivery-Status Updates",
+      desc: "Supported bookings provide status updates; the level of tracking detail depends on the assigned courier.",
     },
     {
       title: "Instant Electronic POD",
@@ -133,7 +134,7 @@ export default function SameDayDeliveryPage() {
 
   const workflow = [
     { step: "01", title: "Instant Quote Request", desc: "Enter your pickup & dropoff postcodes in our 30-second quote calculator to receive a fixed upfront price." },
-    { step: "02", title: "60-Min Driver Dispatch", desc: "Our dispatch desk assigns the nearest dedicated vehicle driver to collect your parcel immediately." },
+    { step: "02", title: "Driver Dispatch", desc: "Our dispatch desk confirms the expected collection window and assigns a suitable vehicle." },
     { step: "03", title: "Secure Vehicle Loading", desc: "Your consignment is inspected, strapped, and loaded into an exclusive dedicated car or van." },
     { step: "04", title: "Direct GPS Transit", desc: "Your driver travels directly to the destination with live location updates sent to your email or WhatsApp." },
     { step: "05", title: "Instant POD Confirmation", desc: "Recipient signs electronically on the courier device and your digital POD is generated instantly." },
@@ -166,11 +167,11 @@ export default function SameDayDeliveryPage() {
 
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white font-display leading-[1.1]">
               Dedicated Same-Day Delivery. <br />
-              <span className="text-[#c6ff00]">Collected Within 60 Minutes.</span>
+              <span className="text-[#c6ff00]">Collection Confirmed by Dispatch.</span>
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 max-w-xl font-normal leading-relaxed">
-              When standard overnight postal networks are too slow or risky, InstaDrop provides dedicated door-to-door direct drive transport across the UK. 24/7 live tracking and £50,000 free insurance included.
+              When standard overnight networks do not fit the deadline, InstaDrop can arrange dedicated door-to-door transport across the UK. Timing, status updates and applicable cover are confirmed for each booking.
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -181,23 +182,17 @@ export default function SameDayDeliveryPage() {
                 <span>Get Speedy Quote Now</span>
                 <ArrowRight className="w-4 h-4 text-[#0a192f]" />
               </Link>
-              <a
-                href="tel:08001234455"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#c6ff00]" />
-                <span>24/7 Hotline: 0800 123 4455</span>
-              </a>
+              <ContactPhone prefix="24/7 Hotline: " className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs hover:bg-white/20 border border-white/15" />
             </div>
 
             <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-semibold text-slate-300">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-[#c6ff00]" />
-                <span>60-Min Pickup SLA</span>
+                <span>Confirmed Collection Window</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>£50,000 Insured Free</span>
+                <span>Cover Confirmed Before Booking</span>
               </div>
               <div className="flex items-center gap-2">
                 <Truck className="w-4 h-4 text-[#0066ff]" />
@@ -249,8 +244,8 @@ export default function SameDayDeliveryPage() {
               <ul className="space-y-2.5 text-xs text-slate-700 font-semibold">
                 <li className="flex items-center gap-2">• Exclusive vehicle goes directly from A to B</li>
                 <li className="flex items-center gap-2">• Zero co-loading or depot belt handling</li>
-                <li className="flex items-center gap-2">• Driver picked up within 60 minutes nationwide</li>
-                <li className="flex items-center gap-2">• Live GPS tracking link update every second</li>
+                <li className="flex items-center gap-2">• Collection window confirmed by dispatch</li>
+                <li className="flex items-center gap-2">• Delivery-status updates where supported</li>
               </ul>
             </div>
           </div>
@@ -268,7 +263,7 @@ export default function SameDayDeliveryPage() {
               Built for Speed, Security & Precision
             </h2>
             <p className="text-sm text-slate-500 max-w-xl mx-auto">
-              Every same-day consignment is backed by our strict operational guarantees.
+              Each same-day consignment is handled according to the service details confirmed in your booking.
             </p>
           </div>
 
@@ -345,7 +340,7 @@ export default function SameDayDeliveryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">
-              100% UK MAINLAND COVERAGE
+              UK MAINLAND SERVICE AREA
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a192f] font-display">
               Active Same-Day Dispatch Hubs
@@ -355,19 +350,19 @@ export default function SameDayDeliveryPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-xs font-semibold text-slate-700">
             <div className="p-4 bg-[#f8fafc] rounded-2xl border border-slate-200">
               <p className="font-bold text-sm text-[#0a192f]">London & M25</p>
-              <p className="text-slate-400 mt-1">Pickup in 30-45 mins</p>
+              <p className="text-slate-400 mt-1">Timing confirmed by dispatch</p>
             </div>
             <div className="p-4 bg-[#f8fafc] rounded-2xl border border-slate-200">
               <p className="font-bold text-sm text-[#0a192f]">Birmingham & Midlands</p>
-              <p className="text-slate-400 mt-1">Pickup in 45 mins</p>
+              <p className="text-slate-400 mt-1">Timing confirmed by dispatch</p>
             </div>
             <div className="p-4 bg-[#f8fafc] rounded-2xl border border-slate-200">
               <p className="font-bold text-sm text-[#0a192f]">Manchester & North West</p>
-              <p className="text-slate-400 mt-1">Pickup in 45 mins</p>
+              <p className="text-slate-400 mt-1">Timing confirmed by dispatch</p>
             </div>
             <div className="p-4 bg-[#f8fafc] rounded-2xl border border-slate-200">
               <p className="font-bold text-sm text-[#0a192f]">Leeds & Yorkshire</p>
-              <p className="text-slate-400 mt-1">Pickup in 45 mins</p>
+              <p className="text-slate-400 mt-1">Timing confirmed by dispatch</p>
             </div>
           </div>
         </div>
@@ -389,7 +384,7 @@ export default function SameDayDeliveryPage() {
             <div className="divide-y divide-slate-100 font-semibold text-slate-700">
               <div className="grid grid-cols-3 p-4 items-center">
                 <span>Collection Time</span>
-                <span className="text-emerald-700 font-bold">Within 60 Mins</span>
+                <span className="text-emerald-700 font-bold">Confirmed by Dispatch</span>
                 <span className="text-slate-400">Next Business Day</span>
               </div>
               <div className="grid grid-cols-3 p-4 items-center">
@@ -399,7 +394,7 @@ export default function SameDayDeliveryPage() {
               </div>
               <div className="grid grid-cols-3 p-4 items-center">
                 <span>Insurance Included</span>
-                <span className="text-emerald-700 font-bold">£50,000 Policy Free</span>
+                <span className="text-emerald-700 font-bold">Confirmed for Declared Goods</span>
                 <span className="text-slate-400">£50 Basic Cover</span>
               </div>
             </div>
@@ -444,9 +439,7 @@ export default function SameDayDeliveryPage() {
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600]">
               Get Instant Quote
             </Link>
-            <a href="tel:08001234455" className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15">
-              Call 0800 123 4455
-            </a>
+            <ContactPhone prefix="Call " className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15" />
           </div>
         </div>
       </section>

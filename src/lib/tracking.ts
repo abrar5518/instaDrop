@@ -1,2 +1,39 @@
-declare global { interface Window { dataLayer?: any[]; fbq?: (...args: any[]) => void } }
-export function trackEvent(event:string,parameters:Record<string,unknown>={}){if(typeof window==="undefined")return;window.dataLayer=window.dataLayer||[];window.dataLayer.push({event,...parameters});const metaNames:Record<string,string>={quote_submitted:"Lead",contact_submitted:"Contact",business_account_submitted:"Lead",payment_started:"InitiateCheckout",payment_completed:"Purchase"};const meta=metaNames[event];if(meta&&window.fbq)window.fbq("track",meta,parameters)}
+type TrackingWindow = Window & {
+  dataLayer?: unknown[];
+  gtag?: (...args: unknown[]) => void;
+  fbq?: (...args: unknown[]) => void;
+};
+
+type EventDefinition = {
+  meta: string;
+  ga4: string;
+};
+
+const eventDefinitions: Record<string, EventDefinition> = {
+  quote_submitted: { meta: "Lead", ga4: "generate_lead" },
+  contact_submitted: { meta: "Contact", ga4: "generate_lead" },
+  business_account_submitted: { meta: "Lead", ga4: "generate_lead" },
+  payment_started: { meta: "InitiateCheckout", ga4: "begin_checkout" },
+  payment_completed: { meta: "Purchase", ga4: "purchase" },
+};
+
+export function trackEvent(event: string, parameters: Record<string, unknown> = {}) {
+  if (typeof window === "undefined") return;
+
+  const tracking = window as TrackingWindow;
+  const definition = eventDefinitions[event];
+  const analyticsParameters = {
+    ...parameters,
+    ...(parameters.invoice_number && !parameters.transaction_id
+      ? { transaction_id: parameters.invoice_number }
+      : {}),
+  };
+
+  tracking.dataLayer = tracking.dataLayer ?? [];
+  tracking.dataLayer.push({ event, ...parameters });
+
+  if (definition) {
+    tracking.gtag?.("event", definition.ga4, analyticsParameters);
+    tracking.fbq?.("track", definition.meta, analyticsParameters);
+  }
+}

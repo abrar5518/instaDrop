@@ -2,7 +2,7 @@ import "server-only";
 import { cache } from "react";
 import type { BlogArticle, BlogPost } from "./blog-types";
 
-const backendUrl = (process.env.BACKEND_API_URL ?? "https://admin-instadrop.sahoolat.pk/api/v1").replace(/\/$/, "");
+const backendUrl = (process.env.BACKEND_API_URL ?? "https://admin.instadrop.uk/api/v1").replace(/\/$/, "");
 
 // Do not cache published content: saves, unpublishing and deletions take effect on the next request.
 export const getBlogs = cache(async (): Promise<BlogPost[]> => {

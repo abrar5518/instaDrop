@@ -14,7 +14,7 @@ export default function TermsAndConditionsPage() {
         <div className="max-w-4xl mx-auto text-center space-y-4">
           <p className="text-xs font-bold uppercase tracking-widest text-[#c6ff00]">OPERATIONAL TERMS</p>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white font-display">Terms & Conditions</h1>
-          <p className="text-xs text-slate-400">Booking, payment and transport terms • InstaDrop Courier Services Ltd</p>
+          <p className="text-xs text-slate-400">Booking, payment and transport terms • InstaDrop Courier Services</p>
         </div>
       </section>
 
@@ -23,7 +23,7 @@ export default function TermsAndConditionsPage() {
           <div className="space-y-3">
             <h2 className="text-lg font-bold text-[#0a192f] font-display">1. Contract & Booking Scope</h2>
             <p>
-              These Terms & Conditions apply to all same-day parcel, pallet, document, and freight transport bookings placed with InstaDrop Courier Services Ltd. By placing a booking online or via our 24/7 telephone desk, you accept these operational terms in full.
+              These Terms & Conditions apply to all same-day parcel, pallet, document, and freight transport bookings placed with InstaDrop Courier Services. By placing a booking online or via our 24/7 telephone desk, you accept these operational terms in full.
             </p>
           </div>
 
@@ -34,7 +34,7 @@ export default function TermsAndConditionsPage() {
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div id="insurance" className="scroll-mt-32 space-y-3">
             <h2 className="text-lg font-bold text-[#0a192f] font-display">3. Goods-in-Transit Terms</h2>
             <p>
               Applicable cover, exclusions and liability limits are those confirmed for the individual booking. Customers must accurately declare the goods and their value and package them appropriately for transport.

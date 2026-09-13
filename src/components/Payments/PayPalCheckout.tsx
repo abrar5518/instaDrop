@@ -27,7 +27,7 @@ export default function PayPalCheckout({ token }: { token: string }) {
   useEffect(() => {
     if (!invoice || invoice.status === "paid" || !invoice.paypal_client_id) return;
     const script = document.createElement("script");
-    script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(invoice.paypal_client_id)}&currency=${invoice.currency}&intent=capture`;
+    script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(invoice.paypal_client_id)}&currency=${encodeURIComponent(invoice.currency)}&intent=capture`;
     script.async = true;
     script.onload = () => {
       const paypal = (window as PayPalWindow).paypal;
@@ -49,6 +49,7 @@ export default function PayPalCheckout({ token }: { token: string }) {
         onError: () => setError("PayPal could not complete the payment. Please try again."),
       }).render("#paypal-buttons");
     };
+    script.onerror = () => setError("PayPal could not be loaded. Please refresh the page or try again later.");
     document.body.appendChild(script);
     return () => script.remove();
   }, [invoice, token]);

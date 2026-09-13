@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Zap, Phone, Mail } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { useSettings } from "@/context/SettingsContext";
+import BrandLogo from "@/components/Branding/BrandLogo";
+import { SocialLinks } from "@/components/Contact/ContactSettings";
 
 export default function Footer() {
   const settings = useSettings();
@@ -15,15 +17,16 @@ export default function Footer() {
           {/* Brand Col (2 cols) */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-[#0a192f] text-[#c6ff00] flex items-center justify-center font-black border border-[#c6ff00]/40">
-                <Zap className="w-6 h-6 text-[#c6ff00] fill-[#c6ff00]" />
-              </div>
-              <span className="font-extrabold text-2xl tracking-tight text-white font-display">
-                Insta<span className="text-[#c6ff00]">Drop</span>
-              </span>
+              <BrandLogo variant="footer" />
             </Link>
             <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              UK’s fastest dedicated same-day courier service. Door-to-door pickups within 60 minutes nationwide with real-time satellite GPS tracking and instant digital proof of delivery.
+              Dedicated same-day courier services across the UK, with collection timing confirmed by dispatch and delivery-status or POD updates where available.
+            </p>
+            <p className="max-w-sm text-xs font-bold leading-relaxed text-white">
+              InstaDrop is a trade name of OXON SERVICES MANAGEMENT LTD.
+              <span className="mt-1 block">
+                Company number <span className="text-[#c6ff00]">12346805</span>
+              </span>
             </p>
             <div className="space-y-2 text-xs text-slate-400 pt-2">
               <div className="flex items-center gap-2">
@@ -38,17 +41,15 @@ export default function Footer() {
                   {settings.support_email}
                 </a>
               </div>
-              <p className="text-[11px] text-slate-500 pt-1">
-                📍 {settings.office_address}
-              </p>
+              <SocialLinks className="flex flex-wrap gap-2 pt-2" />
             </div>
           </div>
 
           {/* QUICK LINKS & TOOLS */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
               QUICK LINKS & TOOLS
-            </h4>
+            </p>
             <ul className="space-y-2.5 text-xs font-semibold text-slate-300">
               <li><Link href="/" className="hover:text-white transition-colors">Home Page</Link></li>
               <li><Link href="/instant-quote" className="hover:text-white transition-colors text-[#c6ff00]">Speedy Quote Portal</Link></li>
@@ -62,9 +63,9 @@ export default function Footer() {
 
           {/* COURIER SERVICES */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
               COURIER SERVICES
-            </h4>
+            </p>
             <ul className="space-y-2.5 text-xs font-semibold text-slate-300">
               <li><Link href="/same-day-delivery" className="hover:text-white transition-colors">Same-Day Express</Link></li>
               <li><Link href="/pallet-delivery" className="hover:text-white transition-colors">Pallets & Heavy Freight</Link></li>
@@ -77,9 +78,9 @@ export default function Footer() {
 
           {/* VEHICLES & POLICIES */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">
               VEHICLES & POLICIES
-            </h4>
+            </p>
             <ul className="space-y-2.5 text-xs font-semibold text-slate-300">
               <li><Link href="/vehicle-fleet" className="hover:text-white transition-colors">Vehicle Fleet Guide</Link></li>
               <li><Link href="/faq" className="hover:text-white transition-colors">FAQs & Help Centre</Link></li>

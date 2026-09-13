@@ -1,17 +1,18 @@
-const backendUrl = process.env.BACKEND_API_URL ?? "https://admin-instadrop.sahoolat.pk/api/v1";
+import { enforceRateLimit, proxyError, proxyJson, readJsonBody } from "@/lib/api-proxy";
+
+const backendUrl = (process.env.BACKEND_API_URL ?? "https://admin.instadrop.uk/api/v1").replace(/\/$/, "");
 
 export async function POST(request: Request) {
+  const limited = enforceRateLimit(request, "inquiries", 5);
+  if (limited) return limited;
   try {
-    const payload = await request.json();
-    const response = await fetch(`${backendUrl}/inquiries`, {
+    const payload = await readJsonBody(request);
+    return await proxyJson(`${backendUrl}/inquiries`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload),
-      cache: "no-store",
     });
-    const data = await response.json();
-    return Response.json(data, { status: response.status });
-  } catch {
-    return Response.json({ message: "Unable to submit your request right now. Please try again." }, { status: 502 });
+  } catch (error) {
+    return proxyError(error, "Unable to submit your request right now. Please try again.");
   }
 }

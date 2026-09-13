@@ -10,7 +10,7 @@ export default function CtaBanner() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display">
               Ready to get it moving?
             </h2>
-            <p className="text-sm sm:text-base text-blue-100 max-w-xl">
+            <p className="text-sm sm:text-base text-white max-w-xl">
               Tell us where it&apos;s going and receive your tailored quote.
             </p>
           </div>

@@ -4,8 +4,8 @@ export default function WhyChooseUsSection() {
   const reasons = [
     {
       icon: Clock,
-      title: "60-Minute Pickup Guarantee",
-      desc: "Our nationwide fleet network allows us to collect your urgent package within 60 minutes anywhere in the UK, 24 hours a day.",
+      title: "Responsive Dispatch",
+      desc: "Our dispatch team checks nearby vehicle availability and confirms an expected collection window for your route.",
     },
     {
       icon: Zap,
@@ -15,7 +15,7 @@ export default function WhyChooseUsSection() {
     {
       icon: ShieldCheck,
       title: "Fully Insured Goods-in-Transit",
-      desc: "Every booking comes with comprehensive £50,000 Goods-in-Transit insurance included at no additional cost for complete peace of mind.",
+      desc: "Goods-in-Transit cover and limits are confirmed for the declared goods and agreed booking terms.",
     },
     {
       icon: Headphones,

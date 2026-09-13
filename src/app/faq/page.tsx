@@ -3,37 +3,38 @@
 import { useState } from "react";
 import { HelpCircle, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { ContactPhone } from "@/components/Contact/ContactSettings";
 
 const faqList = [
   {
     cat: "pickup",
     question: "How fast can an InstaDrop courier pick up my parcel?",
-    answer: "We guarantee door-to-door collection within 60 minutes anywhere across mainland UK. Our automated dispatch system immediately assigns your booking to the nearest available driver in our network of 120+ logistics hubs.",
+    answer: "Collection timing depends on vehicle availability, location and traffic. Dispatch confirms the expected collection window for each booking before it is accepted.",
   },
   {
     cat: "rates",
     question: "How are same-day courier prices calculated?",
-    answer: "Our rates are based strictly on journey mileage from pickup postcode to delivery postcode and the chosen vehicle size (Courier Car, Small Van, Medium Van, Large Van, Luton Tail-Lift). We operate on transparent fixed pricing with zero hidden surcharges.",
+    answer: "Rates are based on the route, vehicle size, timing, load and any special handling. Your tailored quote sets out the price and applicable charges before booking.",
   },
   {
     cat: "insurance",
     question: "Are my goods insured during transport?",
-    answer: "Yes! Every booking automatically includes £50,000 Goods-in-Transit insurance completely free of charge. For ultra high-value cargo or tenders, custom coverage up to £250,000 can be arranged upon request.",
+    answer: "Goods-in-Transit cover and any limits depend on the booking, goods and agreed terms. Tell us the contents and value so dispatch can confirm the applicable cover before collection.",
   },
   {
     cat: "tracking",
     question: "How do I track my delivery in real-time?",
-    answer: "As soon as your driver is dispatched, you receive a live GPS tracking link via email or WhatsApp. You can watch your courier’s real-time progress on a map from collection point straight to dropoff.",
+    answer: "Supported bookings receive status updates and a tracking reference. The detail available can vary by assigned courier; dispatch can provide the latest recorded update.",
   },
   {
     cat: "service",
     question: "Is my delivery a dedicated direct vehicle?",
-    answer: "100% yes. Once your driver collects your consignment, it goes straight to the dropoff destination with zero co-loading or intermediate hub stops.",
+    answer: "A dedicated direct vehicle is available when selected and confirmed in your quote. Other service types may follow different routing arrangements.",
   },
   {
     cat: "business",
     question: "How do I set up a corporate business credit account?",
-    answer: "You can apply for a business account online in 2 minutes. Account holders receive 30-day net monthly invoice terms, priority dispatch, and tiered volume discounts up to 25%.",
+    answer: "You can apply online. Credit terms, service levels and any volume pricing are subject to review and are confirmed in the account agreement.",
   },
 ];
 
@@ -74,7 +75,7 @@ export default function FaqPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Everything you need to know about InstaDrop same-day pickups, pricing guarantees, insurance policy, and vehicle options.
+            Practical information about InstaDrop collections, quotes, cover, tracking and vehicle options.
           </p>
         </div>
       </section>
@@ -85,7 +86,8 @@ export default function FaqPage() {
           {/* Category Tabs */}
           <div className="flex flex-wrap justify-center gap-2 pb-4">
             <button
-              onClick={() => setActiveCategory("all")}
+              onClick={() => { setActiveCategory("all"); setOpenIndex(null); }}
+              aria-pressed={activeCategory === "all"}
               className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                 activeCategory === "all" ? "bg-[#0a192f] text-[#c6ff00]" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
@@ -93,7 +95,8 @@ export default function FaqPage() {
               All Questions
             </button>
             <button
-              onClick={() => setActiveCategory("pickup")}
+              onClick={() => { setActiveCategory("pickup"); setOpenIndex(null); }}
+              aria-pressed={activeCategory === "pickup"}
               className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                 activeCategory === "pickup" ? "bg-[#0a192f] text-[#c6ff00]" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
@@ -101,7 +104,8 @@ export default function FaqPage() {
               Pickup & Times
             </button>
             <button
-              onClick={() => setActiveCategory("rates")}
+              onClick={() => { setActiveCategory("rates"); setOpenIndex(null); }}
+              aria-pressed={activeCategory === "rates"}
               className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                 activeCategory === "rates" ? "bg-[#0a192f] text-[#c6ff00]" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
@@ -109,7 +113,8 @@ export default function FaqPage() {
               Rates & Quote
             </button>
             <button
-              onClick={() => setActiveCategory("insurance")}
+              onClick={() => { setActiveCategory("insurance"); setOpenIndex(null); }}
+              aria-pressed={activeCategory === "insurance"}
               className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                 activeCategory === "insurance" ? "bg-[#0a192f] text-[#c6ff00]" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
@@ -126,6 +131,8 @@ export default function FaqPage() {
                 <div key={faq.question} className="bg-[#f8fafc] border border-slate-200 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-panel-${index}`}
                     className="w-full p-6 text-left font-bold text-base text-[#0a192f] flex items-center justify-between gap-4 focus:outline-none hover:text-[#0066ff]"
                   >
                     <span className="flex items-center gap-3">
@@ -135,7 +142,7 @@ export default function FaqPage() {
                     <ChevronDown className={`w-5 h-5 text-slate-400 shrink-0 transition-transform ${isOpen ? "rotate-180 text-[#0066ff]" : ""}`} />
                   </button>
                   {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60">
+                    <div id={`faq-panel-${index}`} role="region" className="px-6 pb-6 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60">
                       {faq.answer}
                     </div>
                   )}
@@ -156,9 +163,7 @@ export default function FaqPage() {
             Our experienced logistics coordinators are live right now to answer any custom transport inquiries.
           </p>
           <div className="pt-2 flex justify-center gap-4">
-            <a href="tel:08001234455" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs">
-              Call 0800 123 4455
-            </a>
+            <ContactPhone prefix="Call " className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs" />
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-white/10 text-white font-bold text-xs border border-white/15">
               Get Instant Quote
             </Link>

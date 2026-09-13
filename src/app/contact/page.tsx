@@ -2,14 +2,10 @@
 
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useSettings } from "@/context/SettingsContext";
+import ContactForm from "@/components/Forms/ContactForm";
 
 export default function ContactPage() {
   const settings = useSettings();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("Thank you for contacting us! Our dispatch desk will reply within 5 minutes.");
-  };
 
   return (
     <div className="w-full bg-white">
@@ -51,7 +47,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Call for emergency same-day pickups. A courier can be at your door within 60 minutes anywhere in the UK.
+                  Call for urgent same-day collections. Dispatch will confirm the nearest suitable vehicle and expected collection window.
                 </p>
               </div>
 
@@ -62,7 +58,7 @@ export default function ContactPage() {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400 font-bold uppercase">Dispatch Email</p>
+                    <p className="text-xs text-slate-600 font-bold uppercase">Dispatch Email</p>
                     <a href={`mailto:${settings.support_email}`} className="text-sm font-bold text-[#0a192f] hover:text-[#0066ff]">
                       {settings.support_email}
                     </a>
@@ -80,7 +76,7 @@ export default function ContactPage() {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-slate-400 font-bold uppercase">Head Office Location</p>
+                    <p className="text-xs text-slate-600 font-bold uppercase">Head Office Location</p>
                     <p className="text-sm font-bold text-[#0a192f]">
                       {settings.business_name}
                     </p>
@@ -103,76 +99,9 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 text-xs font-semibold">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                      FULL NAME *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Alex Johnson"
-                      className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                      PHONE NUMBER *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="e.g. 07 1234 56789"
-                      className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                      EMAIL ADDRESS *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="name@company.co.uk"
-                      className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                      INQUIRY TYPE *
-                    </label>
-                    <select className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f]">
-                      <option>General Support / Inquiry</option>
-                      <option>Corporate Account Application</option>
-                      <option>Existing Delivery Update</option>
-                      <option>Invoice / Billing Query</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                    YOUR MESSAGE *
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    placeholder="How can our dispatch team help you today?"
-                    className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0a192f] resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-4 px-6 rounded-xl bg-[#0a192f] hover:bg-[#051329] text-white font-bold text-sm shadow-md transition-colors"
-                >
-                  Send Message to Operations Desk
-                </button>
-              </form>
+              <div id="contact-form" className="scroll-mt-32">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </div>

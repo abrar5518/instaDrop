@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "about InstaDrop courier",
     "same day courier company UK",
     "dedicated courier network",
-    "fastest courier UK",
+    "urgent courier UK",
     "InstaDrop logistics",
   ],
   openGraph: {

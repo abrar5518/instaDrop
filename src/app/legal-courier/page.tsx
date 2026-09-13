@@ -27,18 +27,18 @@ export const metadata: Metadata = {
 export default function LegalCourierPage() {
   const features = [
     { title: "Hand-to-Hand Named Signature", desc: "Delivered strictly into the hands of named solicitors, court clerks, or company directors." },
-    { title: "Serialized Tamper-Evident Bags", desc: "Sealed in tamper-proof security pouches with unique tracking numbers to guarantee confidentiality." },
+    { title: "Serialized Tamper-Evident Bags", desc: "Security pouches and reference numbers can be requested where suitable; confidentiality also depends on the agreed handling process." },
     { title: "Court Filing Deadline SLA", desc: "Direct vehicle dispatch ensures your legal briefs arrive at court chambers prior to strict cutoff times." },
     { title: "Instant Electronic POD Email", desc: "Receive timestamped signature and recipient confirmation emailed directly to your desk." },
     { title: "Discreet Direct Transport", desc: "Zero multi-drop detours. Your confidential documents travel in an exclusive dedicated vehicle." },
-    { title: "£50,000 Goods-in-Transit Policy", desc: "Full Goods-in-Transit insurance coverage included for valuable original deeds and tenders." },
+    { title: "Goods-in-Transit Cover", desc: "Applicable cover for valuable originals and tenders is confirmed from the declared contents, value and booking terms." },
   ];
 
   const workflow = [
     { step: "01", title: "Legal Request", desc: "Enter pickup law firm & court postcodes in our 30-second quote calculator or call our desk." },
     { step: "02", title: "Driver Assigned", desc: "Dedicated courier driver is assigned to collect your confidential documents within 60 mins." },
     { step: "03", title: "Tamper Pouch Sealing", desc: "Briefs enclosed in a serialized tamper-evident pouch in the presence of your clerk." },
-    { step: "04", title: "Direct Drive Express", desc: "Driver travels directly to court chambers with live satellite GPS tracking updates." },
+    { step: "04", title: "Direct Drive Express", desc: "Where dedicated service is booked, the driver travels directly to the agreed destination with status updates where supported." },
     { step: "05", title: "Hand Handover & POD", desc: "Handed to named recipient with electronic POD signature sent instantly to your inbox." },
   ];
 
@@ -51,7 +51,7 @@ export default function LegalCourierPage() {
 
   const faqs = [
     { q: "Will the courier hand the document directly to a specific person?", a: "Yes! We specialize in named recipient hand-to-hand deliveries. We will not leave legal briefs at generic reception desks without your explicit instruction." },
-    { q: "How quickly can legal documents be picked up?", a: "We guarantee collection within 60 minutes anywhere across mainland UK, 24 hours a day." },
+    { q: "How quickly can legal documents be picked up?", a: "Dispatch confirms an expected collection window based on location, vehicle availability and the required deadline." },
     { q: "Are the documents kept confidential?", a: "100% confidential. Documents are placed in serialized tamper-evident security pouches and travel in an exclusive vehicle." },
     { q: "Do you deliver directly to High Court chambers?", a: "Yes, our couriers regularly deliver to the Royal Courts of Justice, Rolls Building, and regional Civil Justice Centres." },
     { q: "How do I get proof of delivery for court records?", a: "The second the recipient signs electronically, an automated PDF with exact timestamp, signature, and name is emailed to you." },
@@ -204,7 +204,7 @@ export default function LegalCourierPage() {
             Need Legal Briefs Delivered Before Court Close?
           </h2>
           <p className="text-sm text-slate-300 max-w-xl mx-auto">
-            Our high-security couriers collect within 60 minutes nationwide.
+            Ask dispatch to confirm availability, handling requirements and the expected collection window for your legal consignment.
           </p>
           <div className="pt-2 flex justify-center gap-4">
             <Link href="/instant-quote" className="px-7 py-3.5 rounded-full bg-[#c6ff00] text-[#0a192f] font-extrabold text-xs hover:bg-[#b2e600]">

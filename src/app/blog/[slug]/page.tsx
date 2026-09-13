@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Truck } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getBlog, getBlogs } from "@/lib/blogs";
+import sanitizeHtml from "sanitize-html";
 import "./rich-content.css";
 
 export async function generateMetadata({ params }: {
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: {
       type: "article", title: post.seo.ogTitle, description: post.seo.ogDescription,
       images: [{ url: post.seo.ogImage, alt: post.alt }],
       publishedTime: post.publishedAt, modifiedTime: post.updatedAt,
-      url: `https://instadrop.sahoolat.pk/blog/${post.slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.uk"}/blog/${post.slug}`,
     },
     twitter: { card: "summary_large_image", title: post.seo.ogTitle, description: post.seo.ogDescription, images: [post.seo.ogImage] },
   };
@@ -36,19 +37,33 @@ export default async function BlogDetail({ params }: {
 
   const blogPosts = await getBlogs();
   const relatedPosts = blogPosts.filter(item => item.slug !== slug).slice(0, 3);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.uk";
+  const safeContent = sanitizeHtml(post.content, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "figure", "figcaption"]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      a: ["href", "name", "target", "rel"],
+      img: ["src", "alt", "width", "height", "loading"],
+    },
+    allowedSchemes: ["http", "https", "mailto", "tel"],
+    transformTags: {
+      a: sanitizeHtml.simpleTransform("a", { rel: "noopener noreferrer" }, true),
+      img: sanitizeHtml.simpleTransform("img", { loading: "lazy" }, true),
+    },
+  });
 
   return (
     <div className="bg-white px-4 pb-16 pt-6 sm:px-8 sm:pb-20 sm:pt-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "Article",
-        "@id": `https://instadrop.sahoolat.pk/blog/${post.slug}#article`,
-        url: `https://instadrop.sahoolat.pk/blog/${post.slug}`,
-        mainEntityOfPage: { "@type": "WebPage", "@id": `https://instadrop.sahoolat.pk/blog/${post.slug}` },
+        "@id": `${siteUrl}/blog/${post.slug}#article`,
+        url: `${siteUrl}/blog/${post.slug}`,
+        mainEntityOfPage: { "@type": "WebPage", "@id": `${siteUrl}/blog/${post.slug}` },
         headline: post.title, articleSection: post.category, inLanguage: "en-GB",
         keywords: post.seo.keywords || undefined,
         description: post.description, image: [post.image], datePublished: post.publishedAt,
-        dateModified: post.updatedAt, author: { "@type": "Organization", name: "InstaDrop Editorial", url: "https://instadrop.sahoolat.pk/about" },
-        publisher: { "@type": "Organization", name: "InstaDrop Courier Services", url: "https://instadrop.sahoolat.pk" },
+        dateModified: post.updatedAt, author: { "@type": "Organization", name: "InstaDrop Editorial", url: `${siteUrl}/about` },
+        publisher: { "@type": "Organization", name: "InstaDrop Courier Services", url: siteUrl },
       }).replace(/</g, "\\u003c") }} />
       <div className="mx-auto max-w-7xl">
         <div className="relative h-[190px] overflow-hidden rounded-2xl bg-slate-50 sm:h-[260px] sm:rounded-3xl lg:h-[300px]">
@@ -70,7 +85,7 @@ export default async function BlogDetail({ params }: {
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_300px] xl:gap-16">
           <article
             className="instadrop-rich-content min-w-0"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: safeContent }}
           />
           <aside aria-label="More from InstaDrop" className="space-y-6 lg:border-l lg:border-slate-100 lg:pl-7">
             <section className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-6">
