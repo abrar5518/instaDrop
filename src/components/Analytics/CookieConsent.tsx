@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 
 export const COOKIE_CONSENT_KEY = "instadrop_cookie_consent";
@@ -8,33 +8,44 @@ export const COOKIE_CONSENT_EVENT = "instadrop-consent-change";
 
 type Consent = "accepted" | "essential" | null;
 
+function getConsentSnapshot(): Consent {
+  const stored = localStorage.getItem(COOKIE_CONSENT_KEY);
+  return stored === "accepted" || stored === "essential" ? stored : null;
+}
+
+function subscribeToConsent(onStoreChange: () => void) {
+  window.addEventListener(COOKIE_CONSENT_EVENT, onStoreChange);
+  window.addEventListener("storage", onStoreChange);
+  return () => {
+    window.removeEventListener(COOKIE_CONSENT_EVENT, onStoreChange);
+    window.removeEventListener("storage", onStoreChange);
+  };
+}
+
+export function useCookieConsent() {
+  return useSyncExternalStore(subscribeToConsent, getConsentSnapshot, () => null);
+}
+
 function saveConsent(value: Exclude<Consent, null>) {
   localStorage.setItem(COOKIE_CONSENT_KEY, value);
   window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
 }
 
 export default function CookieConsent() {
-  const [consent, setConsent] = useState<Consent>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem(COOKIE_CONSENT_KEY);
-    setConsent(stored === "accepted" || stored === "essential" ? stored : null);
-    setReady(true);
-  }, []);
+  const consent = useCookieConsent();
 
   function choose(value: Exclude<Consent, null>) {
     saveConsent(value);
-    setConsent(value);
   }
-
-  if (!ready) return null;
 
   if (consent) {
     return (
       <button
         type="button"
-        onClick={() => setConsent(null)}
+        onClick={() => {
+          localStorage.removeItem(COOKIE_CONSENT_KEY);
+          window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
+        }}
         className="fixed bottom-3 left-3 z-50 rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-[#0a192f] shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066ff]"
         aria-label="Change cookie settings"
       >

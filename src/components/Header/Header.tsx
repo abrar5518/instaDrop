@@ -19,7 +19,7 @@ export default function Header() {
     { name: "Fleet", href: "/vehicle-fleet" },
     { name: "Coverage", href: "/coverage" },
     { name: "Track POD", href: "/track-delivery" },
-    { name: "Business", href: "/business-accounts" },
+    { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];

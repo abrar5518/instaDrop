@@ -1,11 +1,11 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element -- Meta requires a 1x1 noscript tracking pixel. */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { useContactSettings } from "@/components/Contact/ContactSettings";
-import { COOKIE_CONSENT_EVENT, COOKIE_CONSENT_KEY } from "@/components/Analytics/CookieConsent";
+import { useCookieConsent } from "@/components/Analytics/CookieConsent";
 
 type TrackingWindow = Window & {
   dataLayer?: unknown[];
@@ -69,20 +69,13 @@ function ClientNavigationTracking({ gaId, metaPixelId }: { gaId: string | null; 
 
 export default function TrackingScripts() {
   const pathname = usePathname();
-  const [hasConsent, setHasConsent] = useState(false);
+  const consent = useCookieConsent();
   const { tracking } = useContactSettings();
   const gtmId = validGtmId(tracking.gtm_id);
   const gaId = validGaId(tracking.ga_id);
   const metaPixelId = validMetaPixelId(tracking.meta_pixel_id);
 
-  useEffect(() => {
-    const updateConsent = () => setHasConsent(localStorage.getItem(COOKIE_CONSENT_KEY) === "accepted");
-    updateConsent();
-    window.addEventListener(COOKIE_CONSENT_EVENT, updateConsent);
-    return () => window.removeEventListener(COOKIE_CONSENT_EVENT, updateConsent);
-  }, []);
-
-  if (pathname.startsWith("/pay/") || !hasConsent) return null;
+  if (pathname.startsWith("/pay/") || consent !== "accepted") return null;
 
   return (
     <>

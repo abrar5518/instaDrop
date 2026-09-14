@@ -21,6 +21,6 @@ test("payment pages are private and optional analytics require consent", async (
   const [payment, tracking] = await Promise.all([read("src/app/pay/[token]/page.tsx"), read("src/components/Analytics/TrackingScripts.tsx")]);
   assert.match(payment, /index:\s*false/);
   assert.match(payment, /referrer:\s*"no-referrer"/);
-  assert.match(tracking, /COOKIE_CONSENT_KEY/);
+  assert.match(tracking, /useCookieConsent/);
   assert.match(tracking, /pathname\.startsWith\("\/pay\/"\)/);
 });
