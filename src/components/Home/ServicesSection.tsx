@@ -1,8 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { courierServices } from "@/content/siteContent";
+import type { ServiceSummary } from "@/lib/content-types";
+import ServiceIcon from "@/components/Content/ServiceIcon";
 
-export default function ServicesSection() {
+export default function ServicesSection({ services }: { services: ServiceSummary[] }) {
+  if (services.length === 0) return null;
   return (
     <section id="services" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
@@ -21,8 +23,7 @@ export default function ServicesSection() {
 
         {/* Enhanced Interactive Cards Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
-          {courierServices.map((service) => {
-            const Icon = service.icon;
+          {services.map((service) => {
             return (
               <Link
                 key={service.slug}
@@ -35,7 +36,7 @@ export default function ServicesSection() {
                 <div>
                   {/* Icon Container */}
                   <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-[#0066ff] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#c6ff00] group-hover:text-[#0a192f] group-hover:shadow-md">
-                    <Icon className="h-6 w-6" />
+                    <ServiceIcon name={service.icon} className="h-6 w-6" />
                   </div>
 
                   {/* Title */}
@@ -45,7 +46,7 @@ export default function ServicesSection() {
 
                   {/* Description */}
                   <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-500 transition-colors duration-300 group-hover:text-slate-300">
-                    {service.short}
+                    {service.summary}
                   </p>
                 </div>
 

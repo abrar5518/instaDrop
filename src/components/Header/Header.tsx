@@ -6,8 +6,9 @@ import HeaderMobileMenu from "./HeaderMobileMenu";
 import HeaderServicesDropdown from "./HeaderServicesDropdown";
 import { useSettings } from "@/context/SettingsContext";
 import BrandLogo from "@/components/Branding/BrandLogo";
+import type { ServiceSummary } from "@/lib/content-types";
 
-export default function Header() {
+export default function Header({ services }: { services: ServiceSummary[] }) {
   const settings = useSettings();
 
   const topNavLinks = [
@@ -73,7 +74,7 @@ export default function Header() {
           ))}
 
           {/* Interactive Services Dropdown Component */}
-          <HeaderServicesDropdown />
+          <HeaderServicesDropdown services={services} />
 
           {rightNavLinks.map((link) => (
             <Link
@@ -98,7 +99,7 @@ export default function Header() {
         </div>
 
         {/* Mobile menu */}
-        <HeaderMobileMenu />
+        <HeaderMobileMenu services={services} />
       </div>
     </header>
   );

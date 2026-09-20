@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
-import { courierServices } from "@/content/siteContent";
+import type { ServiceSummary } from "@/lib/content-types";
+import ServiceIcon from "@/components/Content/ServiceIcon";
 
-export default function HeaderServicesDropdown() {
+export default function HeaderServicesDropdown({ services }: { services: ServiceSummary[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -21,8 +22,6 @@ export default function HeaderServicesDropdown() {
       document.removeEventListener("mousedown", close);
     };
   }, []);
-
-  const services = courierServices;
 
   return (
     <div ref={containerRef}
@@ -45,7 +44,6 @@ export default function HeaderServicesDropdown() {
         <div id="desktop-services-menu" className="absolute top-full -left-4 z-50 w-72 pt-2 animate-in fade-in zoom-in-95 duration-150">
           <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-3 space-y-1">
             {services.map((s) => {
-              const IconComp = s.icon;
               return (
                 <Link
                   key={s.slug}
@@ -54,14 +52,14 @@ export default function HeaderServicesDropdown() {
                   className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#f8fafc] transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-lg bg-[#0a192f] text-[#c6ff00] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                    <IconComp className="w-4 h-4" />
+                    <ServiceIcon name={s.icon} className="w-4 h-4" />
                   </div>
                   <div>
                     <p className="text-xs font-bold text-[#0a192f] group-hover:text-[#0066ff] transition-colors">
-                      {s.title}
+                      {s.navigationTitle}
                     </p>
                     <p className="text-[10px] text-slate-400">
-                      {s.short}
+                      {s.summary}
                     </p>
                   </div>
                 </Link>

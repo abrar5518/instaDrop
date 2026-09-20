@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { courierServices, industries } from "@/content/siteContent";
+import { industries } from "@/content/siteContent";
+import type { ServiceSummary } from "@/lib/content-types";
 
-export default function HeaderMobileMenu() {
+export default function HeaderMobileMenu({ services }: { services: ServiceSummary[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesExpanded, setServicesExpanded] = useState(false);
   const [industriesExpanded, setIndustriesExpanded] = useState(false);
@@ -78,14 +79,14 @@ export default function HeaderMobileMenu() {
                 </button>
                 {servicesExpanded && (
                   <div id="mobile-services-menu" className="pl-4 pt-2 space-y-2 text-xs font-medium text-slate-600">
-                    {courierServices.map((s) => (
+                    {services.map((s) => (
                       <Link
                         key={s.slug}
                         href={`/${s.slug}`}
                         onClick={() => setIsOpen(false)}
                         className="block py-1.5 hover:text-[#0066ff]"
                       >
-                        • {s.title}
+                        • {s.navigationTitle}
                       </Link>
                     ))}
                     <Link href="/services" onClick={() => setIsOpen(false)} className="block py-1.5 font-bold text-[#0066ff]">All courier services</Link>

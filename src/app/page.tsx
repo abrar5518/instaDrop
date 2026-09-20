@@ -7,14 +7,16 @@ import FleetSection from "@/components/Home/FleetSection";
 import CtaBanner from "@/components/Home/CtaBanner";
 import IndustriesSection from "@/components/Home/IndustriesSection";
 import type { Metadata } from "next";
+import { getServicesSafe } from "@/lib/content-pages";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
-export default function Home() {
+export default async function Home() {
+  const services = await getServicesSafe();
   return (
     <div className="w-full bg-white">
       <HeroSection />
-      <ServicesSection />
+      <ServicesSection services={services} />
       <IndustriesSection />
       <HowItWorksSection />
 

@@ -8,6 +8,7 @@ import { ContactSettingsProvider } from "@/components/Contact/ContactSettings";
 import TrackingScripts from "@/components/Analytics/TrackingScripts";
 import CookieConsent from "@/components/Analytics/CookieConsent";
 import { getSiteSettings } from "@/lib/get-site-settings";
+import { getServicesSafe } from "@/lib/content-pages";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -97,7 +98,7 @@ function createJsonLdSchema(settings: Awaited<ReturnType<typeof getSiteSettings>
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const settings = await getSiteSettings();
+  const [settings, services] = await Promise.all([getSiteSettings(), getServicesSafe()]);
   const jsonLdSchema = createJsonLdSchema(settings);
 
   return (
@@ -112,7 +113,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <SettingsProvider initialSettings={settings}>
           <ContactSettingsProvider>
             <TrackingScripts />
-            <Header />
+            <Header services={services} />
             <main className="flex-1">{children}</main>
             <Footer />
             <CookieConsent />

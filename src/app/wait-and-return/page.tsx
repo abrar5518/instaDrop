@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import ServicePage from "@/components/Content/ServicePage";
-import { courierServices } from "@/content/siteContent";
-export const metadata: Metadata = { title: "Wait & Return Courier", description: courierServices[4].description, alternates:{canonical:"/wait-and-return"} };
-export default function Page() { return <ServicePage service={courierServices[4]} />; }
+import DynamicServicePage from "@/components/Content/DynamicServicePage";
+import { contentMetadata } from "@/lib/content-metadata";
+import { getService } from "@/lib/content-pages";
+
+const slug = "wait-and-return";
+export async function generateMetadata(): Promise<Metadata> { return contentMetadata(await getService(slug), `/${slug}`); }
+export default function Page() { return <DynamicServicePage slug={slug} />; }
