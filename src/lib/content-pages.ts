@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import type { ManagedPage, ServiceSummary } from "./content-types";
+import type { CoveragePage, DirectoryPage, ServicePage, ServiceSummary } from "./content-types";
 
 const backendUrl = (process.env.BACKEND_API_URL ?? "https://admin.instadrop.uk/api/v1").replace(/\/$/, "");
 
@@ -30,10 +30,12 @@ export const getServicesSafe = cache(async (): Promise<ServiceSummary[]> => {
   }
 });
 
-export const getService = cache(async (slug: string): Promise<ManagedPage | null> =>
-  readData<ManagedPage>(`/services/${encodeURIComponent(slug)}`, "This service could not be loaded."),
+export const getService = cache(async (slug: string): Promise<ServicePage | null> =>
+  readData<ServicePage>(`/services/${encodeURIComponent(slug)}`, "This service could not be loaded."),
 );
 
-export const getManagedPage = cache(async (slug: "services" | "coverage"): Promise<ManagedPage | null> =>
-  readData<ManagedPage>(`/managed-pages/${slug}`, "This page could not be loaded."),
-);
+export const getServiceDirectory = cache(async (): Promise<DirectoryPage | null> =>
+  readData<DirectoryPage>("/services-page", "The services directory could not be loaded."));
+
+export const getCoverage = cache(async (): Promise<CoveragePage | null> =>
+  readData<CoveragePage>("/coverage", "Coverage could not be loaded."));

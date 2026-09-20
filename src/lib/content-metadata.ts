@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import type { ManagedPage } from "./content-types";
+import type { ContentSeo } from "./content-types";
 
-export function contentMetadata(page: ManagedPage | null, canonical: string): Metadata {
+export function contentMetadata(page: { title: string; summary: string | null; seo: ContentSeo } | null, canonical: string): Metadata {
   if (!page) return {};
   const keywords = page.seo.keywords?.split(",").map((keyword) => keyword.trim()).filter(Boolean);
   return {

@@ -1,25 +1,22 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin } from "lucide-react";
-import ManagedSections from "@/components/Content/ManagedSections";
+import { ArrowRight, MapPin } from "lucide-react";
+import ServiceIcon from "@/components/Content/ServiceIcon";
 import { contentMetadata } from "@/lib/content-metadata";
-import { getManagedPage } from "@/lib/content-pages";
+import { getCoverage } from "@/lib/content-pages";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return contentMetadata(await getManagedPage("coverage"), "/coverage");
+  return contentMetadata(await getCoverage(), "/coverage");
 }
 
 export default async function CoveragePage() {
-  const page = await getManagedPage("coverage");
+  const page = await getCoverage();
   if (!page) notFound();
   return <div className="w-full bg-white">
-    <section className="bg-[#0a192f] px-4 py-16 text-white sm:px-8">
-      <div className="mx-auto max-w-7xl space-y-4 text-center">
-        {page.hero.badge && <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#c6ff00]"><MapPin className="h-4 w-4" /><span>{page.hero.badge}</span></div>}
-        <h1 className="font-display text-4xl font-extrabold text-white sm:text-6xl">{page.hero.title}</h1>
-        {page.hero.description && <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">{page.hero.description}</p>}
-      </div>
-    </section>
-    <ManagedSections sections={page.sections} />
+    <section className="bg-[#0a192f] px-4 py-16 text-white sm:px-8"><div className="mx-auto max-w-7xl space-y-4 text-center">{page.hero.badge && <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#c6ff00]"><MapPin className="h-4 w-4" /><span>{page.hero.badge}</span></div>}<h1 className="font-display text-4xl font-extrabold text-white sm:text-6xl">{page.hero.title}</h1>{page.hero.description && <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">{page.hero.description}</p>}</div></section>
+    {page.regions.length > 0 && <section className="bg-white py-20"><div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-8"><div className="mx-auto max-w-2xl space-y-3 text-center">{page.regionsEyebrow && <p className="text-xs font-bold uppercase tracking-widest text-[#0066ff]">{page.regionsEyebrow}</p>}{page.regionsHeading && <h2 className="font-display text-3xl font-extrabold text-[#0a192f]">{page.regionsHeading}</h2>}</div><div className="grid gap-8 md:grid-cols-2">{page.regions.map((region, index) => <article key={`${region.title}-${index}`} className="flex flex-col justify-between space-y-6 rounded-3xl border border-slate-200/90 bg-[#f8fafc] p-8 transition-all hover:border-[#0066ff] hover:shadow-lg"><div className="space-y-4"><div className="flex items-start justify-between gap-4"><div className="flex items-center gap-3"><div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0a192f] text-[#c6ff00]"><ServiceIcon name={region.icon} className="h-5 w-5" /></div><h3 className="font-display text-lg font-bold text-[#0a192f]">{region.title}</h3></div>{region.timing && <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-bold text-emerald-700">{region.timing}</span>}</div>{region.hubs && <p className="text-xs leading-relaxed text-slate-500">{region.hubs}</p>}</div>{region.postcodes && <div className="flex items-start gap-2 border-t border-slate-200 pt-4 text-xs text-slate-500"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#0066ff]" /><span>{region.postcodes}</span></div>}</article>)}</div></div></section>}
+    {page.sections.map((section, index) => <section key={index} className={`py-16 text-center ${section.theme === "dark" ? "bg-[#0a192f] text-white" : section.theme === "soft" ? "bg-[#f8fafc] text-[#0a192f]" : "bg-white text-[#0a192f]"}`}><div className="mx-auto max-w-4xl space-y-5 px-4 sm:px-8">{section.eyebrow && <p className={`text-xs font-bold uppercase tracking-widest ${section.theme === "dark" ? "text-[#c6ff00]" : "text-[#0066ff]"}`}>{section.eyebrow}</p>}{section.heading && <h2 className={`font-display text-3xl font-extrabold ${section.theme === "dark" ? "text-white" : "text-[#0a192f]"}`}>{section.heading}</h2>}{section.body && <p className={`whitespace-pre-line text-sm leading-7 ${section.theme === "dark" ? "text-slate-300" : "text-slate-500"}`}>{section.body}</p>}{section.ctaLabel && section.ctaUrl && <Link href={section.ctaUrl} className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-extrabold ${section.theme === "dark" ? "bg-[#c6ff00] text-[#0a192f]" : "bg-[#0a192f] text-white"}`}>{section.ctaLabel}<ArrowRight className="h-4 w-4" /></Link>}</div></section>)}
+    {(page.bottomCta.title || page.bottomCta.body) && <section className="border-t border-slate-100 bg-white py-16 text-center"><div className="mx-auto max-w-4xl space-y-5 px-4 sm:px-8">{page.bottomCta.title && <h2 className="font-display text-3xl font-extrabold text-[#0a192f]">{page.bottomCta.title}</h2>}{page.bottomCta.body && <p className="text-sm text-slate-500">{page.bottomCta.body}</p>}{page.bottomCta.label && page.bottomCta.url && <Link href={page.bottomCta.url} className="inline-flex items-center gap-2 rounded-full bg-[#0a192f] px-6 py-3 text-xs font-extrabold text-white">{page.bottomCta.label}<ArrowRight className="h-4 w-4" /></Link>}</div></section>}
   </div>;
 }

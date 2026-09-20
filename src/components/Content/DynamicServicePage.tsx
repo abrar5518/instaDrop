@@ -1,68 +1,54 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Clock, ShieldCheck, Truck } from "lucide-react";
-import QuoteWidget from "@/components/Home/QuoteWidget";
+import { ArrowUpRight, Check, Circle, MapPin } from "lucide-react";
 import { ContactPhone } from "@/components/Contact/ContactSettings";
 import { getService } from "@/lib/content-pages";
-import ManagedSections from "./ManagedSections";
-import ServiceIcon from "./ServiceIcon";
+import type { ServiceSection } from "@/lib/content-types";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://instadrop.uk";
+
+function Paragraphs({ text, lead = false }: { text: string | null; lead?: boolean }) {
+  if (!text) return null;
+  return <>{text.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index} className={`${lead && index === 0 ? "text-lg text-[#23344b]" : "text-[#435168]"} mb-4 whitespace-pre-line leading-7`}>{paragraph}</p>)}</>;
+}
+
+function ContentBlock({ section }: { section: ServiceSection }) {
+  const anchor = section.anchorId || undefined;
+  const heading = <>{section.label && <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.14em] text-[#698000]">{section.label}</span>}{section.heading && <h2 className="mb-4 mt-12 font-display text-2xl font-extrabold leading-tight tracking-tight text-[#0a192f] sm:text-[34px] first:mt-0">{section.heading}</h2>}</>;
+  const callout = (section.calloutHeading || section.calloutBody) && <div className="my-7 rounded-r-2xl border-l-4 border-[#c6ff00] bg-[#f5f8fb] px-6 py-5">{section.calloutHeading && <strong className="text-[#0a192f]">{section.calloutHeading}</strong>}<Paragraphs text={section.calloutBody} /></div>;
+  if (section.type === "steps") return <section id={anchor}>{heading}<Paragraphs text={section.intro} /><div className="my-6 grid gap-3 md:grid-cols-3">{section.items.map((item, index) => <article key={`${item.title}-${index}`} className="rounded-2xl border border-[#e4eaf0] bg-white p-5">{item.badge && <b className="mb-4 block text-xs text-[#668400]">{item.badge}</b>}{item.title && <h3 className="mb-2 font-display text-base font-bold text-[#0a192f]">{item.title}</h3>}<p className="text-[13px] leading-6 text-[#435168]">{item.body}</p></article>)}</div><Paragraphs text={section.body} />{callout}</section>;
+  if (section.type === "tiles") return <section id={anchor}>{heading}<Paragraphs text={section.intro} /><div className="my-5 grid gap-5 md:grid-cols-2">{section.items.map((item, index) => <article key={`${item.title}-${index}`} className="rounded-2xl border border-[#e4eaf0] p-6">{item.image && <div className="relative mb-4 aspect-video overflow-hidden rounded-xl"><Image src={item.image} alt={item.imageAlt || item.title || "Service information"} fill sizes="(max-width:768px) 100vw, 40vw" className="object-cover" /></div>}{item.title && <h3 className="mb-2 font-display text-xl font-bold text-[#0a192f]">{item.title}</h3>}<p className="text-sm leading-7 text-[#435168]">{item.body}</p></article>)}</div><Paragraphs text={section.body} />{callout}</section>;
+  if (section.type === "faq") return <section id={anchor}>{heading}<Paragraphs text={section.intro} /><div className="border-t border-[#e4eaf0]">{section.items.map((item, index) => <details key={`${item.title}-${index}`} className="border-b border-[#e4eaf0] py-4"><summary className="flex cursor-pointer list-none justify-between gap-4 text-[15px] font-extrabold text-[#0a192f] marker:hidden">{item.title}<span className="text-xl text-[#658000]">+</span></summary>{item.body && <p className="pt-3 text-sm leading-7 text-[#435168]">{item.body}</p>}</details>)}</div></section>;
+  if (section.type === "related") return <section id={anchor}>{heading}<Paragraphs text={section.intro} /><div className="mt-5 grid gap-4 md:grid-cols-3">{section.items.map((item, index) => item.linkUrl && <Link key={`${item.title}-${index}`} href={item.linkUrl} className="rounded-xl border border-[#e4eaf0] p-4 text-[13px] font-extrabold text-[#0a192f] transition hover:border-[#b4d334]">{item.linkLabel || item.title}<ArrowUpRight className="ml-1 inline h-4 w-4 text-[#7da000]" /></Link>)}</div></section>;
+  if (section.type === "callout") return <section id={anchor}>{heading}<div className="my-7 rounded-r-2xl border-l-4 border-[#c6ff00] bg-[#f5f8fb] px-6 py-5"><Paragraphs text={section.intro || section.body} /></div></section>;
+  return <section id={anchor}>{heading}<Paragraphs text={section.intro} lead /><Paragraphs text={section.body} />{section.image && <div className="relative my-7 aspect-[16/9] overflow-hidden rounded-2xl"><Image src={section.image} alt={section.imageAlt || section.heading || "Courier service"} fill sizes="(max-width: 900px) 100vw, 70vw" className="object-cover" /></div>}{callout}</section>;
+}
 
 export default async function DynamicServicePage({ slug }: { slug: string }) {
   const page = await getService(slug);
   if (!page) notFound();
-
+  const sidebarSections = page.sections.filter((section) => section.showInSidebar && section.anchorId && section.heading);
   const schema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
-          { "@type": "ListItem", position: 2, name: "Services", item: `${siteUrl}/services` },
-          { "@type": "ListItem", position: 3, name: page.title, item: `${siteUrl}/${page.slug}` },
-        ],
-      },
-      {
-        "@type": "Service",
-        name: page.title,
-        description: page.seo.description || page.hero.description || page.summary,
-        url: `${siteUrl}/${page.slug}`,
-        provider: { "@type": "DeliveryService", name: "InstaDrop Courier Services", url: siteUrl },
-        areaServed: { "@type": "Country", name: "United Kingdom" },
-      },
-      ...page.sections.filter((section) => section.type === "faq" && section.items.length > 0).map((section) => ({
-        "@type": "FAQPage",
-        mainEntity: section.items.filter((item) => item.title && item.description).map((item) => ({
-          "@type": "Question",
-          name: item.title,
-          acceptedAnswer: { "@type": "Answer", text: item.description },
-        })),
-      })),
+    "@context": "https://schema.org", "@graph": [
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: siteUrl }, { "@type": "ListItem", position: 2, name: "Services", item: `${siteUrl}/services` }, { "@type": "ListItem", position: 3, name: page.title, item: `${siteUrl}/${page.slug}` }] },
+      { "@type": "Service", name: page.title, description: page.seo.description || page.hero.description || page.summary, url: `${siteUrl}/${page.slug}`, provider: { "@type": "DeliveryService", name: "InstaDrop Courier Services", url: siteUrl }, areaServed: { "@type": "Country", name: "United Kingdom" } },
+      ...page.sections.filter((section) => section.type === "faq" && section.items.length).map((section) => ({ "@type": "FAQPage", mainEntity: section.items.filter((item) => item.title && item.body).map((item) => ({ "@type": "Question", name: item.title, acceptedAnswer: { "@type": "Answer", text: item.body } })) })),
     ],
   };
 
-  return <div className="w-full bg-white">
+  return <div className="w-full bg-white text-[#172338]">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
-    <section className="overflow-hidden bg-[#0a192f] px-4 py-16 text-white sm:px-8 lg:py-20">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-12">
-        <div className="space-y-6 lg:col-span-7">
-          {page.hero.badge && <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#c6ff00]"><ServiceIcon name={page.icon} className="h-4 w-4" /><span>{page.hero.badge}</span></div>}
-          <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-6xl">{page.hero.title}</h1>
-          {page.hero.description && <p className="max-w-xl text-base font-normal leading-relaxed text-slate-300 sm:text-lg">{page.hero.description}</p>}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            {page.hero.ctaLabel && page.hero.ctaUrl && <Link href={page.hero.ctaUrl} className="inline-flex items-center gap-2.5 rounded-full bg-[#c6ff00] px-7 py-3.5 text-sm font-extrabold text-[#0a192f] shadow-md transition-all hover:bg-[#b2e600]">{page.hero.ctaLabel}<ArrowRight className="h-4 w-4" /></Link>}
-            <ContactPhone prefix="24/7 Hotline: " className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-6 py-3.5 text-xs font-bold text-white hover:bg-white/20" />
-          </div>
-          <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-semibold text-slate-300"><span className="flex items-center gap-2"><Clock className="h-4 w-4 text-[#c6ff00]" />Timing confirmed by dispatch</span><span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-emerald-400" />Terms confirmed before booking</span><span className="flex items-center gap-2"><Truck className="h-4 w-4 text-[#0066ff]" />Suitable vehicle arranged</span></div>
-        </div>
-        <div className="flex justify-center lg:col-span-5 lg:justify-end">
-          {page.hero.image ? <div className="relative aspect-[4/3] w-full max-w-lg overflow-hidden rounded-3xl border border-white/10"><Image src={page.hero.image} alt={page.hero.imageAlt || page.hero.title} fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" /></div> : <QuoteWidget />}
-        </div>
-      </div>
-    </section>
-    <ManagedSections sections={page.sections} />
+    <div className="mx-auto max-w-[1240px] px-5 py-5 text-xs text-[#6f8097] sm:px-7"><Link href="/">Home</Link><span className="px-2 text-[#a9b3c1]">/</span><Link href="/services">Services</Link><span className="px-2 text-[#a9b3c1]">/</span>{page.navigationTitle}</div>
+    <section className="overflow-hidden bg-[#0a192f] text-white"><div className="mx-auto grid max-w-[1240px] items-center gap-12 px-5 py-14 sm:px-7 lg:grid-cols-[1.2fr_.8fr] lg:gap-[60px] lg:py-[72px]">
+      <div>{page.hero.eyebrow && <p className="mb-4 text-[11px] font-extrabold uppercase tracking-[.17em] text-[#c6ff00]">{page.hero.eyebrow}</p>}<h1 className="mb-5 max-w-[780px] font-display text-[40px] font-extrabold leading-[1.12] tracking-[-.055em] sm:text-5xl lg:text-[65px]">{page.hero.title}</h1>{page.hero.description && <p className="mb-7 max-w-[650px] text-[17px] leading-8 text-[#d0d9e6]">{page.hero.description}</p>}<div className="flex flex-wrap gap-3">{page.hero.primaryLabel && page.hero.primaryUrl && <Link className="inline-flex min-h-12 items-center gap-3 rounded-full bg-[#c6ff00] px-5 py-3 text-sm font-extrabold text-[#0a192f] hover:bg-[#d8ff55]" href={page.hero.primaryUrl}>{page.hero.primaryLabel}<ArrowUpRight className="h-4 w-4" /></Link>}{page.hero.secondaryLabel && page.hero.secondaryUrl && <a className="inline-flex min-h-12 items-center rounded-full border border-[#637286] px-5 py-3 text-sm font-extrabold text-white hover:bg-[#20334f]" href={page.hero.secondaryUrl}>{page.hero.secondaryLabel}</a>}</div>{page.hero.points.length > 0 && <div className="mt-8 flex flex-wrap gap-4 text-xs font-bold text-[#ccd8e7]">{page.hero.points.map((point) => <span key={point} className="flex items-center gap-2"><Check className="h-4 w-4 text-[#c6ff00]" />{point}</span>)}</div>}</div>
+      {page.hero.image ? <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-[#344660]"><Image src={page.hero.image} alt={page.hero.imageAlt || page.hero.title} fill priority sizes="(max-width:1024px) 100vw, 40vw" className="object-cover" /></div> : <div className="relative overflow-hidden rounded-3xl border border-[#344660] bg-[#152941] p-7 shadow-[0_26px_60px_#02102066]"><div className="flex justify-between text-[11px] font-extrabold uppercase tracking-[.13em] text-[#afc1d3]"><span>{page.routeVisual.kicker}</span><span>{page.routeVisual.counter}</span></div>{page.routeVisual.title && <h2 className="my-7 whitespace-pre-line font-display text-2xl font-bold leading-snug tracking-tight text-white">{page.routeVisual.title}</h2>}<div className="grid grid-cols-[22px_1fr] gap-x-3.5"><Circle className="h-5 w-5 fill-[#c6ff00] text-[#c6ff00]" /><div><strong className="block text-[15px] text-white">{page.routeVisual.collectionLabel}</strong><small className="text-xs text-[#aebed1]">{page.routeVisual.collectionDetail}</small></div><span className="ml-2.5 h-12 border-l-2 border-dashed border-[#7693a9]" /><span /><MapPin className="h-5 w-5 text-[#c6ff00]" /><div><strong className="block text-[15px] text-white">{page.routeVisual.deliveryLabel}</strong><small className="text-xs text-[#aebed1]">{page.routeVisual.deliveryDetail}</small></div></div><div className="mt-7 flex justify-between gap-3 border-t border-[#344860] pt-5 text-xs text-[#d5deea]"><span>{page.routeVisual.footer}</span><b className="text-[#c6ff00]">↗ {page.routeVisual.status}</b></div></div>}
+    </div></section>
+    {(page.notice.title || page.notice.body) && <div className="border-b border-[#d9e8ad] bg-[#eff7d9]"><div className="mx-auto max-w-[1240px] px-5 py-4 text-[13px] text-[#304018] sm:px-7">{page.notice.title && <strong className="mr-2">{page.notice.title}</strong>}{page.notice.body}</div></div>}
+    <div className="mx-auto grid max-w-[1240px] gap-12 px-5 py-14 sm:px-7 lg:grid-cols-[minmax(0,1fr)_285px] lg:gap-[68px] lg:py-[68px]">
+      <article className="min-w-0">{page.sections.map((section, index) => <ContentBlock key={`${section.anchorId}-${index}`} section={section} />)}</article>
+      <aside className="self-start lg:sticky lg:top-[125px]" aria-label="Service information">{sidebarSections.length > 0 && <div className="mb-5 rounded-2xl border border-[#e4eaf0] bg-white p-6 shadow-[0_12px_30px_#0a192f08]"><h2 className="mb-4 text-base font-extrabold text-[#0a192f]">On this page</h2><nav>{sidebarSections.map((section) => <a key={section.anchorId} href={`#${section.anchorId}`} className="block border-t border-[#e4eaf0] py-2.5 text-[13px] font-bold hover:text-[#6b8100]">{section.heading}</a>)}</nav></div>} {(page.sidebar.title || page.sidebar.body) && <div className="mb-5 rounded-2xl bg-[#0a192f] p-6 text-white"><h2 className="mb-4 text-base font-extrabold text-white">{page.sidebar.title}</h2><p className="text-[13px] leading-6 text-[#c3d0df]">{page.sidebar.body}</p>{page.sidebar.ctaLabel && page.sidebar.ctaUrl && <Link href={page.sidebar.ctaUrl} className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#c6ff00] px-5 py-3 text-sm font-extrabold text-[#0a192f]">{page.sidebar.ctaLabel}<ArrowUpRight className="ml-2 h-4 w-4" /></Link>}<p className="mt-5 text-[13px] text-[#c3d0df]">24/7 dispatch desk</p><ContactPhone className="text-[17px] font-extrabold text-[#c6ff00]" /></div>}{page.sidebar.helpfulDetails && <div className="rounded-2xl border border-[#e4eaf0] bg-white p-6 shadow-[0_12px_30px_#0a192f08]"><h2 className="mb-4 text-base font-extrabold text-[#0a192f]">Helpful details</h2><p className="text-[13px] leading-6 text-[#607087]">{page.sidebar.helpfulDetails}</p></div>}</aside>
+    </div>
+    {(page.bottomCta.title || page.bottomCta.body) && <section className="bg-[#0a192f] py-14 text-white"><div className="mx-auto flex max-w-[1240px] flex-col items-start justify-between gap-7 px-5 sm:px-7 lg:flex-row lg:items-center"><div>{page.bottomCta.title && <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-[38px]">{page.bottomCta.title}</h2>}{page.bottomCta.body && <p className="mt-2 max-w-[600px] text-sm text-[#ced8e4]">{page.bottomCta.body}</p>}</div>{page.bottomCta.label && page.bottomCta.url && <Link href={page.bottomCta.url} className="inline-flex min-h-12 items-center rounded-full bg-[#c6ff00] px-6 py-3 text-sm font-extrabold text-[#0a192f]">{page.bottomCta.label}<ArrowUpRight className="ml-2 h-4 w-4" /></Link>}</div></section>}
   </div>;
 }
