@@ -33,6 +33,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "admin-instadrop.sahoolat.pk", pathname: "/storage/blogs/**" },
       { protocol: "https", hostname: "admin.instadrop.uk", pathname: "/storage/blogs/**" },
       { protocol: "https", hostname: "admin.instadrop.uk", pathname: "/storage/branding/**" },
+      { protocol: "https", hostname: "admin.instadrop.uk", pathname: "/media/branding/**" },
       { protocol: "https", hostname: "admin.instadrop.uk", pathname: "/storage/content-pages/**" },
       { protocol: "https", hostname: "admin-instadrop.sahoolat.pk", pathname: "/storage/content-pages/**" },
     ],
