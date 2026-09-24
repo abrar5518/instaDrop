@@ -54,6 +54,9 @@ export async function generateMetadata(): Promise<Metadata> {
       images: ["/opengraph-image"],
     },
     icons: { icon: settings.branding.favicon_url || "/favicon" },
+    verification: {
+      google: "Sw6hsdzK_g_Tb6nwCGCcczo4C_OPZwbZpfZGHkOrdus",
+    },
   };
 }
 
