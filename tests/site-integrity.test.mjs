@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
@@ -51,4 +51,20 @@ test("service pages use the canonical nested route and preserve legacy URLs", as
   assert.match(page, /`\/services\/\$\{slug\}`/);
   assert.match(legacyPage, /permanentRedirect\(`\/services\/\$\{encodeURIComponent\(slug\)\}`\)/);
   assert.match(directory, /href=\{`\/services\/\$\{service\.slug\}`\}/);
+});
+
+test("single-service pages are not duplicated as static route folders", async () => {
+  const legacyFolders = [
+    "same-day-delivery",
+    "dedicated-vehicle-delivery",
+    "scheduled-delivery",
+    "pallet-delivery",
+    "wait-and-return",
+    "medical-courier",
+    "legal-courier",
+  ];
+
+  await Promise.all(legacyFolders.map(async (slug) => {
+    await assert.rejects(access(new URL(`../src/app/${slug}/page.tsx`, import.meta.url)));
+  }));
 });
