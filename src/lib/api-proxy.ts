@@ -54,11 +54,11 @@ export async function readJsonBody(request: Request, maxBytes = 64 * 1024): Prom
   }
 }
 
-export async function proxyJson(url: string, init: RequestInit = {}) {
+export async function proxyJson(url: string, init: RequestInit = {}, timeoutMs = 12_000) {
   const response = await fetch(url, {
     ...init,
     cache: "no-store",
-    signal: AbortSignal.timeout(12_000),
+    signal: AbortSignal.timeout(timeoutMs),
   });
   const text = await response.text();
   let data: unknown;

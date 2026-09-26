@@ -41,6 +41,23 @@ export default function PayPalCheckout({ token }: { token: string }) {
     let active = true;
     let buttons: PayPalButtons | undefined;
 
+    const reconcilePaymentStatus = async () => {
+      try {
+        const response = await fetch(`/api/invoices/${encodeURIComponent(token)}`, { cache: "no-store" });
+        if (!response.ok) return false;
+        const currentInvoice = await response.json() as Invoice;
+        if (currentInvoice.status !== "paid") return false;
+        if (active) {
+          setInvoice(currentInvoice);
+          setPaid(true);
+          setError("");
+        }
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
     const renderButtons = async () => {
       if (!active) return;
       const paypal = (window as PayPalWindow).paypal;
@@ -58,14 +75,23 @@ export default function PayPalCheckout({ token }: { token: string }) {
           return data.order_id;
         },
         onApprove: async (data) => {
-          const response = await fetch("/api/payments/paypal/capture", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ payment_token: token, paypal_order_id: data.orderID }) });
-          const result = await response.json();
-          if (!response.ok) throw new Error(result.message || "Unable to confirm payment.");
-          setPaid(true);
-          trackEvent("payment_completed", { currency: invoice.currency, value: Number(invoice.total_amount), invoice_number: invoice.invoice_number });
+          try {
+            const response = await fetch("/api/payments/paypal/capture", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ payment_token: token, paypal_order_id: data.orderID }) });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.message || "Unable to confirm payment.");
+            if (active) setPaid(true);
+            trackEvent("payment_completed", { currency: invoice.currency, value: Number(invoice.total_amount), invoice_number: invoice.invoice_number });
+          } catch (captureError) {
+            if (await reconcilePaymentStatus()) return;
+            if (active) setError(captureError instanceof Error ? captureError.message : "Unable to confirm payment. Please refresh this invoice before trying again.");
+          }
         },
         onCancel: () => setError("Payment was cancelled. No charge was made. Refresh the page when you are ready to try again."),
-        onError: () => setError("PayPal could not complete the payment. Please try again."),
+        onError: () => {
+          void reconcilePaymentStatus().then((confirmed) => {
+            if (!confirmed && active) setError("PayPal could not complete the payment. Please refresh this invoice before trying again.");
+          });
+        },
       });
 
       try {

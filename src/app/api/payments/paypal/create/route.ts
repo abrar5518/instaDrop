@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({ payment_token: payload.payment_token }),
-    });
+    }, 30_000);
   } catch (error) {
     return proxyError(error, "PayPal is temporarily unavailable.");
   }
