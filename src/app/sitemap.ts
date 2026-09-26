@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     changeFrequency: route === "" ? "daily" : "weekly",
-    priority: route === "" ? 1 : route === "/instant-quote" || route === "/same-day-delivery" ? 0.9 : route.includes("policy") || route.includes("terms") ? 0.3 : 0.8,
+    priority: route === "" ? 1 : route === "/instant-quote" ? 0.9 : route.includes("policy") || route.includes("terms") ? 0.3 : 0.8,
   }));
 
   pages.push(...industries.map((industry) => ({
@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const services = await getServices();
     pages.push(...services.filter((service) => !service.seo.noindex).map((service) => ({
-      url: `${baseUrl}/${service.slug}`,
+      url: `${baseUrl}/services/${service.slug}`,
       lastModified: service.updatedAt || undefined,
       changeFrequency: "weekly" as const,
       priority: 0.9,

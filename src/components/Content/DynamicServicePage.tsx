@@ -31,8 +31,8 @@ export default async function DynamicServicePage({ slug }: { slug: string }) {
   const sidebarSections = page.sections.filter((section) => section.showInSidebar && section.anchorId && section.heading);
   const schema = {
     "@context": "https://schema.org", "@graph": [
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: siteUrl }, { "@type": "ListItem", position: 2, name: "Services", item: `${siteUrl}/services` }, { "@type": "ListItem", position: 3, name: page.title, item: `${siteUrl}/${page.slug}` }] },
-      { "@type": "Service", name: page.title, description: page.seo.description || page.hero.description || page.summary, url: `${siteUrl}/${page.slug}`, provider: { "@type": "DeliveryService", name: "InstaDrop Courier Services", url: siteUrl }, areaServed: { "@type": "Country", name: "United Kingdom" } },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: siteUrl }, { "@type": "ListItem", position: 2, name: "Services", item: `${siteUrl}/services` }, { "@type": "ListItem", position: 3, name: page.title, item: `${siteUrl}/services/${page.slug}` }] },
+      { "@type": "Service", name: page.title, description: page.seo.description || page.hero.description || page.summary, url: `${siteUrl}/services/${page.slug}`, provider: { "@type": "DeliveryService", name: "InstaDrop Courier Services", url: siteUrl }, areaServed: { "@type": "Country", name: "United Kingdom" } },
       ...page.sections.filter((section) => section.type === "faq" && section.items.length).map((section) => ({ "@type": "FAQPage", mainEntity: section.items.filter((item) => item.title && item.body).map((item) => ({ "@type": "Question", name: item.title, acceptedAnswer: { "@type": "Answer", text: item.body } })) })),
     ],
   };

@@ -67,11 +67,11 @@ export default function Footer() {
               COURIER SERVICES
             </p>
             <ul className="space-y-2.5 text-xs font-semibold text-slate-300">
-              <li><Link href="/same-day-delivery" className="hover:text-white transition-colors">Same-Day Express</Link></li>
-              <li><Link href="/pallet-delivery" className="hover:text-white transition-colors">Pallets & Heavy Freight</Link></li>
-              <li><Link href="/medical-courier" className="hover:text-white transition-colors text-emerald-400">Medical GDP Courier</Link></li>
-              <li><Link href="/legal-courier" className="hover:text-white transition-colors">Legal & Court Briefs</Link></li>
-              <li><Link href="/wait-and-return" className="hover:text-white transition-colors">Wait & Return Courier</Link></li>
+              <li><Link href="/services/same-day-delivery" className="hover:text-white transition-colors">Same-Day Express</Link></li>
+              <li><Link href="/services/pallet-delivery" className="hover:text-white transition-colors">Pallets & Heavy Freight</Link></li>
+              <li><Link href="/services/medical-courier" className="hover:text-white transition-colors text-emerald-400">Medical GDP Courier</Link></li>
+              <li><Link href="/services/legal-courier" className="hover:text-white transition-colors">Legal & Court Briefs</Link></li>
+              <li><Link href="/services/wait-and-return" className="hover:text-white transition-colors">Wait & Return Courier</Link></li>
               <li><Link href="/services" className="hover:text-white transition-colors">All Services Directory</Link></li>
             </ul>
           </div>

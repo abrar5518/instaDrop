@@ -39,4 +39,16 @@ test("sitemap reads every published indexable blog and service at request time",
   assert.match(sitemap, /await getBlogs\(\)/);
   assert.match(sitemap, /!service\.seo\.noindex/);
   assert.match(sitemap, /!post\.noindex/);
+  assert.match(sitemap, /\$\{baseUrl\}\/services\/\$\{service\.slug\}/);
+});
+
+test("service pages use the canonical nested route and preserve legacy URLs", async () => {
+  const [page, legacyPage, directory] = await Promise.all([
+    read("src/app/services/[slug]/page.tsx"),
+    read("src/app/[slug]/page.tsx"),
+    read("src/app/services/page.tsx"),
+  ]);
+  assert.match(page, /`\/services\/\$\{slug\}`/);
+  assert.match(legacyPage, /permanentRedirect\(`\/services\/\$\{encodeURIComponent\(slug\)\}`\)/);
+  assert.match(directory, /href=\{`\/services\/\$\{service\.slug\}`\}/);
 });

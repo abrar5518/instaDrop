@@ -27,7 +27,7 @@ export default function ServicesSection({ services }: { services: ServiceSummary
             return (
               <Link
                 key={service.slug}
-                href={`/${service.slug}`}
+                href={`/services/${service.slug}`}
                 className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:bg-[#0a192f] hover:border-[#c6ff00]/40 hover:shadow-[0_20px_40px_rgba(10,25,47,0.25)] cursor-pointer overflow-hidden"
               >
                 {/* Subtle Background Glow Line on Hover */}
