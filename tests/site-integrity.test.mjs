@@ -72,6 +72,6 @@ test("single-service pages are not duplicated as static route folders", async ()
 test("single-blog hero uses the intended desktop height", async () => {
   const page = await read("src/app/blog/[slug]/page.tsx");
 
-  assert.match(page, /sm:h-\[260px\][\s\S]+lg:h-\[360px\]/);
-  assert.doesNotMatch(page, /lg:h-\[300px\]/);
+  assert.match(page, /sm:h-\[260px\][\s\S]+lg:h-\[400px\]/);
+  assert.doesNotMatch(page, /lg:h-\[(?:300|360)px\]/);
 });

@@ -66,7 +66,7 @@ export default async function BlogDetail({ params }: {
         publisher: { "@type": "Organization", name: "InstaDrop Courier Services", url: siteUrl },
       }).replace(/</g, "\\u003c") }} />
       <div className="mx-auto max-w-7xl">
-        <div className="relative h-[190px] overflow-hidden rounded-2xl bg-slate-50 sm:h-[260px] sm:rounded-3xl lg:h-[360px]">
+        <div className="relative h-[190px] overflow-hidden rounded-2xl bg-slate-50 sm:h-[260px] sm:rounded-3xl lg:h-[400px]">
           <Image
             src={post.image}
             alt={post.alt}
