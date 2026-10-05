@@ -27,6 +27,8 @@ test("payment pages are private and optional analytics require consent", async (
   assert.match(payment, /index:\s*false/);
   assert.match(payment, /referrer:\s*"no-referrer"/);
   assert.match(checkout, /reconcilePaymentStatus/);
+  assert.match(checkout, /reconcilePaymentStatus\(6\)/);
+  assert.match(checkout, /Do not pay again/);
   assert.match(captureRoute, /45_000/);
   assert.match(tracking, /useCookieConsent/);
   assert.match(tracking, /pathname\.startsWith\("\/pay\/"\)/);

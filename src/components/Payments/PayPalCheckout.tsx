@@ -41,21 +41,31 @@ export default function PayPalCheckout({ token }: { token: string }) {
     let active = true;
     let buttons: PayPalButtons | undefined;
 
-    const reconcilePaymentStatus = async () => {
-      try {
-        const response = await fetch(`/api/invoices/${encodeURIComponent(token)}`, { cache: "no-store" });
-        if (!response.ok) return false;
-        const currentInvoice = await response.json() as Invoice;
-        if (currentInvoice.status !== "paid") return false;
-        if (active) {
-          setInvoice(currentInvoice);
-          setPaid(true);
-          setError("");
+    const reconcilePaymentStatus = async (attempts = 1) => {
+      for (let attempt = 0; attempt < attempts; attempt += 1) {
+        try {
+          const response = await fetch(`/api/invoices/${encodeURIComponent(token)}`, { cache: "no-store" });
+          if (response.ok) {
+            const currentInvoice = await response.json() as Invoice;
+            if (currentInvoice.status === "paid") {
+              if (active) {
+                setInvoice(currentInvoice);
+                setPaid(true);
+                setError("");
+              }
+              return true;
+            }
+          }
+        } catch {
+          // A completed capture can take a moment to reach the invoice API.
         }
-        return true;
-      } catch {
-        return false;
+
+        if (attempt < attempts - 1) {
+          await new Promise(resolve => window.setTimeout(resolve, 1_200));
+        }
       }
+
+      return false;
     };
 
     const renderButtons = async () => {
@@ -82,14 +92,14 @@ export default function PayPalCheckout({ token }: { token: string }) {
             if (active) setPaid(true);
             trackEvent("payment_completed", { currency: invoice.currency, value: Number(invoice.total_amount), invoice_number: invoice.invoice_number });
           } catch (captureError) {
-            if (await reconcilePaymentStatus()) return;
-            if (active) setError(captureError instanceof Error ? captureError.message : "Unable to confirm payment. Please refresh this invoice before trying again.");
+            if (await reconcilePaymentStatus(6)) return;
+            if (active) setError(captureError instanceof Error ? captureError.message : "PayPal payment is still being confirmed. Do not pay again. Please refresh shortly or contact dispatch.");
           }
         },
         onCancel: () => setError("Payment was cancelled. No charge was made. Refresh the page when you are ready to try again."),
         onError: () => {
-          void reconcilePaymentStatus().then((confirmed) => {
-            if (!confirmed && active) setError("PayPal could not complete the payment. Please refresh this invoice before trying again.");
+          void reconcilePaymentStatus(6).then((confirmed) => {
+            if (!confirmed && active) setError("PayPal payment is still being confirmed. Do not pay again. Please refresh shortly or contact dispatch.");
           });
         },
       });
