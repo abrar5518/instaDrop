@@ -88,3 +88,10 @@ test("blog listing cards prefer the separately uploaded box image", async () => 
   assert.match(styles, /\.journal-card-image\{[^}]*aspect-ratio:16\/9/);
   assert.match(styles, /\.journal-card img\{object-fit:cover\}/);
 });
+
+test("blog listing shows every article in the card grid without a featured banner", async () => {
+  const page = await read("src/app/blog/page.tsx");
+
+  assert.match(page, /<BlogExplorer blogPosts=\{blogPosts\} \/>/);
+  assert.doesNotMatch(page, /journal-featured|EDITOR’S PICK/);
+});
