@@ -85,6 +85,6 @@ test("blog listing cards prefer the separately uploaded box image", async () => 
   ]);
 
   assert.match(card, /post\.cardImage \|\| post\.image/);
-  assert.match(styles, /\.journal-card-image\{[^}]*aspect-ratio:12\/5/);
+  assert.match(styles, /\.journal-card-image\{[^}]*aspect-ratio:16\/9/);
   assert.match(styles, /\.journal-card img\{object-fit:contain\}/);
 });
