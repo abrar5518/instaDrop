@@ -4,6 +4,7 @@ export type BlogPost = {
   category: string;
   description: string;
   image: string;
+  cardImage?: string | null;
   alt: string;
   date: string;
   publishedAt: string;

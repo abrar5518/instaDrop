@@ -77,3 +77,14 @@ test("single-blog hero uses the intended desktop height", async () => {
   assert.match(page, /sm:h-\[260px\][\s\S]+lg:h-\[400px\]/);
   assert.doesNotMatch(page, /lg:h-\[(?:300|360)px\]/);
 });
+
+test("blog listing cards prefer the separately uploaded box image", async () => {
+  const [card, styles] = await Promise.all([
+    read("src/components/Blog/BlogCard.tsx"),
+    read("src/app/blog/journal.css"),
+  ]);
+
+  assert.match(card, /post\.cardImage \|\| post\.image/);
+  assert.match(styles, /\.journal-card-image\{[^}]*aspect-ratio:12\/5/);
+  assert.match(styles, /\.journal-card img\{object-fit:contain\}/);
+});
